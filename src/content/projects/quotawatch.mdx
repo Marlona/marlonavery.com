@@ -1,88 +1,209 @@
 ---
-title: 'QuotaWatch: Multi-Cloud Quota Monitoring System'
+title: 'QuotaWatch: Proactive AWS Quota Monitoring with AI-Powered Doc Parsing'
 slug: quotawatch
 publishDate: '2026-01-27'
 description: >-
-  A Python CLI tool for monitoring cloud service quotas across AWS, GCP, and
-  Azure with real-time tracking and intelligent alerting.
+  A Python CLI tool that combines AWS Service Quotas API integration with
+  AI-powered documentation parsing to proactively monitor service limits across
+  10 AWS networking services and multiple accounts.
 category: open-source
 role: Creator & Maintainer
 organization: Open Source
 impactSummary: >-
-  Built a comprehensive multi-cloud quota monitoring system that prevents
-  deployment failures by proactively tracking service limits across AWS, GCP,
-  and Azure. The tool combines API integration with intelligent documentation
-  parsing to provide complete visibility into critical infrastructure quotas.
+  Built a local-first CLI tool that prevents quota-related deployment failures
+  by combining real-time AWS Service Quotas API data with AI-powered
+  documentation parsing across 10 networking services and multiple AWS accounts,
+  stored in a local SQLite database for fast, offline-capable lookups.
 scale:
-  - Multi-cloud
-  - Production-ready
-  - Real-time monitoring
-  - CLI-based
+  - 10 supported AWS networking services
+  - Multi-account AWS profile support
+  - Local SQLite quota database
+  - AI-powered documentation enrichment
 primaryTech:
   - Python
   - SQLite
   - AWS Service Quotas API
-  - Pydantic
-  - Click CLI
   - Anthropic Claude
+  - Click CLI
+  - TOML
+  - uv
 contributions:
-  - Designed multi-provider quota abstraction layer
-  - Built intelligent documentation parsing with AI
-  - Implemented real-time usage monitoring system
-  - Created configurable watchlist and alerting
-  - Developed SQLite-based quota enrichment engine
-  - Built comprehensive CLI interface with filtering
+  - >-
+    Designed local SQLite database schema storing quota definitions with
+    metadata, adjustability flags, and documentation context for 10 AWS
+    networking services
+  - >-
+    Built AWS Service Quotas API integration for real-time quota sync
+    across multiple AWS accounts via TOML-configured profiles
+  - >-
+    Implemented AI-powered documentation parsing using Anthropic Claude
+    to extract quota information directly from AWS docs pages
+  - >-
+    Created enrichment pipeline that cross-references API data with
+    AI-parsed documentation to fill gaps in Service Quotas API coverage
+  - >-
+    Built priority-based watchlist system for monitoring business-critical
+    quotas with configurable thresholds
+  - >-
+    Developed multi-account support with TOML configuration
+    (~/.config/quotawatch/config.toml) enabling per-profile AWS credentials
 outcomes:
-  - Prevents quota-related deployment failures
-  - Provides unified view across cloud providers
-  - Enables proactive capacity planning
-  - Automates quota documentation updates
+  - >-
+    Prevents quota-related deployment failures by surfacing approaching
+    limits before they block infrastructure changes
+  - >-
+    Covers 10 AWS networking services: VPC, Transit Gateway, Cloud WAN,
+    PrivateLink, Direct Connect, Route 53, Route 53 Resolver, Network
+    Firewall, VPC Lattice, Global Accelerator, and Elastic Load Balancing
+  - >-
+    AI doc parsing fills gaps where AWS Service Quotas API returns
+    incomplete or missing quota metadata
+  - >-
+    Multi-account profiles eliminate the need to manually check quotas
+    across separate AWS accounts
+  - >-
+    Local SQLite database enables fast, offline-capable quota lookups
+    without repeated API calls
 tags:
   - cloud-infrastructure
   - monitoring
   - devops
-  - multi-cloud
+  - aws
   - python-cli
+  - ai
 duration: 2026-Present
 featured: false
 repository: 'https://github.com/fakoli/quotawatch'
-generated: true
-generatedAt: '2026-01-27T10:15:28.472Z'
+generated: false
+
+decisionCard:
+  problem: >-
+    Quota blindness causes deployment failures. Teams hit AWS service limits
+    on VPC subnets, Transit Gateway attachments, or PrivateLink endpoints
+    and only discover the problem when a terraform apply or CloudFormation
+    stack fails. The AWS Service Quotas API helps, but it has gaps: not all
+    quotas are represented, metadata is often sparse, and checking across
+    multiple accounts is tedious.
+  constraints:
+    - 'Must work locally without requiring cloud-hosted infrastructure'
+    - 'Must support multiple AWS accounts from a single CLI'
+    - 'Must cover networking services where quota issues are most painful'
+    - 'Must fill gaps in AWS Service Quotas API coverage'
+    - 'Must be usable by engineers who do not have console access'
+  tradeoffs:
+    - option: 'Local CLI + SQLite + AI doc parsing (chosen)'
+      pros:
+        - 'No cloud infrastructure to manage or pay for'
+        - 'AI parsing fills gaps in the Service Quotas API'
+        - 'SQLite gives fast, offline-capable lookups'
+        - 'Multi-account TOML config is simple to share across teams'
+      cons:
+        - 'Requires ANTHROPIC_API_KEY for doc parsing features'
+        - 'No web dashboard or visual alerting'
+      chosen: true
+    - option: 'CloudWatch alarms per quota'
+      pros:
+        - 'Native AWS integration'
+        - 'Push-based alerting'
+      cons:
+        - 'Requires per-quota alarm setup across every account'
+        - 'No enrichment from documentation'
+        - 'Costly at scale with many quotas and accounts'
+        - 'Does not cover quotas missing from Service Quotas API'
+      chosen: false
+    - option: 'Commercial monitoring tool (Datadog, CloudHealth)'
+      pros:
+        - 'Polished dashboards and team features'
+        - 'Multi-cloud out of the box'
+      cons:
+        - 'Expensive licensing'
+        - 'Still limited by Service Quotas API coverage gaps'
+        - 'Vendor lock-in on monitoring infrastructure'
+      chosen: false
 ---
-## Problem
 
-Managing cloud service quotas across multiple providers has become a critical but often overlooked aspect of infrastructure operations. Teams frequently encounter deployment failures when they hit unexpected limits on VPC subnets, Transit Gateway attachments, or PrivateLink endpoints, quotas that aren't always visible until it's too late.
+## The Problem
 
-Existing cloud provider consoles only show quotas for individual accounts and services, making it impossible to get a unified view across AWS, GCP, and Azure environments. Documentation is scattered, often outdated, and doesn't provide context about which quotas are adjustable or likely to impact production workloads. I needed a solution that could proactively monitor these limits and provide early warnings before they blocked critical deployments.
+I kept running into the same failure mode: a deployment would fail because some AWS service quota was exhausted, and nobody knew until the terraform apply blew up. It happened with VPC subnets, Transit Gateway attachments, PrivateLink endpoints. Every time, it was the same scramble: figure out which quota was hit, check if it's adjustable, file a support ticket, wait.
 
-The challenge was particularly acute for networking quotas, where limits like CloudWAN connections or Route 53 Resolver endpoints can silently prevent infrastructure expansion. Without a centralized monitoring system, teams resort to manual spreadsheet tracking or discover quota issues only during failed deployments.
+The frustrating part is that AWS has the Service Quotas API. You can query it programmatically. But it has real gaps. Not every quota shows up in the API. The metadata is often incomplete: you might get a quota name and a limit value, but no context about what happens when you hit it, whether it's adjustable, or what the typical lead time is for an increase. And if you're working across multiple AWS accounts, which most teams are, you're repeating this exercise per account.
 
-## Approach
+Networking quotas are where this hurts the most. These are the limits that silently prevent infrastructure expansion. You're trying to peer a new VPC, attach another spoke to a Transit Gateway, or spin up a new PrivateLink endpoint, and the deployment fails. The blast radius is high because networking changes tend to gate everything else.
 
-I built QuotaWatch as a Python CLI tool that creates a unified quota intelligence system across cloud providers. The architecture centers around a local SQLite database that stores quota definitions, current values, usage metrics, and enriched metadata from both APIs and documentation sources.
+I looked at the existing options. CloudWatch alarms can alert on some quotas, but you need to set them up individually per quota per account, and they still can't tell you about quotas that aren't in the Service Quotas API. Commercial monitoring tools like Datadog or CloudHealth have quota features, but they're expensive, still limited by the same API gaps, and adding another vendor dependency for what should be a straightforward data problem felt wrong.
 
-The core design separates quota data collection into multiple layers: a provider abstraction for cloud API integration, an intelligent documentation parser using Anthropic Claude for context extraction, and an enrichment engine that combines API data with parsed documentation to create comprehensive quota profiles. This layered approach ensures that quota information remains accurate while providing the contextual intelligence needed for effective monitoring.
+So I built QuotaWatch.
 
-### Key Design Elements
+## The Approach
 
-- **Multi-provider abstraction layer** with pluggable cloud provider clients for AWS Service Quotas API and future GCP/Azure support
-- **Intelligent documentation parsing** using Claude to extract quota information from provider documentation and maintain up-to-date context
-- **Real-time usage monitoring** that tracks utilization percentages and identifies quotas approaching critical thresholds
-- **Configurable watchlist system** for priority-based monitoring of business-critical quotas
-- **SQLite-based enrichment engine** that cross-references API data with documentation for comprehensive quota intelligence
-- **Comprehensive filtering and querying** with CLI commands for service-based, adjustability, and utilization-based quota discovery
+### Local-First Architecture
 
-## Outcomes
+QuotaWatch is a Python CLI that stores everything in a local SQLite database. The database holds quota definitions, current values, usage metrics, and enriched metadata. No cloud infrastructure to manage. No servers to run. You install it, configure your AWS profiles, and start querying.
 
-QuotaWatch enables proactive quota management that prevents deployment failures and supports informed capacity planning decisions. Teams can identify approaching limits before they impact production workloads, while the unified multi-cloud view eliminates the need to check multiple provider consoles.
+The configuration lives in `~/.config/quotawatch/config.toml`. Each AWS account gets its own profile section with credentials, default region, and any account-specific settings. This makes it straightforward to monitor quotas across a whole AWS organization from one machine.
 
-The intelligent documentation parsing keeps quota context current without manual maintenance, while the enrichment system provides the operational intelligence needed to prioritize quota increases and understand the impact of different limits on infrastructure expansion.
+### AWS Service Quotas API Integration
 
-## Key Contributions
+The core data layer syncs directly from the AWS Service Quotas API. QuotaWatch pulls quota definitions, current applied values, and default values for 10 AWS networking services:
 
-- **Designed multi-provider quota abstraction layer** with pluggable architecture supporting AWS Service Quotas API and extensible interfaces for GCP and Azure integration
-- **Built intelligent documentation parsing system** using Anthropic Claude to automatically extract and maintain quota information from cloud provider documentation
-- **Implemented real-time usage monitoring** with configurable thresholds and utilization tracking across multiple AWS accounts and regions
-- **Created comprehensive CLI interface** with filtering capabilities for service, adjustability, and usage-based quota discovery and management
-- **Developed SQLite-based enrichment engine** that combines API data with parsed documentation to create comprehensive quota intelligence profiles
-- **Built configurable watchlist and alerting system** for priority-based monitoring of business-critical quotas with customizable notification thresholds
+- **VPC** (subnets, route tables, security groups, NAT gateways)
+- **Transit Gateway** (attachments, route tables, peerings)
+- **Cloud WAN** (segments, attachments, core network edges)
+- **PrivateLink** (endpoints, endpoint services, gateway endpoints)
+- **Direct Connect** (connections, virtual interfaces, gateways)
+- **Route 53** (hosted zones, records per zone, health checks)
+- **Route 53 Resolver** (endpoints, rules, rule associations)
+- **Network Firewall** (firewalls, rule groups, policies)
+- **VPC Lattice** (services, service networks, targets)
+- **Global Accelerator** (accelerators, listeners, endpoint groups)
+- **Elastic Load Balancing** (load balancers, target groups, listeners)
+
+Each sync stores the full quota record in SQLite with timestamps, so you can track changes over time without hitting the API repeatedly.
+
+### AI-Powered Documentation Parsing
+
+Here's where QuotaWatch goes beyond what the raw API gives you. The AWS Service Quotas API is incomplete. Some quotas are missing entirely. Others have names but no description, no adjustability flag, no context.
+
+QuotaWatch uses Anthropic Claude to parse AWS documentation pages and extract quota information that the API doesn't provide. It reads the official docs, identifies quota tables and descriptions, and structures the extracted data into the same schema as the API records. The enrichment pipeline then cross-references what it got from the API with what it parsed from the docs, filling in the gaps.
+
+This is not summarization. It's structured extraction. Claude reads a documentation page for, say, VPC Lattice quotas and pulls out the quota name, default value, whether it's adjustable, which API action it applies to, and any caveats mentioned in the docs. That structured data goes into the same SQLite database alongside the API-sourced records.
+
+You need an `ANTHROPIC_API_KEY` to use the doc parsing features. The rest of the tool works fine without it, but you'll miss the enrichment layer.
+
+### Multi-Account Support
+
+Most teams don't have one AWS account. They have dev, staging, production, shared services, maybe a dedicated networking account. QuotaWatch handles this with TOML-based profiles:
+
+```toml
+[profiles.production]
+aws_profile = "prod-admin"
+regions = ["us-east-1", "us-west-2"]
+
+[profiles.staging]
+aws_profile = "staging-admin"
+regions = ["us-east-1"]
+
+[profiles.networking]
+aws_profile = "network-admin"
+regions = ["us-east-1", "us-west-2", "eu-west-1"]
+```
+
+Each profile maps to an AWS credentials profile. You can sync and query them independently or sweep across all of them. The SQLite database tags every record with its source account and region, so you always know where a quota value came from.
+
+### Watchlist and Priority Monitoring
+
+Not every quota matters equally. The watchlist system lets you flag specific quotas as high priority and set custom utilization thresholds. When a watched quota crosses its threshold during a sync, QuotaWatch flags it immediately.
+
+This is the difference between "here are 500 quotas across your accounts" and "these 3 quotas are at 80% utilization and one of them is not adjustable." The watchlist turns a data dump into actionable monitoring.
+
+## What I Learned
+
+**The AWS Service Quotas API is better than nothing, but it's not enough.** I started this project assuming the API would cover most of what I needed and I'd just need a nice CLI wrapper. In practice, the API has significant coverage gaps, especially for newer services and for quota metadata beyond the raw limit value. The documentation parsing wasn't a nice-to-have; it was necessary to get a complete picture.
+
+**AI-powered extraction works well for structured documentation.** AWS docs follow consistent patterns: quota tables with columns for name, default, adjustable, and description. Claude handles this structured extraction reliably. The key was being specific about the output schema rather than asking for a general summary. When you tell the model exactly what fields you need and what format they should be in, the extraction is accurate.
+
+**SQLite is the right database for CLI tools.** No setup, no server, no dependencies. The database file lives alongside the config and travels with the user. Queries are fast enough that the CLI feels instant even with thousands of quota records. And because it's a real database, you can do things like "show me all quotas across all accounts where utilization is above 70% and the quota is not adjustable" as a single query.
+
+**Multi-account is table stakes, not a feature.** I initially built this for a single account and immediately found it inadequate. Real AWS environments have multiple accounts, and quota exhaustion in a shared networking account can block deployments across all of them. Adding multi-account support early changed the architecture for the better: it forced clean separation between data collection and data storage, which made the enrichment pipeline simpler too.
+
+**The gap between "data exists" and "data is useful" is where tooling lives.** AWS exposes quota data through the API, through the console, through documentation. But none of those surfaces answer the question an engineer actually has: "Am I going to hit a limit on my next deployment?" Turning scattered data into that answer required combining multiple data sources, enriching them, and presenting the result in a way that's actionable. That's the entire value proposition of QuotaWatch.

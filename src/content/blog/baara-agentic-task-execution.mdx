@@ -1,0 +1,93 @@
+---
+title: "Baara: What Happens When You Build a Task System on an AI Agent SDK"
+publishDate: 2026-04-15
+description: "Building a chat-first personal automation platform on the Claude Agent SDK, and why naming it after the Mandinka word for work felt right."
+tags: ["ai-infrastructure", "open-source", "agent-sdk", "architecture"]
+draft: false
+readingTime: 7
+heroImage: "/blog/baara-hero.png"
+---
+
+*The views expressed here are my own and do not represent those of any current or former employer.*
+
+In Mandinka, the language of my tribe, the word for work is *baara*. It doesn't carry the baggage that "work" does in English. There's no implied drudgery. Baara is closer to craft. The thing the blacksmith does at the anvil. Purposeful, skilled, worth doing well.
+
+I named this project after that word because the best automation should feel like that. Not a cron job that fires and forgets. Not a script that runs in the dark. Something you can talk to, something that understands context, something that treats your tasks with the same care you would if you had the time.
+
+## The Problem I Was Actually Solving
+
+I had too many things running in too many places. A shell script here that checks a deployment status every hour. A reminder there that I set up in a notes app and forgot about. A recurring task that I keep doing manually because automating it felt like it would take longer than just doing it.
+
+The common thread: none of these tasks are hard. They're just *numerous*. And the friction of automating each one individually (write a script, set up a cron, figure out notifications) means most of them never get automated at all.
+
+What I wanted was simple: describe a task in plain language, tell the system when and how to run it, and let an AI agent handle the execution. Not a workflow builder with drag-and-drop nodes. Not a YAML-configured pipeline. A conversation.
+
+## Chat as the Primary Interface
+
+Baara's main interface is a chat window. You describe what you want done, and the AI figures out which tools to use, creates the task, and optionally schedules it. Behind that chat interface are nineteen tools that the agent can call: creating tasks, managing jobs, triaging failures, discovering installed plugins, executing skills.
+
+The key architectural decision here is that these tools run in-process. There's no subprocess. No HTTP self-call. No message queue between the chat handler and the tool executor. When you ask the agent to create a task, it calls a service function directly. When you ask it to check on a failed job, it queries the database in the same process.
+
+This sounds like an obvious choice, but it's not how most agent systems work. The typical pattern is to expose tools as external endpoints that the agent calls over HTTP. That adds latency, error modes, and authentication complexity for every tool invocation. When the tools are yours and the agent is yours and everything runs on your machine, the in-process pattern is simpler and faster.
+
+The tradeoff is isolation. An in-process tool can crash the host. I accept that tradeoff for a personal system. For a multi-tenant system, I wouldn't.
+
+## Three Interfaces, One Service Layer
+
+This is the part of the architecture I'm proudest of. Baara has three ways to interact with it: a web UI with streaming chat, a full CLI for headless operation, and a cron scheduler for recurring tasks. All three call the same service layer. No business logic lives in the routes, the CLI handlers, or the scheduler callbacks.
+
+I've seen too many projects where the web API does one thing, the CLI does a slightly different thing, and the scheduler does a third thing because each interface implemented its own version of the logic. That divergence starts small and compounds until you have three systems pretending to be one.
+
+The discipline is simple: routes and CLI handlers validate input and call a service method. Services own the logic. The store owns the data. The engine owns execution. If a new feature doesn't fit cleanly into that stack, the feature needs rethinking, not the architecture.
+
+## The Execution Pipeline
+
+Tasks flow through a dispatcher that supports two modes.
+
+**Direct execution** is for one-off tasks. You describe something, the agent creates it, and it runs immediately. The result streams back through the chat interface.
+
+**Queued execution** is for tasks that should run on a schedule or when resources are available. Jobs enter a priority queue with four tiers: critical, high, normal, and background. Within each tier, it's first-in-first-out. The queue manager dequeues jobs and hands them to the executor.
+
+The executor supports three runtime types. The primary one calls the Claude Agent SDK with configurable tools, model selection, and a budget cap. There's also a raw shell execution mode for simple commands that don't need AI reasoning. A third mode for sandboxed execution is stubbed out but not yet implemented.
+
+I spent more time than I expected on the failure handling. When a job fails, it retries with exponential backoff up to a configurable limit. When retries are exhausted, the job gets flagged for triage. Triage means a human (me) looks at it and decides whether to retry, modify, or abandon. The chat interface surfaces triaged jobs proactively: "You have three jobs that need attention."
+
+## What the Agent SDK Changes
+
+Building on the Claude Agent SDK is different from building a traditional API integration. With an API, you send a prompt and get a response. With the SDK, you define tools, and the agent decides which ones to use and in what order.
+
+That shift changes how you think about the interface. Instead of designing explicit workflows ("user clicks create, fills form, clicks submit"), you design capabilities ("the agent can create tasks, query status, manage schedules") and let the agent compose them. The chat becomes the workflow engine.
+
+It's a genuinely different way to build software. I'm not sure it's better for everything. For a task execution system where the space of possible actions is well-defined and the tools have clear contracts, it works remarkably well. The agent handles the intent parsing, the parameter extraction, and the multi-step orchestration. I handle the service layer and the execution guarantees.
+
+The part that surprised me: the agent is better at discovering installed capabilities than I am. Baara scans for all installed Claude Code plugins, skills, commands, and agents. The chat interface offers autocomplete across all of them. I have over a hundred and fifty skills installed across various plugins. The agent surfaces ones I'd forgotten about.
+
+## Keeping It Honest
+
+A few things I chose to be deliberate about.
+
+**Budget caps.** Every task has a maximum spend. The default is two dollars. The hard ceiling is ten. This prevents a runaway agent from burning through API credits on a task that's stuck in a loop. The budget is enforced at the executor level, not at the agent level, because the thing spending the money shouldn't be the thing deciding how much to spend.
+
+**Input validation with hard clamps.** Timeouts are clamped between one second and one hour. Retry counts between zero and ten. These aren't configurable upward. I don't trust future-me to make good decisions at 11pm about whether a task should be allowed to retry fifty times.
+
+**Append-only execution logs.** Every job execution writes to a JSONL log. Start events, tool calls, completions, failures. The logs are append-only and compatible with `jq` for ad-hoc querying. I've been burned before by logging systems that only keep the latest state. When something goes wrong, I want the full history.
+
+**Crash recovery.** On startup, the system checks for orphaned jobs (marked as "running" but the process isn't actually running them) and resets them to "failed." SQLite WAL mode with a checkpoint on graceful shutdown. These are the kinds of details that don't matter until the one time they matter a lot.
+
+## The Dependency Question
+
+Baara has six production dependencies. Six. For a system with a chat UI, a CLI, a cron scheduler, priority queues, SQLite persistence, and streaming AI execution.
+
+This wasn't an accident. Every dependency I didn't add is a dependency I don't have to update, audit, or debug when it breaks. Bun gives me native SQLite and TypeScript execution without a build step. Hono gives me a web server with streaming support. Commander gives me a CLI. Croner gives me cron parsing. The Agent SDK gives me AI execution. Zod gives me schema validation.
+
+The web UI is vanilla JavaScript. No React. No build step. No bundler. The HTML is served as static files. This is a personal tool, not a SaaS product. The UI needs to work, not win design awards. Vanilla JS is the fastest way to get there and the easiest to maintain.
+
+I know this choice wouldn't scale to a team of ten developers working on the frontend. It doesn't need to. That's the advantage of building for yourself: you can optimize for the constraints that actually matter.
+
+## Why This Matters Beyond the Project
+
+I think we're in the early days of a shift in how personal software gets built. The combination of AI agent frameworks and local-first architecture means that individuals can build automation that used to require a team and a SaaS subscription.
+
+Baara isn't a product. It's a personal tool that solves a personal problem. But the pattern it represents, chat-first interface, AI-composed workflows, local execution with no cloud dependency, is one I think we'll see a lot more of.
+
+The name still feels right. Work, done with craft and care, at the speed of conversation. That's what baara means to me, in both languages.

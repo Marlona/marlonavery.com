@@ -1,75 +1,207 @@
 ---
-title: AI-Powered Study Platform with Multi-Modal Learning
+title: 'AI Study Buddy: Full-Stack Learning Platform with Multi-Provider AI'
 slug: my-ai-study-buddy
 publishDate: '2026-01-26'
 description: >-
-  Full-stack learning platform combining flashcards, course authoring, and
-  AI-powered content generation for visual learners.
+  Full-stack learning platform combining spaced repetition flashcards, AI-generated
+  quizzes, and course authoring with dual AI providers (Claude + Gemini) and three
+  swappable storage backends.
 category: open-source
 role: Creator & Maintainer
 organization: Open Source
 impactSummary: >-
-  Built a comprehensive learning platform that integrates spaced repetition, AI
-  content generation, and visual learning tools. Designed for scalability with
-  multiple storage backends and user-customizable AI API keys.
+  Built a full-featured learning management system from scratch with 74+ API
+  endpoints across 13 resource groups, multi-provider AI integration for text and
+  image generation, and a storage abstraction layer supporting JSON, SQLite, and
+  Supabase backends. Designed for learners who want AI-assisted content creation
+  without vendor lock-in.
 scale:
-  - Multi-tenant
-  - Production-ready
-  - Full-stack
-  - AI-integrated
+  - 74+ REST API endpoints
+  - 13 resource groups
+  - 3 storage backends
+  - 2 AI providers
 primaryTech:
   - TypeScript
+  - React
+  - Vite
   - Python
   - FastAPI
-  - React
   - Claude API
   - Gemini API
-contributions: []
-outcomes: []
+  - Supabase
+  - SQLite
+  - Pydantic v2
+contributions:
+  - >-
+    Architected a FastAPI backend with 74+ endpoints organized across 13 resource
+    groups (auth, courses, modules, paths, generate, admin, settings, decks,
+    reviews, quiz, progress, ai, uploads)
+  - >-
+    Built a multi-provider AI integration layer using Claude API for text generation
+    (flashcards, quizzes, course outlines) and Gemini API for image generation,
+    with user-supplied API keys to eliminate platform costs
+  - >-
+    Designed a storage abstraction layer supporting three backends (JSON files for
+    local dev, SQLite for single-user deployments, Supabase for multi-tenant
+    production) with zero application code changes between them
+  - >-
+    Implemented a spaced repetition engine for flashcard reviews that adapts
+    scheduling intervals based on individual recall accuracy and streak data
+  - >-
+    Created a course authoring system with hierarchical modules, Markdown content
+    files, drag-and-drop reordering, and learning path composition
+  - >-
+    Built role-based admin console with user management, API key administration,
+    configurable notifications (email and SMS), and system monitoring
+outcomes:
+  - >-
+    Delivered a complete learning platform covering flashcards, quizzes, courses,
+    modules, learning paths, and progress tracking in a single cohesive application
+  - >-
+    Achieved seamless environment scaling from local JSON files to production
+    Supabase with the same codebase and no configuration changes beyond a
+    storage backend flag
+  - >-
+    Enabled users to bring their own AI API keys (Claude and Gemini), removing
+    the need for platform-managed AI costs entirely
+  - >-
+    Published with Apache-2.0 license, CONTRIBUTING.md, SECURITY.md, and GitHub
+    issue templates to support community contributions from day one
+  - >-
+    Maintained end-to-end type safety with Pydantic v2 models on the backend and
+    TypeScript on the frontend, reducing integration bugs across the API boundary
+  - >-
+    Built configurable notification system supporting both email and SMS channels
+    for review reminders and learning streak alerts
 tags:
   - ai-integration
   - education-tech
   - full-stack
   - typescript
   - fastapi
+  - python
+  - react
+  - supabase
 duration: 2026-Present
 featured: false
 repository: 'https://github.com/fakoli/my-ai-study-buddy'
-generated: true
-generatedAt: '2026-01-27T10:15:02.980Z'
+generated: false
+
+decisionCard:
+  problem: >-
+    Most learning platforms treat studying as a text-only activity. Visual
+    learners, people who retain information better through diagrams, generated
+    images, and interactive content, get left behind. Meanwhile, AI tools can
+    generate rich educational content on demand, but existing platforms either
+    lock you into a single AI provider or require expensive subscriptions that
+    put the cost on the platform operator.
+  constraints:
+    - 'Must support both text and image AI generation from different providers'
+    - 'Users must own their own AI API keys to avoid platform-side costs'
+    - 'Must work in local, single-user, and multi-tenant production deployments'
+    - 'Content authoring must support Markdown for portability and version control'
+    - 'Must implement proven spaced repetition for measurable learning outcomes'
+  tradeoffs:
+    - option: 'Full-stack with multi-provider AI + flexible storage (chosen)'
+      pros:
+        - 'Claude handles text generation, Gemini handles images: best of both'
+        - 'Three storage backends cover every deployment scenario'
+        - 'User-supplied API keys eliminate platform operating costs'
+        - 'FastAPI + React gives a modern, maintainable stack'
+      cons:
+        - 'Higher initial complexity: two AI SDKs, three storage adapters'
+        - 'Requires users to obtain their own API keys'
+      chosen: true
+    - option: 'Static flashcard app (Anki-style)'
+      pros:
+        - 'Simple to build and deploy'
+        - 'No AI cost concerns'
+        - 'Large existing user base familiar with the model'
+      cons:
+        - 'No AI-generated content, users manually create everything'
+        - 'No image generation or visual learning support'
+        - 'No course structure, learning paths, or admin tools'
+      chosen: false
+    - option: 'LMS platform (Moodle / Canvas style)'
+      pros:
+        - 'Mature ecosystem with extensive plugin libraries'
+        - 'Well-understood by educational institutions'
+      cons:
+        - 'Massive codebase, heavy infrastructure requirements'
+        - 'No native AI content generation'
+        - 'Designed for institutions, not individual learners'
+        - 'PHP-heavy stacks are harder to extend with modern AI SDKs'
+      chosen: false
 ---
-## Problem
 
-Traditional learning platforms often fail visual learners who need hands-on, interactive experiences to master complex subjects. Most existing solutions either focus purely on content delivery without adaptive learning mechanisms, or they lack the flexibility to generate personalized content at scale. Additionally, many educational tools don't leverage modern AI capabilities to create dynamic, context-aware learning experiences.
+## The Problem
 
-I needed to build a platform that combined the proven effectiveness of spaced repetition with AI-powered content generation, while maintaining the flexibility for users to control their own AI integrations. The challenge was creating a system that could serve both individual learners and administrators, with robust course authoring capabilities and progress tracking.
+I study a lot, and I kept running into the same frustration: the tools that help me learn best are scattered across different apps. Flashcards live in one app. Course materials live in another. Quizzes are somewhere else. And none of them can generate content for me. I'd spend more time creating study materials than actually studying them.
 
-## Approach
+The bigger issue is that most learning platforms are text-first. If you're a visual learner who retains information through diagrams and images alongside text, you're out of luck unless you manually create those assets yourself. AI can generate both text and images now, but no learning platform I found actually wired that capability into the study workflow.
 
-I designed Study Buddy as a full-stack TypeScript and Python application, choosing FastAPI for the backend to leverage Python's rich AI ecosystem while maintaining high performance and automatic API documentation. The frontend uses React with Vite for fast development iteration and optimal build performance.
+I wanted a single platform where I could create a course, have AI generate flashcards and quizzes from the material, get images to reinforce visual concepts, and then review everything through spaced repetition, all in one place.
 
-### Key Design Elements
+## The Approach
 
-- **Modular AI Integration**: Built adapters for both Claude (text generation) and Gemini (image generation) APIs, with user-configurable API keys to avoid vendor lock-in
-- **Flexible Storage Layer**: Implemented abstracted storage backends supporting JSON files for development, SQLite for single-user deployments, and Supabase for production multi-tenant scenarios
-- **Spaced Repetition Engine**: Developed a sophisticated flashcard review system that adapts to individual learning patterns and retention rates
-- **Markdown-Based Content**: Used Markdown for course content to enable version control, easy editing, and seamless integration with existing documentation workflows
-- **Comprehensive API**: Architected 74+ REST endpoints across 12 resource categories, providing full CRUD operations for all learning components
+### Choosing the Stack
 
-The architecture separates concerns cleanly, with Pydantic v2 models ensuring type safety across the Python backend, while TypeScript provides end-to-end type safety in the React frontend. I implemented role-based access control with JWT authentication and built an admin console for user management and system monitoring.
+I went with React and TypeScript on the frontend (using Vite for fast iteration) and Python with FastAPI on the backend. The Python choice was deliberate. The AI SDK ecosystem in Python is more mature, and FastAPI gives you automatic OpenAPI documentation for free, which matters when you're building 74+ endpoints.
 
-## Outcomes
+For data modeling, I used Pydantic v2 throughout the backend. Every request and response has a typed model, which catches integration issues at the validation layer instead of at runtime. On the frontend, TypeScript provides the same safety, so the entire data flow from React component to API endpoint to database is type-checked.
 
-- **Complete Learning Management System**: Delivered a full-featured platform supporting flashcards, quizzes, structured courses, learning paths, and progress tracking with AI-powered content generation
-- **Flexible Deployment Options**: Achieved seamless scaling from local development (JSON storage) to production environments (Supabase) with the same codebase
-- **User-Controlled AI Integration**: Enabled learners to use their own AI API keys, reducing operational costs while providing access to cutting-edge language models
-- **Extensible Architecture**: Built modular components that support multiple content types, assessment methods, and notification systems
+### The AI Layer
 
-## Key Contributions
+Rather than committing to a single AI provider, I built adapters for two: Claude API for text generation and Gemini for image generation. Each provider does what it does best. Claude generates flashcard content, quiz questions, course outlines, and explanatory text. Gemini generates images that reinforce visual learning.
 
-- **Architected comprehensive FastAPI backend** with 74+ endpoints across authentication, content management, AI generation, and administration
-- **Implemented sophisticated spaced repetition algorithm** that tracks user performance and optimizes review scheduling for maximum retention
-- **Built multi-provider AI integration system** supporting Claude for text generation and Gemini for visual content creation
-- **Designed flexible storage abstraction layer** enabling seamless transitions between JSON, SQLite, and Supabase backends
-- **Created intuitive course authoring system** with Markdown support, module reordering, and automated progress tracking
-- **Developed role-based admin console** with user management, token administration, and comprehensive system monitoring
+The key design decision was making users supply their own API keys through the settings page. This sounds like a friction point, but it solves a real problem: platform-managed AI keys mean the operator pays for every generation, which either limits usage or requires a subscription model. With user-supplied keys, there's no artificial cap on how much content you can generate.
+
+### Storage That Scales With You
+
+I didn't want to force a database choice on anyone, so I built a storage abstraction layer with three backends:
+
+- **JSON files** for local development and quick experimentation. Just clone the repo and start building. No database setup required.
+- **SQLite** for single-user deployments. One file, zero configuration, good enough for personal use.
+- **Supabase** for production multi-tenant deployments. Real authentication, row-level security, and all the features you need for multiple users.
+
+Switching between backends is a configuration flag. The application code doesn't change. Every storage operation goes through the same interface regardless of what's behind it.
+
+### The API Surface
+
+The backend exposes 74+ endpoints organized across 13 resource groups:
+
+- **auth**: Registration, login, token management
+- **courses** and **modules**: Course CRUD, module ordering, content management
+- **paths**: Learning path composition from multiple courses
+- **decks** and **reviews**: Flashcard decks with spaced repetition scheduling
+- **quiz**: AI-generated quizzes with scoring and history
+- **generate**: AI content generation endpoints (flashcards, quizzes, outlines, images)
+- **ai**: Direct AI provider interaction and configuration
+- **progress**: Streak tracking, mastery metrics, completion data
+- **admin**: User management, system monitoring, bulk operations
+- **settings**: User preferences, API key management, notification configuration
+- **uploads**: File handling for course materials and generated images
+
+Each group has its own FastAPI router, keeping the codebase navigable even at this scale.
+
+### Spaced Repetition
+
+The flashcard review system implements a spaced repetition algorithm that adjusts intervals based on how well you recall each card. Cards you struggle with appear more frequently. Cards you know well get pushed further out. The system tracks streaks, mastery percentages, and review history so you can see your progress over time.
+
+### Admin and Notifications
+
+The admin console handles user management, API key oversight, and system health monitoring. I also built a notification system that supports both email and SMS channels for review reminders, keeping learners on track with their study schedules even when they're not actively using the platform.
+
+## What I Learned
+
+**Storage abstraction is worth the upfront cost.** Writing three backend adapters felt like overkill initially. But being able to develop with JSON files (no database daemon, instant startup), test with SQLite, and deploy with Supabase made the development cycle dramatically faster. It also means anyone who clones the repo can be productive in under a minute.
+
+**Multi-provider AI is simpler than it sounds.** I expected juggling two AI SDKs to be a headache. In practice, the adapter pattern makes it straightforward. Each provider has a thin wrapper that normalizes the interface. Adding a third provider would be a single new module, not a rewrite.
+
+**Pydantic v2 is transformative for API development.** With 74+ endpoints, data validation bugs would have been constant without strong typing. Pydantic catches malformed requests before they reach business logic, and the auto-generated OpenAPI docs mean I never have to manually document the API surface. The TypeScript frontend can even generate its types from the OpenAPI spec.
+
+**User-supplied API keys change the economics.** Every learning platform I've seen either limits AI features behind a paywall or absorbs the cost and eventually raises prices. Letting users bring their own keys removes that tension entirely. The tradeoff is onboarding friction (users need to get an API key), but for the audience that wants AI-powered studying, that bar is low.
+
+**Spaced repetition needs real data to tune.** The algorithm works, but getting the intervals right required actual usage data. The initial parameters were based on published research, but individual learning patterns vary enough that the adaptive scheduling (adjusting based on per-user recall accuracy) matters more than the starting values.
+
+**Open source scaffolding signals intent.** Including CONTRIBUTING.md, SECURITY.md, issue templates, and an Apache-2.0 license from the start isn't just checkbox compliance. It tells potential contributors that the project is ready for collaboration, not just a personal experiment pushed to GitHub.

@@ -3,87 +3,228 @@ title: 'FamilyFinance: Self-Hosted Finance Tracker with AI Categorization'
 slug: family-finance
 publishDate: '2025-01-09'
 description: >-
-  A privacy-first personal finance application featuring AI-powered transaction
-  categorization and a full-stack architecture with Python, React, and Celery.
+  A privacy-first personal finance application with AI-powered transaction
+  categorization, 8+ bank-specific PDF parsers, and a 6-service Docker
+  Compose deployment built on Python, React, and Celery.
 category: open-source
 role: Creator & Maintainer
 organization: Open Source
 impactSummary: >-
-  Built a comprehensive self-hosted finance tracking solution that gives
-  privacy-conscious users full control of their financial data while leveraging
-  AI for intelligent transaction categorization.
+  Built a self-hosted finance tracking platform that gives privacy-conscious
+  users full control of their financial data while leveraging Anthropic Claude
+  for intelligent categorization, supporting multi-format imports including
+  AI-powered PDF extraction from bank statements, brokerage reports, and tax forms.
 scale:
-  - Multi-service Docker deployment
-  - Background task processing
-  - Plugin-based architecture
+  - 6-service Docker Compose deployment
+  - 4 extensible plugin types
+  - 8+ bank-specific PDF parsers
+  - 30-second automated file scan interval
 primaryTech:
   - Python
   - FastAPI
+  - SQLAlchemy 2.0
+  - Celery
   - React
   - TypeScript
-  - Celery
-  - PostgreSQL
+  - Vite
+  - Tailwind CSS
+  - PostgreSQL 16
+  - Redis
 contributions:
   - >-
-    Designed extensible plugin system for parsers, AI providers, and data
-    sources
-  - 'Implemented multi-format import pipeline with CSV, OFX, and QFX support'
-  - Built AI categorization service with OpenAI and Anthropic integration
-  - Created asynchronous task pipeline with Celery for background processing
-  - Developed interactive React dashboard with real-time progress tracking
-  - Architected clean service-layer separation with SQLAlchemy 2.0
+    Designed extensible plugin system with 4 distinct plugin types
+    (FileParser, DataSource, AIProvider, Notification) discovered at startup
+    via registry pattern
+  - >-
+    Implemented multi-format import pipeline supporting CSV, OFX, QFX, and
+    PDF files with automatic parser detection and custom column mapping
+  - >-
+    Built AI-powered PDF extraction engine with 8+ bank-specific parsers
+    covering Ally, Chase, BofA, PennyMac, and Amex bank statements, Schwab
+    and Fidelity brokerage reports, and W-2/1099/1098 tax forms
+  - >-
+    Created asynchronous 3-stage Celery task chain (scan, parse, categorize)
+    with real-time progress tracking through discrete state transitions
+  - >-
+    Developed interactive React dashboard with Recharts visualizations
+    including spending summaries, trend charts, donut breakdowns, KPI cards,
+    and net worth tracking
+  - >-
+    Architected financial overview suite with balance sheet, spending
+    breakdown, subscription tracking, brokerage holdings, asset allocation,
+    and tax insights (document checklist, income breakdown, deduction tracking)
+  - >-
+    Built file watch automation via Celery Beat scanning every 30 seconds
+    for drop-in imports without manual upload
+  - >-
+    Implemented modern fintech visual redesign with teal/emerald palette,
+    gradient cards, collapsible sidebar, and area/donut chart components
 outcomes:
-  - Delivered production-ready 6-service Docker Compose deployment
-  - Enabled automatic file-watch imports with configurable scan intervals
-  - Created comprehensive CLI tooling for user and system administration
+  - >-
+    Delivered production-ready 6-service Docker Compose deployment (FastAPI
+    backend, React frontend, Celery worker, Celery Beat scheduler,
+    PostgreSQL 16, Redis) launchable with a single command
+  - >-
+    Enabled AI categorization via Anthropic Claude with batch processing
+    to manage API costs across bulk imports
+  - >-
+    Created 8+ specialized PDF parsers that extract structured data from
+    bank statements, brokerage reports, and tax forms without manual entry
+  - >-
+    Built comprehensive CLI tooling for bulk imports, user management, role
+    assignment, and system administration
+  - >-
+    Established plugin architecture enabling community contributions for
+    new bank formats, AI providers, data sources, and notification integrations
 tags:
   - fintech
   - full-stack
   - ai-integration
   - self-hosted
   - privacy
+  - pdf-parsing
+  - docker
 duration: 2026-Present
 featured: false
 repository: 'https://github.com/fakoli/family-finance'
-generated: true
-generatedAt: '2026-02-09T08:45:46.695Z'
+generated: false
+
+decisionCard:
+  problem: >-
+    Managing personal and family finances forces a choice between privacy and
+    convenience. Commercial apps like Mint require handing banking credentials
+    to third parties. Self-hosted alternatives lack intelligent features like
+    automatic categorization and PDF extraction that make commercial options
+    worth using.
+  constraints:
+    - 'All financial data must stay on user-owned infrastructure'
+    - 'Must handle diverse import formats across different banks and brokerages'
+    - 'AI categorization must work without exposing raw financial data to third parties beyond the LLM call'
+    - 'Must be deployable by non-developers via Docker Compose'
+    - 'Must support ongoing automated imports without manual intervention'
+  tradeoffs:
+    - option: 'Self-hosted Docker stack with AI categorization (chosen)'
+      pros:
+        - 'Complete data ownership on user infrastructure'
+        - 'AI categorization via Anthropic Claude for intelligent automation'
+        - 'Extensible plugin system for new banks and formats'
+        - 'Single docker compose up deployment'
+      cons:
+        - 'Requires self-hosting (server or local machine)'
+        - 'AI categorization requires an API key and incurs per-call cost'
+        - 'No mobile app'
+      chosen: true
+    - option: 'Commercial SaaS (Mint, YNAB, Copilot)'
+      pros:
+        - 'Polished UX with mobile apps'
+        - 'Direct bank integrations via Plaid'
+        - 'No infrastructure to manage'
+      cons:
+        - 'Banking credentials shared with third party'
+        - 'Financial data stored on vendor servers'
+        - 'Vendor lock-in, shut-down risk (Mint shut down in 2024)'
+        - 'No customization for unusual bank formats'
+      chosen: false
+    - option: 'Spreadsheet (Google Sheets, Excel)'
+      pros:
+        - 'Total flexibility in structure'
+        - 'No software to deploy'
+      cons:
+        - 'Manual data entry for every transaction'
+        - 'No automatic categorization'
+        - 'No PDF extraction'
+        - 'Breaks down at scale with months of transaction history'
+      chosen: false
+  artifact:
+    type: code
+    title: FamilyFinance GitHub Repository
+    url: 'https://github.com/fakoli/family-finance'
 ---
-## Problem
 
-Managing personal and family finances typically means choosing between convenience and privacy. Commercial finance apps like Mint or YNAB require handing over banking credentials and financial data to third parties, which creates security concerns and locks users into proprietary ecosystems. Meanwhile, self-hosted alternatives often lack the intelligent features that make commercial options appealing, particularly automatic transaction categorization.
+## The Problem
 
-I wanted a solution that combined the convenience of AI-powered categorization with complete data ownership. The tool needed to support multiple import formats since different banks export statements in different ways, and it needed to be extensible enough to adapt to varying workflows without requiring code changes for every new use case.
+I got tired of the tradeoff. Every personal finance app I tried wanted my bank credentials. Mint, before it shut down, wanted a direct connection to every account. YNAB wants Plaid access. Copilot, the same. The pitch is always: give us your banking credentials, and we'll give you pretty charts.
 
-Beyond privacy concerns, I saw this as an opportunity to build a modern full-stack application that demonstrated clean architecture patterns, separating concerns between API routes, business logic, and data access while maintaining a responsive user experience during long-running operations like bulk imports.
+That never sat right with me. I work in infrastructure. I know what happens to data once it leaves your control. And frankly, after Mint's shutdown in 2024 left millions of users scrambling to export their data, the risk of vendor lock-in stopped being theoretical.
 
-## Approach
+But the alternative was miserable. I tried spreadsheets. I tried Ledger CLI. The problem is the same every time: manual data entry. Every bank exports statements differently. Some give you CSVs with inconsistent column headers. Some give you OFX or QFX files that generic parsers choke on. And none of them handle PDF statements, which is what most brokerages and tax documents actually come as.
 
-I architected FamilyFinance as a 6-service Docker Compose deployment, separating concerns between the FastAPI backend, React frontend, Celery workers, Celery Beat scheduler, PostgreSQL database, and Redis for task queuing. This separation allows each component to scale independently and makes the system easier to reason about.
+I wanted something that could ingest whatever format my banks threw at me, categorize transactions intelligently, and give me a real financial picture -- spending trends, net worth, tax prep, the works -- all running on my own hardware.
 
-The backend follows a strict layered architecture where route handlers remain thin, validating input via Pydantic schemas, delegating to services, and returning responses. All business logic lives in the service layer, which interacts with SQLAlchemy 2.0 models using async database sessions. This pattern makes the codebase testable and maintainable as features grow.
+## The Approach
 
-For the import pipeline, I implemented a three-stage Celery task chain: scanning the watch directory for new files, parsing and creating transactions, then categorizing uncategorized items in batches. The pipeline tracks status through discrete states (PENDING → PROCESSING → CATEGORIZING → COMPLETED) with real-time progress available via API endpoints, which the frontend polls to update the UI.
+### 6-Service Architecture
 
-### Key Design Elements
+FamilyFinance runs as a 6-service Docker Compose deployment. Each service has a clear responsibility:
 
-- **Plugin architecture**: Four extensible plugin types (FileParser, DataSource, AIProvider, Notification) discovered at startup via registry pattern, allowing new integrations without core code changes
-- **Multi-format parsing**: Automatic parser detection for CSV, OFX, and QFX files with saveable custom column mappings for different bank export formats
-- **AI provider abstraction**: Swappable AI backends supporting both OpenAI and Anthropic, with batch processing to manage API costs
-- **File watch automation**: Celery Beat scheduled task scans a configurable directory at regular intervals, enabling drop-in imports without manual upload
-- **Admin tooling**: Both web-based admin panel and CLI tools for user management, role assignment, and system monitoring
+1. **FastAPI backend** -- API routes, business logic via a strict service layer, SQLAlchemy 2.0 models with async sessions
+2. **React frontend** -- TypeScript, Vite, Tailwind CSS, TanStack Query for server state, Zustand for client state
+3. **Celery worker** -- processes import tasks, runs AI categorization batches
+4. **Celery Beat scheduler** -- triggers file watch scans every 30 seconds
+5. **PostgreSQL 16** -- the source of truth for all transaction and account data
+6. **Redis** -- task queue broker and result backend for Celery
 
-## Outcomes
+The separation matters. The Celery worker can churn through a bulk import of thousands of transactions without the API server missing a beat. The Beat scheduler runs independently, scanning the watch directory on its 30-second interval regardless of what else is happening.
 
-- **Privacy-first architecture**: Users maintain complete control of financial data on their own infrastructure with no third-party data sharing
-- **Streamlined import workflow**: Automatic file detection and AI categorization reduces manual transaction management overhead
-- **Extensible foundation**: Plugin system enables community contributions for new bank formats, AI providers, and notification integrations
-- **Production-ready deployment**: Single `docker compose up` command brings up the entire stack with sensible defaults
+### The Import Pipeline
 
-## Key Contributions
+The import pipeline is where I spent the most design time. It runs as a 3-stage Celery task chain:
 
-- **Designed the plugin registry system** that discovers and loads parser, AI, data source, and notification plugins at application startup
-- **Implemented the async import pipeline** using chained Celery tasks with progress tracking and failure recovery
-- **Built the React dashboard** with Recharts visualizations, TanStack Query for server state, and Zustand for client state management
-- **Created the AI categorization service** that batches transactions and supports multiple LLM providers through a common interface
-- **Developed comprehensive CLI tooling** for user creation, role management, and password resets without requiring database access
-- **Architected the custom parser schema system** allowing users to save and reuse column mappings for their specific bank export formats
+**Stage 1: Scan.** Celery Beat checks the watch directory every 30 seconds. New files get queued. The automatic parser detection looks at file extensions and content signatures to route CSV, OFX, QFX, and PDF files to the right parser.
+
+**Stage 2: Parse.** This is where the plugin system earns its keep. CSV files use custom parser schemas -- saved column mappings specific to each bank's export format. You map the columns once, save the schema, and every future import from that bank uses it automatically. OFX and QFX files go through standard financial data parsers. PDF files hit the AI-powered extraction engine.
+
+**Stage 3: Categorize.** Uncategorized transactions get batched and sent to Anthropic Claude for categorization. Batching is deliberate -- sending transactions one at a time would be wasteful. The system groups them, sends a batch, and applies the results.
+
+The pipeline tracks status through discrete states (PENDING, PROCESSING, CATEGORIZING, COMPLETED) with real-time progress available via API endpoints that the frontend polls to update the UI.
+
+### PDF Intelligence
+
+The PDF parsing was the hardest part and the feature I'm most satisfied with. Every bank formats their PDF statements differently. Chase puts transaction data in a completely different layout than Bank of America. Brokerage reports from Schwab look nothing like Fidelity's.
+
+I built 8+ bank-specific PDF parsers:
+
+- **Bank statements:** Ally, Chase, Bank of America, PennyMac, American Express
+- **Brokerage reports:** Schwab, Fidelity
+- **Tax forms:** W-2, 1099 (various types), 1098
+
+Each parser knows the exact layout of its target document type. It's not generic OCR hoping for the best -- it's targeted extraction that knows where Chase puts the date column versus where BofA puts it. When the built-in parsers don't match, the system falls back to AI-powered extraction that can handle unfamiliar formats.
+
+### The Plugin System
+
+Early on I realized I'd be adding new bank formats and data sources indefinitely. So I built a plugin system with 4 distinct plugin types:
+
+1. **FileParser** -- handles parsing logic for specific file formats or bank-specific layouts
+2. **DataSource** -- integrates external data (market prices, exchange rates) for net worth calculations
+3. **AIProvider** -- swappable AI backends for categorization (currently Anthropic Claude)
+4. **Notification** -- alerts when imports complete, errors occur, or spending thresholds are hit
+
+Plugins are discovered at startup via a registry pattern. Drop a new parser module in the right directory, and it's available on the next restart. No core code changes required.
+
+### The Dashboard
+
+The frontend went through a major visual redesign. The current version uses a modern fintech aesthetic: teal and emerald palette, gradient cards, collapsible sidebar navigation, and a suite of interactive Recharts visualizations.
+
+**Financial overview:** KPI cards showing key metrics at a glance, balance sheet view, spending breakdown by category, and subscription tracking.
+
+**Spending analysis:** Interactive trend charts (area and line), category donut breakdowns, and summary tables with date range filtering.
+
+**Net worth tracking:** Brokerage holdings pulled from imported statements, net worth over time charting, and asset allocation breakdowns.
+
+**Tax insights:** Document checklist tracking which tax forms have been imported, income breakdown across sources, and deduction tracking for estimated returns.
+
+### CLI and Automation
+
+Beyond the web interface, there's a full CLI for power users. Bulk import commands can process an entire directory of statements. User management (creation, role assignment, password resets) works without touching the database directly. And the file watch mode means day-to-day usage is genuinely hands-off: drop a statement PDF in the watch folder, and within 30 seconds it's parsed, categorized, and reflected in your dashboard.
+
+## What I Learned
+
+**Bank data formats are a mess, and that's the actual product.** The technical architecture -- FastAPI, Celery, React -- is standard full-stack work. The hard part is handling the chaos of real-world financial data. Every bank exports CSVs with different column names. Date formats vary. Amounts are sometimes negative for debits, sometimes positive with a separate column for transaction type. The custom parser schema system (save and reuse column mappings per bank) came directly from hitting this wall repeatedly.
+
+**PDF parsing is a domain problem, not an NLP problem.** My first instinct was to throw AI at every PDF and let it figure out the structure. That works in a pinch, but it's slow, expensive, and unreliable for documents you'll process regularly. The 8+ bank-specific parsers exist because knowing the exact layout of a Chase statement and extracting data deterministically is faster, cheaper, and more accurate than asking an LLM to interpret it every time. AI extraction is the fallback for unknown formats, not the primary path.
+
+**Plugin systems need to justify themselves early.** I've seen projects build elaborate plugin architectures for two integrations. I almost did the same thing. What saved it was that I genuinely needed 4 different extension points (parsers, data sources, AI providers, notifications) within the first month of development. If you're going to add the complexity of a plugin system, you need to be adding plugins regularly or the abstraction is just overhead.
+
+**Docker Compose is the right deployment target for personal tools.** I briefly considered packaging this as a desktop Electron app. Docker Compose won because the target user (someone technical enough to care about self-hosting their finances) already has Docker. Six services sounds like a lot, but `docker compose up` makes it a single command. And the separation means I can upgrade PostgreSQL or swap Redis for a different broker without touching application code.
+
+**Celery Beat for file watching is surprisingly elegant.** I originally had a Python watchdog process monitoring the directory. Replacing it with a Celery Beat task that scans every 30 seconds was simpler, more reliable, and eliminated a whole class of file-locking issues. The scan is cheap -- just a directory listing -- and it integrates naturally with the existing task pipeline.

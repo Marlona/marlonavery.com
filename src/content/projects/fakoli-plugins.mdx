@@ -1,88 +1,204 @@
 ---
-title: Claude Code Plugin Marketplace
+title: 'fakoli-plugins: Claude Code Plugin Marketplace'
 slug: fakoli-plugins
 publishDate: '2025-01-10'
 description: >-
-  A curated marketplace of Claude Code plugins with validation tooling and
-  plugin development templates
+  A curated, CI-validated marketplace of Claude Code plugins featuring 9+
+  plugins, 8 specialized agent archetypes, and a self-managing architecture
+  where the marketplace-manager plugin manages the marketplace itself.
 category: open-source
 role: Creator & Maintainer
 organization: Open Source
 impactSummary: >-
-  Built a plugin marketplace ecosystem for Claude Code that enables developers
-  to discover, share, and install productivity-enhancing plugins. The project
-  includes validation tooling, starter templates, and documentation to lower the
-  barrier for plugin development.
+  Built a self-managing plugin marketplace for Claude Code with CI validation,
+  9+ curated plugins spanning Google Workspace integration to multi-agent
+  orchestration, and a fork-friendly architecture that lets teams stand up
+  private marketplaces with the same tooling.
 scale:
-  - Extensible plugin architecture
-  - Community-driven marketplace
-  - Developer tooling focus
+  - 9+ curated plugins with skills, commands, agents, and hooks
+  - 8 specialized agent archetypes via fakoli-crew
+  - CI-validated on every PR via GitHub Actions
+  - Self-managing marketplace architecture
 primaryTech:
   - Shell
   - Python
+  - TypeScript
   - JSON Schema
-  - Git
+  - GitHub Actions
+  - Claude Code Plugin API
 contributions:
   - >-
-    Designed modular plugin architecture with skills, commands, agents, and
-    hooks
-  - Built validation tooling for plugin quality assurance
-  - Created starter templates to accelerate plugin development
-  - Implemented JSON Schema definitions for plugin manifests
+    Designed the plugin manifest schema and 4-part extension point taxonomy
+    (skills, commands, agents, hooks) that every plugin in the marketplace
+    follows
   - >-
-    Authored comprehensive documentation for contributors and marketplace
-    operators
+    Built 9+ first-party plugins: GWS (Google Workspace), fakoli-speak (TTS),
+    Excalidraw diagrams, safe-fetch, marketplace-manager, fakoli-crew (8 agent
+    archetypes), systems-thinking, nano-banana-pro, and more
+  - >-
+    Created the marketplace-manager plugin that manages the marketplace itself:
+    adding plugins, removing plugins, scanning for issues, and installing
+    CI workflows
+  - >-
+    Implemented CI validation pipeline via GitHub Actions that validates plugin
+    structure, manifest compliance, and documentation on every pull request
+  - >-
+    Designed fakoli-crew with 8 specialized agent archetypes for coordinated
+    multi-agent workflows across complex projects
+  - >-
+    Built fork-friendly architecture with documentation for teams to stand up
+    private or domain-specific marketplaces using the same tooling
+  - >-
+    Created starter templates and scaffolding commands so new plugin authors
+    can go from zero to working plugin in minutes
 outcomes:
-  - Established reusable plugin structure adopted across multiple plugins
-  - Enabled fork-and-customize model for private marketplaces
-  - Streamlined plugin submission workflow with automated validation
+  - >-
+    9+ production plugins covering integrations (Google Workspace, Excalidraw),
+    developer tools (safe-fetch, systems-thinking), media (TTS, image generation),
+    and agent orchestration (fakoli-crew)
+  - >-
+    Self-managing design eliminates manual marketplace maintenance: the
+    marketplace-manager plugin handles registry updates, validation, and
+    plugin lifecycle
+  - >-
+    CI validation catches structural issues before merge, shifting quality
+    assurance left and reducing review burden
+  - >-
+    Fork-and-customize model adopted for private marketplace deployments
+  - >-
+    8 agent archetypes in fakoli-crew enable team-based AI workflows without
+    building agent infrastructure from scratch
 tags:
   - developer-tools
   - plugins
   - marketplace
   - automation
   - claude-code
-duration: 2026-Present
-featured: false
+  - agents
+  - ci-cd
+duration: 2025-Present
+featured: true
 repository: 'https://github.com/fakoli/fakoli-plugins'
-generated: true
-generatedAt: '2026-02-02T13:14:00.611Z'
+generated: false
+
+decisionCard:
+  problem: >-
+    Claude Code's plugin ecosystem was fragmented. Individual developers were
+    building one-off integrations, but there was no standardized way to discover,
+    validate, install, or share plugins. Good work stayed siloed in personal
+    repos, common patterns got reinvented, and there was no quality gate to
+    prevent broken plugins from wasting users' time.
+  constraints:
+    - 'Plugins must work without executing arbitrary code during discovery/install'
+    - 'Validation must be automated and run on every PR, not rely on manual review'
+    - 'Architecture must support both first-party and external plugin references'
+    - 'Teams must be able to fork for private marketplaces without upstream changes'
+    - 'The marketplace itself should be manageable through Claude Code, not external tooling'
+  tradeoffs:
+    - option: 'Self-managing marketplace with CI validation (chosen)'
+      pros:
+        - 'Marketplace-manager plugin eats its own dogfood'
+        - 'GitHub Actions catch issues before merge automatically'
+        - 'Fork-friendly: private marketplaces inherit the same validation'
+        - 'Plugin authors get immediate feedback on structure issues'
+      cons:
+        - 'More complex initial setup than a simple registry'
+        - 'Self-referential architecture requires careful bootstrapping'
+      chosen: true
+    - option: 'Static registry with manual curation'
+      pros:
+        - 'Simple to implement and maintain initially'
+        - 'Full editorial control over what ships'
+      cons:
+        - 'Does not scale: every plugin needs manual review'
+        - 'No automated quality gate'
+        - 'Forking gives you the registry but not the validation'
+      chosen: false
+    - option: 'Decentralized plugin discovery (no central registry)'
+      pros:
+        - 'Zero maintenance burden on marketplace operator'
+        - 'Fully open contribution model'
+      cons:
+        - 'No quality assurance whatsoever'
+        - 'Discovery becomes a search problem with no curation'
+        - 'Users install broken plugins and blame the ecosystem'
+      chosen: false
 ---
-## Problem
 
-As AI-assisted development tools like Claude Code gain adoption, developers need ways to extend and customize their workflows. The challenge isn't just building plugins. It's creating an ecosystem where plugins can be discovered, validated, installed, and shared reliably.
+## The Problem
 
-I saw an opportunity to build infrastructure that would benefit the broader Claude Code community. Individual developers were building one-off integrations, but there was no standardized way to share these tools or ensure they met quality standards. Without a marketplace model, good plugins remained siloed in individual repositories, and developers had to reinvent common patterns repeatedly.
+When I started building Claude Code plugins, I ran into the same friction every plugin author hits. There's no standard way to structure a plugin. No validation to tell you if your manifest is malformed before you ship it. No central place for people to find what's already been built. And no way for teams to maintain their own curated set of plugins without building all the infrastructure from scratch.
 
-The goal was to create not just a collection of plugins, but a complete marketplace infrastructure that others could fork and customize for their own needs, whether for team-internal tooling or specialized domain plugins.
+I watched developers (including myself) reinvent the same patterns over and over. Every new plugin needed the same boilerplate. Every team that wanted a private plugin collection had to figure out their own quality gates. Good plugins sat in random repos with no discoverability.
 
-## Approach
+So I built the infrastructure layer that was missing: a curated, CI-validated marketplace with a self-managing architecture that teams can fork and make their own.
 
-I designed the marketplace around a clear separation of concerns: plugin manifests define metadata and capabilities, while the actual functionality lives in well-defined extension points (skills, commands, agents, and hooks).
+## The Approach
 
-### Key Design Elements
+### The Extension Point Taxonomy
 
-- **Manifest-driven architecture**: Each plugin declares its capabilities through a `plugin.json` manifest, enabling automated discovery and installation without executing arbitrary code during the browsing phase
-- **Extension point taxonomy**: Plugins can contribute skills (knowledge/context), commands (user-invokable actions), agents (autonomous workflows), or hooks (event-driven automations), covering the full spectrum of AI assistant customization
-- **Validation pipeline**: Shell and Python scripts validate plugin structure, manifest schema compliance, and documentation completeness before plugins can be merged
-- **JSON Schema definitions**: Formal schemas enable tooling to validate manifests and provide autocomplete in editors, reducing friction for plugin authors
-- **Template-first development**: Starter templates give authors a working plugin structure out of the box, so they can focus on functionality rather than boilerplate
+The first design decision was defining what a plugin actually is. I settled on four extension points that cover the full spectrum of how you'd want to extend an AI assistant:
 
-The validation tooling was particularly important. I built `validate.sh` to catch common issues early (missing required fields, malformed JSON, undocumented commands) before they reach the marketplace. This shifts quality assurance left and reduces maintenance burden on marketplace maintainers.
+- **Skills** provide knowledge and context. They're documents that Claude loads when relevant, giving it domain expertise it wouldn't otherwise have.
+- **Commands** are user-invokable actions. Slash commands that trigger specific workflows.
+- **Agents** are autonomous sub-agents with their own system prompts, tool access, and behavioral constraints. They handle complex multi-step work.
+- **Hooks** are event-driven automations. They fire on specific events (pre-tool-use, post-tool-use, stop) and can validate, transform, or block operations.
 
-For the registry infrastructure, I designed auto-generated indices that enable fast plugin search and discovery. The registry rebuilds on each merge, ensuring the index always reflects the current state of available plugins.
+Every plugin in the marketplace declares which of these four it contributes through a `plugin.json` manifest. This manifest-driven approach means discovery and installation never need to execute arbitrary code. You can browse the marketplace, read what a plugin does, and install it without running anything untrusted.
 
-## Outcomes
+### The Plugins Themselves
 
-- **Reusable infrastructure**: The marketplace design supports both first-party plugins and external plugin references, allowing curators to aggregate plugins from multiple sources without forking the original repositories
-- **Fork-friendly architecture**: Documentation explicitly supports creating private or domain-specific marketplaces, enabling teams to maintain internal plugin collections with the same tooling
-- **Lowered contribution barrier**: The combination of templates, validation scripts, and comprehensive documentation means new contributors can submit their first plugin without deep knowledge of the marketplace internals
+Here's what's actually in the marketplace today:
 
-## Key Contributions
+**GWS (Google Workspace)** is the largest plugin. It integrates Gmail, Calendar, Drive, Docs, Sheets, Slides, Chat, Tasks, Keep, Classroom, Meet, and Forms into Claude Code. Full CRUD operations, workflow recipes, and persona-based skill bundles for different roles (exec assistant, project manager, team lead).
 
-- **Designed the plugin manifest schema** defining how plugins declare capabilities, dependencies, and metadata
-- **Implemented the validation pipeline** in Shell and Python to enforce quality standards automatically
-- **Created starter templates** that provide working plugin scaffolding for common use cases
-- **Built the registry generation system** for automated plugin indexing and discovery
-- **Authored documentation** covering contribution workflows, plugin guidelines, and marketplace forking instructions
-- **Established category taxonomy** organizing plugins by function (Productivity, Code Quality, DevOps, Integrations, Utilities) for intuitive browsing
+**fakoli-crew** provides 8 specialized agent archetypes designed to work as coordinated teams. Instead of one general-purpose AI, you get focused agents for specific roles that can be composed into crews for complex projects. The crew-ops skill orchestrates them.
+
+**fakoli-speak** turns Claude's responses into speech. Multiple TTS providers, voice selection, cost tracking, and an autospeak mode that reads every response aloud.
+
+**Excalidraw** generates and modifies diagrams from natural language descriptions or code analysis. Describe what you want, get a real Excalidraw diagram you can open and edit.
+
+**nano-banana-pro** handles image generation, editing, optimization, and URL-based style remixing through Google Gemini.
+
+**systems-thinking** brings structured analysis frameworks into Claude: complexity mapping, architecture risk reviews, decision briefs, pattern remixing, and context sharding for large document sets.
+
+**safe-fetch** provides controlled HTTP access with safety constraints.
+
+**marketplace-manager** is the meta-plugin. It manages the marketplace itself: adding new plugins from templates, removing plugins, scanning all plugins for path resolution issues and hook safety problems, installing GitHub Actions workflows, and regenerating registry indices.
+
+### Self-Managing Architecture
+
+The marketplace-manager plugin is the design choice I'm most satisfied with. Instead of maintaining the marketplace through external scripts or manual processes, the marketplace manages itself through Claude Code.
+
+Want to add a new plugin? Run `/add-plugin` and it scaffolds from a template, sets up the manifest, and registers it in the index. Want to validate everything? Run `/scan-plugins` and it deep-scans for path resolution issues and hook safety problems. Need CI workflows? Run `/install-workflows` and it drops in the GitHub Actions configuration.
+
+This self-referential design means the marketplace eats its own dogfood. The tooling that manages plugins is itself a plugin, following the same manifest schema and validation rules as everything else.
+
+### CI Validation Pipeline
+
+Every pull request to the marketplace triggers GitHub Actions that validate plugin structure. The pipeline checks:
+
+- Manifest schema compliance (required fields, valid types, properly formed JSON)
+- File structure (expected directories, required files present)
+- Documentation completeness (README exists, commands are documented)
+- Hook safety (no dangerous patterns in event-driven automations)
+
+This shifts quality assurance left. Plugin authors get immediate feedback on structural issues before a human reviewer ever looks at the PR. For forks running private marketplaces, the same CI configuration comes along for free.
+
+### Fork-Friendly Design
+
+I designed the marketplace explicitly for forking. A team can fork the repo, remove plugins they don't need, add their own internal plugins, and get the full validation pipeline and management tooling without upstream changes.
+
+The registry auto-generates indices on each merge, so forks stay self-contained. Documentation covers the forking workflow step by step: how to customize the registry, how to add private plugins, how to configure CI for your fork.
+
+## What I Learned
+
+**Self-referential systems are worth the bootstrapping complexity.** Having the marketplace-manager be a plugin inside the marketplace it manages created a chicken-and-egg problem during initial setup. But once bootstrapped, the payoff is enormous. Every improvement to the management tooling benefits from the same validation and quality gates as every other plugin. The system improves itself.
+
+**A clear extension point taxonomy prevents scope creep.** The four-part model (skills, commands, agents, hooks) gives plugin authors a clear framework for what goes where. Without it, everything becomes a command or everything becomes a skill. The taxonomy forces intentional design: "Is this reactive automation? That's a hook. Is this domain knowledge? That's a skill."
+
+**CI validation is the trust layer.** In any marketplace, the hardest problem is trust. Users need confidence that what they install won't break their setup. Automated validation on every PR doesn't catch everything, but it catches the structural issues that cause the most frustration: malformed manifests, missing files, undocumented commands. It turns "hope this works" into "this passed the checks."
+
+**Plugins compose better than monoliths.** Early on I considered building one mega-plugin with everything. The marketplace model is more work upfront, but it pays off in composability. A team that needs Google Workspace and TTS but not image generation installs exactly what they need. Plugin boundaries force clean interfaces. And different plugins can evolve at different speeds without blocking each other.
+
+**Agent archetypes are more useful than general agents.** The fakoli-crew plugin taught me that 8 focused agents with clear roles outperform one general-purpose agent on complex work. Specialization lets each agent carry domain-specific system prompts, tool restrictions, and behavioral constraints that would conflict if merged into a single agent. The orchestration layer (crew-ops) handles coordination.

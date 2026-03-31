@@ -3,20 +3,20 @@ title: 'MCP Gateway: Centralized API Gateway for Model Context Protocol'
 slug: mcp-gateway
 publishDate: '2025-01-27'
 description: >-
-  A production-grade API gateway for Model Context Protocol servers with
-  authentication, routing, and analytics built in Go.
+  A centralized API gateway for MCP servers written in Go with namespace-based
+  routing, API key authentication, tool filtering, and embedded DuckDB analytics.
 category: open-source
 role: Creator & Maintainer
 organization: Open Source
 impactSummary: >-
-  Built a centralized gateway that enables LLM clients to securely access
-  multiple MCP servers through a single endpoint with comprehensive analytics
-  and monitoring.
+  Built a centralized gateway in Go that lets LLM clients reach multiple MCP
+  servers through a single endpoint, with namespace isolation, per-key access
+  controls, tool-level filtering, and embedded analytics powered by DuckDB.
 scale:
-  - Multi-tenant
-  - Production-grade
-  - Real-time Analytics
-  - SSE Streaming
+  - Multi-tenant with namespace isolation
+  - 88.8% test coverage
+  - Embedded DuckDB analytics
+  - SSE streaming proxy
 primaryTech:
   - Go
   - DuckDB
@@ -25,64 +25,183 @@ primaryTech:
   - REST API
   - YAML Configuration
 contributions:
-  - Designed namespace-based routing architecture
-  - Implemented API key authentication with namespace restrictions
-  - Built real-time analytics engine with DuckDB
-  - Created SSE streaming proxy for MCP protocol
-  - Developed tool filtering and access control system
-  - Architected modular middleware pipeline
+  - >-
+    Designed namespace-based routing architecture that maps URL prefixes to
+    backend MCP servers, allowing clients to reach filesystem, search, and
+    other tool servers through a single gateway endpoint
+  - >-
+    Implemented API key authentication with per-key namespace restrictions,
+    enabling fine-grained multi-tenant access control without external
+    identity infrastructure
+  - >-
+    Built embedded analytics engine on DuckDB that logs every request and
+    exposes usage statistics, tool popularity rankings, and time-series
+    data through a dedicated analytics API
+  - >-
+    Created SSE streaming proxy that preserves Server-Sent Events semantics
+    end-to-end, maintaining full MCP protocol compatibility for real-time
+    tool responses
+  - >-
+    Developed per-namespace tool filtering with allow/deny lists, giving
+    operators granular control over which tools each tenant can invoke
+  - >-
+    Architected composable middleware pipeline for authentication, rate
+    limiting, request logging, and health checks
+  - >-
+    Built comprehensive test suite achieving 88.8% coverage across unit
+    tests, integration tests, and test fixtures
 outcomes:
-  - Unified access to multiple MCP servers through single endpoint
-  - Comprehensive request analytics and monitoring
-  - Secure multi-tenant access with namespace isolation
-  - Production-ready with rate limiting and logging
+  - >-
+    Unified access to multiple MCP servers through a single endpoint,
+    eliminating per-server client configuration
+  - >-
+    Embedded DuckDB analytics provide request insights with zero external
+    infrastructure, no separate database installation required
+  - >-
+    Namespace isolation enables secure multi-tenant deployments where
+    each API key sees only the tools it is authorized to use
+  - >-
+    88.8% test coverage from the initial commit, establishing a reliable
+    foundation for production use
+  - >-
+    YAML configuration with environment variable expansion supports
+    flexible deployment across development and production environments
 tags:
   - api-gateway
   - mcp
   - llm-tools
   - go
   - analytics
+  - duckdb
 duration: 2024-Present
 featured: false
 repository: 'https://github.com/fakoli/mcp-gateway'
-generated: true
-generatedAt: '2026-01-27T10:16:16.877Z'
+generated: false
+
+decisionCard:
+  problem: >-
+    Managing multiple MCP servers creates operational sprawl. Each server
+    needs its own endpoint, authentication, and monitoring. LLM clients
+    must juggle multiple connections and credentials, and there is no
+    centralized view of which tools are being called, how often, or by whom.
+  constraints:
+    - 'Must add minimal latency to real-time LLM tool calls'
+    - 'Analytics must be embedded, no external database to install or manage'
+    - 'Must preserve SSE streaming for MCP protocol compatibility'
+    - 'Configuration must be declarative and environment-aware'
+    - 'Must support multi-tenant access with per-key restrictions'
+  tradeoffs:
+    - option: 'Centralized Go gateway with embedded DuckDB analytics (chosen)'
+      pros:
+        - 'Single binary deployment, DuckDB embedded means zero external deps'
+        - 'Go concurrency model handles many simultaneous SSE streams efficiently'
+        - 'Namespace routing gives clean multi-tenant separation'
+        - 'Analytics built in from day one, not bolted on later'
+      cons:
+        - 'Custom gateway means maintaining routing and proxy logic'
+        - 'DuckDB is embedded, so analytics are local to the gateway instance'
+      chosen: true
+    - option: 'Nginx reverse proxy with Lua scripting'
+      pros:
+        - 'Battle-tested HTTP proxy, widely understood'
+        - 'High throughput with minimal resource usage'
+      cons:
+        - 'Lua scripting for auth and filtering is fragile and hard to test'
+        - 'No built-in analytics, would need a separate logging pipeline'
+        - 'SSE streaming support requires careful configuration'
+      chosen: false
+    - option: 'Service mesh sidecar (Envoy/Istio)'
+      pros:
+        - 'Rich observability and traffic management out of the box'
+        - 'mTLS and policy enforcement built in'
+      cons:
+        - 'Massive operational overhead for what is essentially a tool proxy'
+        - 'Kubernetes-centric, overkill for most MCP deployments'
+        - 'Tool-level filtering would still require custom filters'
+      chosen: false
+  artifact:
+    type: code
+    title: 'mcp-gateway repository'
+    url: 'https://github.com/fakoli/mcp-gateway'
 ---
-## Problem
 
-Large Language Model applications increasingly rely on Model Context Protocol (MCP) servers to extend their capabilities with external tools and data sources. However, managing multiple MCP servers creates significant operational complexity - each server requires separate configuration, authentication, and monitoring. LLM clients must maintain connections to numerous endpoints, handle different authentication schemes, and lack visibility into tool usage patterns and performance metrics.
+## The Problem
 
-Existing solutions forced developers to either embed multiple MCP servers directly into applications or manage complex client-side routing logic. Neither approach provided centralized authentication, comprehensive analytics, or the ability to control access to specific tools based on user roles. This fragmentation made it difficult to scale MCP-powered applications in production environments.
+MCP is quickly becoming the standard way LLM applications connect to external tools. But the moment you have more than one or two MCP servers, the operational picture gets ugly. Each server is its own endpoint with its own configuration. Each LLM client needs credentials for every server it talks to. There is no central place to see what tools are being called, no way to restrict which users can access which tools, and no unified authentication layer.
 
-I needed a solution that would act as a unified gateway, providing secure access to multiple MCP servers while offering the operational visibility and control required for production deployments.
+I ran into this firsthand. I had a filesystem MCP server, a search server, and a couple of domain-specific servers, and each one was a separate integration point. Adding a new client meant configuring four endpoints, distributing four sets of credentials, and hoping nobody fat-fingered a URL. Monitoring was nonexistent. If something broke at 2am, I had no logs to tell me which server, which tool, or which client was involved.
 
-## Approach
+The conventional answer would be "put nginx in front of it" or "throw it into a service mesh." But nginx gives you routing without understanding. It doesn't know what an MCP tool is, so it can't filter at the tool level. And a full service mesh is a sledgehammer for a nail. I needed something purpose-built: a gateway that speaks MCP natively and provides the authentication, routing, filtering, and analytics that production deployments actually require.
 
-I designed MCP Gateway as a centralized proxy that sits between LLM clients and MCP servers, implementing namespace-based routing to cleanly separate different tool categories. The architecture uses Go's excellent concurrency model to handle multiple simultaneous connections while maintaining low latency for real-time LLM interactions.
+## The Approach
 
-The core routing system maps namespace prefixes to backend MCP servers, allowing clients to access filesystem tools via `/mcp/filesystem` and search tools via `/mcp/search` through a single gateway endpoint. This approach eliminates client-side complexity while providing clear service boundaries.
+### Namespace-Based Routing
 
-For authentication, I implemented an API key system that supports both global and namespace-restricted access. Each key can be configured to allow access only to specific namespaces, enabling fine-grained security controls. The middleware pipeline processes authentication, rate limiting, and logging in a composable fashion.
+The core abstraction is the namespace. Each backend MCP server gets a namespace prefix. A client calling `/mcp/filesystem/tools/list` hits the filesystem server. A call to `/mcp/search/tools/call` hits the search server. The gateway resolves the namespace, strips the prefix, and forwards the JSON-RPC request to the appropriate backend.
 
-### Key Design Elements
+This keeps the routing logic simple and declarative. Adding a new MCP server means adding a few lines to the YAML config, not writing new code. The namespace also becomes the natural boundary for access control: an API key can be restricted to specific namespaces, so a client that should only access search tools never sees the filesystem server.
 
-- **Namespace-based routing**: Clean separation of MCP servers by functional domain
-- **Embedded analytics**: DuckDB provides fast querying of request logs without external dependencies  
-- **SSE streaming proxy**: Full support for Server-Sent Events to maintain MCP protocol compatibility
-- **Tool filtering**: Per-namespace allow/deny lists for granular access control
-- **Environment-aware configuration**: YAML with environment variable expansion for flexible deployment
+### API Key Authentication with Namespace Restrictions
 
-## Outcomes
+Every request requires an API key. Each key is configured with a list of allowed namespaces. A key might have access to `search` and `analytics` but not `filesystem`. The middleware validates the key, checks the namespace against the key's allowed list, and rejects unauthorized requests before they reach the backend.
 
-The gateway successfully unifies access to multiple MCP servers through a single endpoint, dramatically simplifying client configuration and reducing connection overhead. The embedded analytics engine provides real-time insights into tool usage patterns, user behavior, and system performance without requiring external monitoring infrastructure.
+This is deliberately simpler than OAuth or JWT. MCP tool calls are machine-to-machine. The clients are LLM applications, not humans clicking through a browser. API keys with namespace scoping hit the right balance: straightforward to implement, easy to rotate, and granular enough for real access control.
 
-Production deployments benefit from comprehensive rate limiting, structured logging, and namespace isolation that enables secure multi-tenant access. The SSE streaming support ensures full compatibility with the MCP protocol while adding the operational benefits of centralized management.
+### Tool Filtering
 
-## Key Contributions
+Namespace restrictions control which servers a key can reach. Tool filtering goes one level deeper: it controls which specific tools within a namespace are available. Each namespace can have an allow list or a deny list of tool names.
 
-- Architected a namespace-based routing system that cleanly separates MCP server domains while maintaining protocol compatibility
-- Implemented a flexible API key authentication system with namespace-level access controls and user identification
-- Built an embedded analytics engine using DuckDB that provides real-time usage statistics, tool popularity metrics, and time-series data
-- Developed a streaming-aware HTTP proxy that preserves Server-Sent Events functionality for real-time MCP responses  
-- Created a comprehensive configuration system supporting YAML files and environment variable expansion for flexible deployment
-- Designed a modular middleware pipeline enabling composable request processing for authentication, logging, and rate limiting
+This matters in practice. You might expose a filesystem MCP server but want to block the `write_file` tool for most clients. Or you might have a powerful admin namespace but want to deny `delete_database` for all but one key. The allow/deny model handles both cases without complicating the routing layer.
+
+### Embedded Analytics with DuckDB
+
+I wanted analytics from day one, not as a follow-up feature. Every request that passes through the gateway gets logged: timestamp, API key, namespace, tool name, response status, and latency. These logs go into DuckDB, an embedded analytical database that ships as a Go library.
+
+DuckDB was the key decision here. It requires zero installation. There is no separate database process, no connection string, no migration tooling. It just works as part of the gateway binary. And because DuckDB is columnar and optimized for analytical queries, it handles the access patterns I cared about efficiently: aggregations over time windows, tool popularity rankings, per-key usage breakdowns.
+
+The analytics API exposes this data through REST endpoints. You can query total requests by namespace, get the top tools by invocation count, or pull time-series data for dashboards. It turns the gateway from a dumb proxy into an observability layer for your MCP infrastructure.
+
+### SSE Streaming Proxy
+
+MCP uses Server-Sent Events for streaming responses. The gateway needs to handle these correctly, which means it can't just buffer the backend response and forward it. It has to proxy the SSE stream in real time, preserving event boundaries and keeping the connection alive.
+
+The Go implementation uses goroutines to read from the backend SSE stream and write to the client connection concurrently. Flush control ensures events are pushed to the client as they arrive rather than batched by the HTTP buffer. This preserves the real-time behavior that MCP clients expect.
+
+### Configuration
+
+The entire gateway is configured through a single YAML file. Server addresses, namespace mappings, API keys, tool filters, analytics settings, all declared in one place. Environment variable expansion (`${VAR_NAME}`) is supported throughout, so secrets stay out of the config file and deployment-specific values can be injected at runtime.
+
+```yaml
+namespaces:
+  filesystem:
+    upstream: "http://localhost:3001"
+    tools:
+      deny: ["write_file", "delete_file"]
+  search:
+    upstream: "http://localhost:3002"
+
+auth:
+  keys:
+    - key: "${MCP_API_KEY_READONLY}"
+      namespaces: ["search"]
+    - key: "${MCP_API_KEY_ADMIN}"
+      namespaces: ["filesystem", "search"]
+```
+
+### Testing
+
+The project shipped with 88.8% test coverage from the initial commit. Unit tests cover the routing logic, authentication middleware, tool filtering, and analytics queries. Integration tests spin up test MCP servers and verify end-to-end request flows through the gateway. Test fixtures provide reproducible scenarios for edge cases like malformed JSON-RPC requests, expired API keys, and SSE connection drops.
+
+I'm particular about test coverage in infrastructure code. A gateway is a single point of failure by definition. If it has a bug in the routing logic or a race condition in the SSE proxy, every client is affected. 88.8% coverage doesn't guarantee correctness, but it means the critical paths have been exercised and the obvious failure modes are covered.
+
+## What I Learned
+
+**Embedded databases change the deployment calculus.** Before DuckDB, adding analytics to a gateway meant introducing a database dependency. That's a migration tool, a connection pool, a health check, and a failure mode. Embedding the database eliminates all of that. The gateway is still a single binary. This shifted my thinking about when to include analytics: if the cost is near zero, you should include it from the start rather than retrofitting it later.
+
+**Namespace-based routing is underrated.** URL-prefix routing is one of the oldest patterns in web infrastructure, and it maps perfectly onto multi-server MCP deployments. The namespace gives you routing, access control boundaries, and tool filtering scopes all in one concept. Every time I considered a more complex routing scheme (header-based, content-based, service discovery), the namespace approach was simpler and sufficient.
+
+**Tool-level filtering is the gap in generic proxies.** Nginx can route by path. A service mesh can enforce mTLS. But neither knows what an MCP tool is. The ability to say "this key can access the filesystem namespace but not the `write_file` tool" requires a gateway that understands the MCP protocol. This is the core reason a purpose-built gateway exists rather than stacking config on a generic reverse proxy.
+
+**SSE proxying is trickier than it looks.** HTTP proxies typically buffer responses. SSE requires the opposite: events must be flushed immediately. Getting this right in Go meant explicit flush control, careful goroutine lifecycle management, and proper cleanup when either side of the connection drops. The streaming proxy logic is some of the most carefully tested code in the project.
+
+**Ship comprehensive from day one.** The entire project landed in a single initial commit: routing, auth, tool filtering, analytics, SSE streaming, configuration, and 88.8% test coverage. Building it all together meant the pieces were designed to fit. If I had shipped routing first and bolted on analytics later, the request logging would have been an afterthought rather than a first-class concern woven through the middleware pipeline.
