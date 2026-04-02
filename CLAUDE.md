@@ -149,6 +149,17 @@ Avoid "AI slop" aesthetics. Make distinctive, creative frontends:
 
 Think outside the box. Vary themes, fonts, and aesthetics across designs.
 
+## Writing Style & Voice
+
+This portfolio has established writing patterns that must be preserved. Before writing or editing any content, consult the relevant style guides in `.claude/rules/`:
+
+- **Voice Reference** (`.claude/rules/voice-reference.md`): Sekou's distinctive voice — sentence rhythm, authority style, verbal signatures. Consult this for ALL content types.
+- **Blog Posts** (`.claude/rules/writing-blog-posts.md`): Structure, conventions, and quality bar for blog articles.
+- **Case Studies** (`.claude/rules/writing-case-studies.md`): Strategic/employer case study structure and confidentiality practices.
+- **Project Descriptions** (`.claude/rules/writing-project-descriptions.md`): Open-source project description structure and narrative expectations.
+
+These guides encode both existing strengths and peer feedback. Follow them as hard requirements, not suggestions.
+
 ## LLM-Readable Profile (llms.txt)
 
 The site serves an LLM-readable profile at `/llms.txt` via `src/pages/llms.txt.ts`. This file helps AI assistants accurately represent Sekou's professional identity and current availability.
