@@ -4,7 +4,7 @@ publishDate: 2026-03-25
 description: "What I learned building specialized agent archetypes that coordinate through file ownership, wave execution, and structured handoffs."
 tags: ["ai-infrastructure", "open-source", "agents", "claude-code"]
 draft: false
-readingTime: 8
+readingTime: 12
 heroImage: "/blog/fakoli-crew-hero.png"
 ---
 
@@ -74,9 +74,73 @@ The agents run in waves, not all at once. Five waves for a full project:
 
 For small changes, the waves collapse. A one-file fix might be three waves: read, change, verify. The pattern scales down gracefully because the principle (separate research from building from integration from validation) holds at every size.
 
+## A Handoff In Practice
+
+Let me make this concrete. Here's what actually happens when I add a new plugin to the marketplace — say I'm wrapping a weather API.
+
+Wave 1 kicks off. Scout researches the target API. When it finishes, its status file looks like this:
+
+```yaml
+agent: scout
+wave: 1
+status: complete
+findings:
+  - endpoint: api.openweathermap.org/data/3.0/onecall
+    auth: API key via query parameter
+    rate_limit: 1000 calls/day (free tier)
+    gotchas:
+      - "3.0 requires paid subscription; 2.5 is free but deprecated"
+      - "Units parameter defaults to Kelvin, not Celsius"
+  - recommendation: "Use 2.5 for free tier, design for 3.0 upgrade path"
+next_agent_notes: >
+  Smith: use env var for API key, not hardcoded.
+  Guido: handle unit conversion in the interface layer.
+```
+
+Simultaneously, Critic reviews the existing plugin loader and produces its own status file:
+
+```yaml
+agent: critic
+wave: 1
+status: complete
+verdict: PASS (with notes)
+findings:
+  - file: src/plugins/loader.ts
+    severity: info
+    note: "Plugin registry uses synchronous fs reads — won't break, but
+           worth noting for future async migration."
+  - file: src/plugins/types.ts
+    severity: warning
+    note: "PluginManifest type lacks optional rateLimit field.
+           New plugin needs this if it enforces call limits."
+next_agent_notes: >
+  Welder: check if manifest type needs extending before integration.
+  Smith: add rateLimit to manifest schema if weather plugin uses it.
+```
+
+Wave 2 reads both files. Guido sees Scout's note about unit conversion and designs the interface with a `units` parameter that defaults to Celsius. Smith sees Scout's note about env vars and Critic's note about the manifest type, so it extends the schema *and* uses `process.env.WEATHER_API_KEY`. Herald starts writing the README based on Scout's API findings — the rate limits, the authentication scheme, the gotchas — without waiting for a single line of implementation code.
+
+None of them talked to each other. They read artifacts. Pull-based coordination.
+
+Wave 3: Welder reads every status file from Waves 1 and 2, sees that Smith extended the manifest type, wires the new plugin into the loader's registry, and adds the rate limit middleware. One agent, touching only the integration files.
+
+Wave 4: Critic re-reviews the entire changeset. Sentinel runs the test suite, validates the manifest against the schema, checks that the README's feature list matches the actual tool count. Both produce structured reports — and here's the part that matters: Sentinel's report is a binary scorecard. No "looks mostly fine." Every line is PASS or FAIL:
+
+```
+manifest_schema:     PASS
+tool_count_matches:  PASS
+readme_sync:         PASS
+test_suite:          PASS (47/47)
+version_consistency: FAIL — plugin.json says 1.0.0, package.json says 0.9.0
+```
+
+That version mismatch gets dispatched back to Smith in Wave 5. The human (me) reads the scorecard, sees one FAIL, and sends it to the right agent. Smith fixes the version. Sentinel re-validates. Ship it.
+
+The whole exchange took maybe six minutes. The important thing isn't speed — it's that at no point did two agents touch the same file, and every handoff left a paper trail I can audit.
+
 ## What I Actually Use This For
 
-I use fakoli-crew most heavily when working on the plugin marketplace itself. The irony isn't lost on me: the plugin that manages plugins is maintained by agents specialized in plugin work.
+I use fakoli-crew most heavily when working on the plugin marketplace itself. The irony isn't lost on me: the plugin that manages plugins is maintained by agents specialized in plugin work. (Yes, I hear it. It's turtles all the way down.)
 
 A typical workflow: I want to add a new plugin to the marketplace. Scout researches the API or tool the plugin will wrap. Guido designs the Python interfaces. Smith handles the manifest and hook infrastructure. Welder wires it into the existing plugin loader. Herald updates the README and marketplace listing. Sentinel validates the whole thing. Keeper updates the registry index and CLAUDE.md.
 

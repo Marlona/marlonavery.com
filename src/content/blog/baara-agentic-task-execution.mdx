@@ -4,7 +4,7 @@ publishDate: 2026-03-15
 description: "Building a chat-first personal automation platform on the Claude Agent SDK, and why naming it after the Mandinka word for work felt right."
 tags: ["ai-infrastructure", "open-source", "agent-sdk", "architecture"]
 draft: false
-readingTime: 7
+readingTime: 9
 heroImage: "/blog/baara-hero.png"
 ---
 
@@ -39,6 +39,39 @@ This is the part of the architecture I'm proudest of. Baara has three ways to in
 I've seen too many projects where the web API does one thing, the CLI does a slightly different thing, and the scheduler does a third thing because each interface implemented its own version of the logic. That divergence starts small and compounds until you have three systems pretending to be one.
 
 The discipline is simple: routes and CLI handlers validate input and call a service method. Services own the logic. The store owns the data. The engine owns execution. If a new feature doesn't fit cleanly into that stack, the feature needs rethinking, not the architecture.
+
+## What It Actually Feels Like
+
+Let me show you what using baara looks like in practice. This is a real interaction pattern, not a demo script:
+
+```
+me: check if the fakoli-plugins CI is green and summarize any failures
+
+baara: Looking into that now.
+  → tool: github.check_workflow_runs("fakoli/fakoli-plugins")
+  → found: 3 recent runs
+
+  Last 3 CI runs for fakoli/fakoli-plugins:
+  ✓ #247 validate-plugins (main) — passed, 2m ago
+  ✗ #246 validate-plugins (pr/89) — failed
+  ✓ #245 validate-plugins (main) — passed, 4h ago
+
+  Failure in #246: the excalidraw plugin manifest is missing
+  a required "version" field. The validation step caught it
+  before merge. PR #89 needs a fix.
+
+me: create a task to remind me about that PR tomorrow at 9am
+
+baara: Created task "Review PR #89 — excalidraw manifest fix"
+  → priority: normal
+  → scheduled: tomorrow 9:00 AM
+  → budget: $0.50 (reminder tasks are cheap)
+  → task_id: tsk_7f2a
+```
+
+That's two interactions. The first one composed three tool calls (GitHub API check, run filtering, failure summarization) without me specifying how. The second created a scheduled task with sensible defaults. The whole thing took about eight seconds.
+
+The part that surprised me most: I've started using it for things I never would have scripted. "What did I work on yesterday?" uses the git log tool. "Draft a reply to this email" uses the text generation tool with my writing style context. These aren't tasks worth building automation for individually. They're worth having a conversational interface that can compose tools on the fly.
 
 ## The Execution Pipeline
 

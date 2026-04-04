@@ -25,8 +25,9 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# claude code
-.claude/
+# claude code (ignore all except rules/ which contains writing style guides)
+.claude/*
+!.claude/rules/
 
 # CLAUDE.md files in subdirectories (keep only root CLAUDE.md)
 */CLAUDE.md
