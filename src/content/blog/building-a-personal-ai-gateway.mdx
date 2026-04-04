@@ -4,7 +4,7 @@ publishDate: 2026-03-05
 description: "How a structured competitive analysis of my own code convinced me that a clean-room rewrite was the right call, and what I learned building Nexus."
 tags: ["ai-infrastructure", "architecture", "typescript", "open-source"]
 draft: false
-readingTime: 8
+readingTime: 10
 heroImage: "/blog/nexus-gateway-hero.png"
 ---
 
@@ -44,6 +44,25 @@ That description sounds simple. The architecture underneath it is where the inte
 
 **Seven providers, one interface.** Anthropic, OpenAI, Google, Groq, DeepSeek, Ollama, and OpenRouter all implement the same interface: `stream()` returns an async generator, `complete()` returns a response. Adding a new provider means implementing two methods. The resolver builds a failover chain automatically. If the preferred provider fails, it tries the next one with a sixty-second cooldown on the failed provider. I don't think about provider reliability anymore. The system handles it.
 
+Here's what the failover actually looks like in practice. Say I send a message and my preferred provider is Anthropic:
+
+```
+→ User sends message
+→ Resolver checks provider priority: [anthropic, openai, google]
+→ Anthropic: available (last failure: none)
+  → stream() called → tokens flow back → done
+
+// Later, Anthropic returns a 529 (overloaded):
+→ User sends message
+→ Resolver checks provider priority: [anthropic, openai, google]
+→ Anthropic: cooling down (failed 12s ago, cooldown: 60s)
+→ OpenAI: available
+  → stream() called → tokens flow back → done
+→ After 60s, Anthropic re-enters the pool automatically
+```
+
+I don't decide which provider serves a given request. The resolver does. I just rank them in order of preference and set the cooldown window. The operational result: I haven't manually switched providers in months.
+
 **Security from day one.** This is the part I'm most deliberate about. Prompt injection detection with sixteen regex patterns. SSRF protection on web fetch. Path traversal guards on filesystem tools. Encrypted credential storage with a master key. Rate limiting per client. Content boundary wrapping on tool output. Every WebSocket frame is validated with Zod before processing. None of this was in the original. All of it should have been.
 
 ## The Channel Problem
@@ -78,7 +97,11 @@ There's a version of this project that's a SaaS product. Multi-tenant, subscript
 
 Your AI conversations are some of the most personal data you generate. The questions you ask, the problems you're working through, the half-formed ideas you're testing. I don't want that data on someone else's server. I don't want it training someone else's model. I don't want to wonder what happens to it when the company pivots or gets acquired.
 
-Nexus stores everything in a SQLite database in your home directory. Your API keys are encrypted locally. Your conversations never leave your machine unless you explicitly connect a channel adapter. That's a deliberate choice, and it's one I'd make again.
+Let me be precise about what "self-hosted" means here, because I've gotten questions about this. Nexus stores your conversations, configuration, and encrypted credentials in a SQLite database on your machine. Nothing phones home. No telemetry. No cloud sync. Your data stays on your hardware.
+
+But it's not an air-gapped system. When you send a message, Nexus calls the AI provider's API — Anthropic, OpenAI, Google, whoever your resolver selects. Those prompts leave your machine. What Nexus controls is the *storage* and *routing*: your conversation history lives locally, your API keys are encrypted locally, the failover logic runs locally, and no third party ever sees the full conversation context. The providers see individual requests, not your archive.
+
+That's a deliberate line. I'm comfortable sending a prompt to an API. I'm not comfortable sending my entire conversation history to someone else's database. Nexus lets me draw that distinction. That's the choice, and it's one I'd make again.
 
 ## The Rewrite Lesson
 
