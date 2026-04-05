@@ -40,7 +40,7 @@ A golden path for deploying a new service might include a pre-configured CI/CD p
 
 This is harder than it sounds. The temptation is to pick one extreme: give everyone maximum flexibility (nobody gets a fast path, everyone reinvents the wheel) or lock everything down (the platform becomes a bottleneck, tickets pile up, teams route around you).
 
-The art is finding the right layer of abstraction. I haven't always gotten it right. The times I've gotten it wrong usually involved optimizing for control when I should have been optimizing for adoption. You can build the most elegant platform in the world, but if the fastest path to production goes around it, you've lost.
+The art is finding the right layer of abstraction. I haven't always gotten it right. One version of a deployment platform I built gave teams so much flexibility that nobody used the same patterns twice — the platform was technically optional and it showed. Another time, I locked things down so tightly that developers started writing their own Terraform outside the system just to move faster. Both mistakes looked like success at first: the first had high adoption numbers, the second had high consistency numbers. Neither was actually working. The times I've gotten it wrong usually involved optimizing for the metric I could measure instead of the outcome I actually wanted.
 
 ## Self-Service Changes the Game
 
@@ -78,4 +78,4 @@ Platform engineering isn't a rebrand of DevOps. It's a fundamentally different w
 
 The teams I've seen succeed with this approach share a few traits: they listen to their users, they ship incrementally, they measure adoption relentlessly, and they're willing to kill features that aren't working. That sounds exactly like product management.
 
-I think that's the point.
+The best platform teams aren't the ones with the most impressive internal tooling. They're the ones whose developers forget the platform exists — because it just works.

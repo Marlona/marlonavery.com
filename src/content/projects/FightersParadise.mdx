@@ -94,3 +94,11 @@ The input system uses a 60-frame ring buffer that captures the complete recent h
 - **Engineered graceful error handling** throughout parsers to handle malformed community content without crashing
 
 - **Documented architecture decisions** including format specifications derived from reverse engineering efforts
+
+## What I Learned
+
+Reverse engineering MUGEN's binary formats was harder than I expected, and not in the ways I anticipated. The community documentation is extensive, but it documents what people observed rather than what the original authors intended — which means edge cases are underdocumented by definition. The real specification is the behavior of the original engine, and the only way to test against it is to run content through both implementations and compare outputs. I spent more time on empirical testing against real community files than on reading any spec.
+
+The GPU palette shader was the most satisfying design decision to get right. MUGEN's indexed color model — where sprites are 256-color palettes that swap at runtime — looked like a constraint at first. It turned out to be elegant: the GPU lookup table approach lets character color variants happen at zero cost. I'd have designed it differently if I hadn't been forced to understand the legacy format first.
+
+What I'd do differently: start with the state machine design before touching rendering. I built the sprite pipeline first because it was concrete and testable, but the state machine is what actually makes a fighting game a fighting game. Getting rendering working early felt like progress; it was actually deferred complexity. The architecture handles it, but the sequencing meant I had a beautiful renderer with no combat logic for longer than I'd like to admit.

@@ -14,10 +14,10 @@ impactSummary: >-
   analysis. The tool streamlines the process of converting server configurations
   into usable skills for Claude Code and Cursor.
 scale:
-  - Cross-platform
-  - Multi-language support
-  - AI-powered analysis
-  - Production-ready
+  - npm and PyPI registry support
+  - Claude Code and Cursor compatible
+  - PEP 723 compliant wrapper scripts
+  - JSON and plain-text output modes
 primaryTech:
   - Python
   - Claude API
@@ -50,9 +50,11 @@ generatedAt: '2026-01-27T10:15:53.328Z'
 ---
 ## Problem
 
-The Model Context Protocol (MCP) ecosystem has grown rapidly, with numerous servers providing powerful functionality for AI assistants. However, there was a significant gap between having MCP servers configured and being able to use them effectively in AI code editors like Claude Code and Cursor. Manual conversion of MCP server configurations into usable skills required deep understanding of each server's tools, extensive documentation reading, and time-consuming wrapper script creation.
+I had a dozen MCP servers configured in Claude Desktop. Useful things: filesystem tools, search, database connectors. But when I switched to Claude Code, none of them worked. Claude Code uses skills, not MCP configs. To get the same capability back, I had to read each server's source, understand its tool definitions, write wrapper scripts, and author a SKILL.md manifest — for every single server.
 
-Developers were spending too much time on the mechanical process of analyzing MCP server source code, understanding tool definitions, and creating the boilerplate needed to make these tools accessible in their AI coding workflows. This friction was preventing wider adoption of the rich MCP ecosystem and limiting productivity gains from these powerful integrations.
+I did it once. It took about forty minutes. I did not want to do it twelve more times.
+
+The MCP ecosystem had grown fast, but the bridge to skill-based workflows didn't exist. The gap wasn't philosophical — it was mechanical. The information needed to generate a skill was all there in the package registry and source code. Someone just needed to extract it automatically.
 
 ## Approach
 
@@ -69,11 +71,32 @@ The tool automatically detects MCP server configurations from standard locations
 - **Flexible output targeting** with support for Claude Code, Cursor, and custom directory structures
 - **Environment variable inheritance** preserving MCP server environment requirements in generated skills
 
-## Outcomes
+## What It Produces
 
-The tool successfully automates the entire MCP server to skill conversion pipeline, generating production-ready skill files with comprehensive documentation and executable wrapper scripts. Each generated skill includes a detailed SKILL.md manifest with tool documentation, parameter specifications, and usage examples, alongside Python wrapper scripts with full CLI interfaces and JSON output options.
+Running the converter against an MCP server looks like this:
 
-Users can now convert any MCP server to a usable skill with a single command, dramatically reducing the barrier to entry for leveraging the MCP ecosystem in AI coding workflows. The generated skills maintain full compatibility with the original MCP servers while providing the convenience of direct script execution through modern Python tooling.
+```bash
+$ mcp-to-skills convert @modelcontextprotocol/server-filesystem
+
+Fetching source from npm registry...
+Analyzing tool definitions with Claude...
+Generating skill files...
+
+✓ Created: ~/.claude/skills/filesystem/SKILL.md
+✓ Created: ~/.claude/skills/filesystem/run.py
+```
+
+The generated `SKILL.md` contains tool names, parameter schemas, and usage examples pulled directly from the server source. The `run.py` wrapper is PEP 723 compliant, so `uv run run.py list_directory --path /tmp` just works without a separate install step.
+
+The output isn't perfect on the first pass for every server — Claude's extraction is good, but unusual MCP schemas occasionally need a manual touch-up. That's an acceptable tradeoff for avoiding forty minutes of hand-authoring.
+
+## What I Learned
+
+The hard part wasn't the AI analysis — it was the source fetching. npm packages are straightforward, but PyPI distributions package things inconsistently: sometimes the source is bundled, sometimes it's a compiled extension, sometimes the relevant tool definitions live three levels deep in a module I had to trace manually before I could teach Claude to find it automatically.
+
+The second lesson: generated skills need a review pass, not a trust pass. I built a `--dry-run` flag early specifically because I wanted to inspect what was generated before writing files. That flag gets used more than any other option.
+
+PEP 723 was the right call for wrapper scripts. Self-contained scripts with inline dependency declarations are exactly what you want for something that needs to run reliably across machines without a dedicated virtualenv.
 
 ## Key Contributions
 

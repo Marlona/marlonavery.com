@@ -82,3 +82,11 @@ I chose Rust for this project because the sidecar sits in the critical path of a
 - **Created address synthesis logic** using the Well-Known Prefix for NAT64 compatibility
 - **Developed Kubernetes-native health endpoints** for liveness, readiness, and startup probes
 - **Packaged as a minimal distroless container** with comprehensive security hardening
+
+## What I Learned
+
+The hardest part of writing a network proxy in Rust wasn't the networking — it was the async lifetime management. Tokio's task model is excellent, but when you're holding mutable state across bidirectional proxy connections while also managing connection pools and cooldowns, you end up in situations where the borrow checker is telling you something real about your design. Several times I thought I had a concurrency bug and it turned out I had a design flaw that the borrow checker was accurately diagnosing.
+
+Happy Eyeballs v3 looks simple in the RFC — interleave IPv6 and IPv4 attempts, prefer the faster response. Implementing it correctly with proper cancellation when one connection wins was genuinely tricky. The hard part is cleaning up the losing connections without introducing delays that defeat the purpose of racing them in the first place. I ended up with more cancellation logic than connection logic.
+
+The zero-privilege constraint turned out to be the right forcing function. By deciding early that the sidecar would run without `NET_ADMIN` or any privileged capabilities, I had to make the userspace proxy approach work rather than reaching for the easier kernel-level solutions. The result is something platform teams can actually deploy in security-conscious environments, which is the whole point. Constraints that feel limiting early on often produce better architecture than unlimited flexibility.
