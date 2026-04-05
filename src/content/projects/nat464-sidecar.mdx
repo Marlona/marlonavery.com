@@ -59,6 +59,8 @@ I designed nat464-sidecar as a Kubernetes sidecar container that shares the netw
 
 The architecture handles bidirectional translation. For inbound traffic, the sidecar listens on an IPv6 address (the pod's actual cluster IP) and forwards connections to the application on localhost over IPv4. From the application's perspective, all requests arrive on `127.0.0.1`. For outbound traffic, the sidecar provides a SOCKS5 proxy on localhost. When the application needs to reach external services, it connects through this proxy, and the sidecar handles DNS resolution and connection establishment over IPv6.
 
+![NAT464 sidecar bidirectional IPv4/IPv6 translation](/images/diagrams/nat464-sidecar.png)
+
 ### Key Design Elements
 
 - **Happy Eyeballs v3 implementation**: The outbound proxy implements RFC 8305 connection racing, interleaving IPv6 and IPv4 addresses and staggering connection attempts. This ensures optimal latency when destinations support both address families through NAT64.

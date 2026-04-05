@@ -141,6 +141,8 @@ The core abstraction is the namespace. Each backend MCP server gets a namespace 
 
 This keeps the routing logic simple and declarative. Adding a new MCP server means adding a few lines to the YAML config, not writing new code. The namespace also becomes the natural boundary for access control: an API key can be restricted to specific namespaces, so a client that should only access search tools never sees the filesystem server.
 
+![MCP gateway namespace-based routing architecture](/images/diagrams/mcp-gateway-routing.png)
+
 ### API Key Authentication with Namespace Restrictions
 
 Every request requires an API key. Each key is configured with a list of allowed namespaces. A key might have access to `search` and `analytics` but not `filesystem`. The middleware validates the key, checks the namespace against the key's allowed list, and rejects unauthorized requests before they reach the backend.

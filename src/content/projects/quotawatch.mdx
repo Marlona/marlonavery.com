@@ -142,6 +142,8 @@ QuotaWatch is a Python CLI that stores everything in a local SQLite database. Th
 
 The configuration lives in `~/.config/quotawatch/config.toml`. Each AWS account gets its own profile section with credentials, default region, and any account-specific settings. This makes it straightforward to monitor quotas across a whole AWS organization from one machine.
 
+![QuotaWatch data pipeline from AWS APIs to SQLite](/images/diagrams/quotawatch-pipeline.png)
+
 ### AWS Service Quotas API Integration
 
 The core data layer syncs directly from the AWS Service Quotas API. QuotaWatch pulls quota definitions, current applied values, and default values for 10 AWS networking services:

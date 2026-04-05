@@ -70,6 +70,8 @@ The system consists of two main workflow types:
 - **ParentWorkflow**: Orchestrates the overall deployment by building a directed acyclic graph (DAG) of workspace dependencies, validating configuration, and managing completion signals.
 - **TerraformWorkflow**: Executes individual workspace operations (init, validate, plan, apply) and captures outputs for downstream consumption.
 
+![Terraform workspace DAG and workflow orchestration](/images/diagrams/terraform-dag.png)
+
 ### Key Features
 
 - **Automatic dependency resolution**

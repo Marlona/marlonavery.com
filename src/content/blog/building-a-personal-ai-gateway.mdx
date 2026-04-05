@@ -40,6 +40,8 @@ That description sounds simple. The architecture underneath it is where the inte
 
 **Six packages, strict boundaries.** The monorepo has six core packages: core (persistence, security, events), agent (execution loop, providers, tools), gateway (HTTP and WebSocket server), CLI, plugins, and UI. Each package has explicit dependencies. The agent package never imports from gateway. The CLI never touches the database directly. These boundaries sound obvious, but they're exactly what the previous version lacked. When everything can reach everything, nothing is maintainable.
 
+![Nexus six-package monorepo architecture](/images/diagrams/nexus-architecture.png)
+
 **The execution loop is under a hundred lines.** That three-thousand-line function? Its replacement is a clean loop: receive message, build context, call provider, handle tool use, persist result, stream response. Multi-turn tool calling, automatic context compaction when approaching limits, and streaming support all fit in that loop because the complexity lives in the right places, not piled into a single function.
 
 **Seven providers, one interface.** Anthropic, OpenAI, Google, Groq, DeepSeek, Ollama, and OpenRouter all implement the same interface: `stream()` returns an async generator, `complete()` returns a response. Adding a new provider means implementing two methods. The resolver builds a failover chain automatically. If the preferred provider fails, it tries the next one with a sixty-second cooldown on the failed provider. I don't think about provider reliability anymore. The system handles it.
@@ -62,6 +64,8 @@ Here's what the failover actually looks like in practice. Say I send a message a
 ```
 
 I don't decide which provider serves a given request. The resolver does. I just rank them in order of preference and set the cooldown window. The operational result: I haven't manually switched providers in months.
+
+![Provider failover sequence diagram](/images/diagrams/provider-failover.png)
 
 **Security from day one.** This is the part I'm most deliberate about. Prompt injection detection with sixteen regex patterns. SSRF protection on web fetch. Path traversal guards on filesystem tools. Encrypted credential storage with a master key. Rate limiting per client. Content boundary wrapping on tool output. Every WebSocket frame is validated with Zod before processing. None of this was in the original. All of it should have been.
 

@@ -99,6 +99,8 @@ The fix was obvious once I understood the problem. For same-region traffic, espe
 
 Transit Gateway is the right choice for complex multi-region routing, transitive connectivity, or when you need centralized security policies. It's the wrong choice for high-volume same-region streaming where the source and destination can peer directly.
 
+![Transit Gateway vs VPC peering cost and architecture comparison](/images/diagrams/tgw-vs-peering.png)
+
 ## Execution
 
 With a clear diagnosis, the fix was straightforward:

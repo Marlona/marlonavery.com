@@ -62,6 +62,8 @@ This is the same pattern I use with human teams. You don't have two engineers ed
 
 The agents run in waves, not all at once. Five waves for a full project:
 
+![Wave execution model across five phases](/images/diagrams/wave-execution.png)
+
 **Wave 1: Research.** Scout and critic run in parallel. Scout gathers external information. Critic reviews existing code. No changes to the codebase. Both produce status files documenting what they found.
 
 **Wave 2: Build.** Guido, smith, and herald run in parallel. Each reads the Wave 1 status files first, then creates new artifacts within their ownership boundaries. Guido writes the code. Smith writes the plugin infrastructure. Herald writes the docs. They don't need to coordinate in real time because they're working on different files.
