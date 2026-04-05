@@ -17,6 +17,8 @@ The agents were fast. The agents were good. But I was the message bus, and I was
 
 That weekend is what made me build fakoli-flow.
 
+![fakoli-flow Pipeline](/images/diagrams/flow-pipeline.png)
+
 ## The Context Window Tax
 
 Here's the friction nobody talks about when you're working with AI coding agents: context management is your job. The agent doesn't know what the last agent did unless you tell it. The agent doesn't know which files changed unless you paste the list. The agent doesn't know whether the critic found problems unless you copy the findings into the next prompt.
@@ -93,7 +95,11 @@ Every one of these passed typecheck. Every one would have been discovered in pro
 
 After that, I made the critic gate non-negotiable. After every wave that writes code, critic reviews everything. If it finds MUST FIX issues, welder fixes them and critic re-reviews. The wave doesn't advance until critic passes. No exceptions.
 
-![Wave Execution Model](/images/diagrams/wave-execution.png)
+![Default Wave Pattern with Critic Gates](/images/diagrams/default-wave-pattern.png)
+
+The fix cycle is the key part. It's not "critic finds bugs, you fix them." It's "critic finds bugs, welder fixes them automatically, critic re-reviews, and this loops until it's clean or escalates to you after three attempts."
+
+![Critic Fix Cycle](/images/diagrams/critic-fix-cycle.png)
 
 Across six phases of BAARA Next — 44,268 lines, 218 files — the critic gate caught 26 bugs. Each critic pass took about two minutes. Each bug caught saved hours of debugging. The math isn't subtle.
 
@@ -104,6 +110,8 @@ The original fakoli-crew was built for Claude Code plugin development. Eight age
 But BAARA Next wasn't a Claude Code plugin. It was a full-stack TypeScript monorepo with 10 packages, a React frontend, an MCP server, and a CLI. The agents needed to work across languages, understand monorepo conventions, and apply testing discipline that wasn't in their original prompts.
 
 So I made them polyglot. Guido auto-detects the project language — Cargo.toml means Rust conventions from the API Guidelines, pyproject.toml means Python from PEP 8, tsconfig.json means TypeScript from the Design Goals. Welder reads a patterns reference file that shows integration techniques side-by-side across all three languages. Critic applies the Staff Engineer review bar regardless of language.
+
+![fakoli-crew Architecture](/images/diagrams/crew-architecture.png)
 
 Then I built fakoli-flow as the orchestration layer — the thing that actually dispatches agents in waves, manages status files between them, and enforces the critic gate automatically. The agents provide the expertise. The flow provides the coordination.
 
