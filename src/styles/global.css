@@ -1086,7 +1086,109 @@
 	}
 }
 
-/* Prose Images - Contain dark-background diagrams in light mode */
+/* ============================
+   Prose Content — Unified Styling
+   Applied globally to all .prose areas (blog, projects, etc.)
+   ============================ */
+
+/* Prose typography colors */
+.prose {
+	--tw-prose-body: var(--color-secondary);
+	--tw-prose-headings: var(--color-foreground);
+	--tw-prose-bold: var(--color-foreground);
+	--tw-prose-links: var(--color-accent);
+	--tw-prose-counters: var(--color-muted);
+	--tw-prose-bullets: var(--color-muted);
+	--tw-prose-hr: var(--border-default);
+}
+
+/* Inline code — needs specificity to beat typography plugin */
+.prose code:not(pre code) {
+	color: var(--color-accent) !important;
+	background-color: var(--color-accent-bg) !important;
+	padding: 0.125rem 0.375rem;
+	border-radius: 0.25rem;
+	font-size: 0.875em;
+	font-weight: 400;
+}
+
+.prose code:not(pre code)::before,
+.prose code:not(pre code)::after {
+	content: none !important;
+}
+
+/* Code blocks */
+.prose pre {
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--border-default);
+	overflow-x: auto;
+}
+
+:root .prose pre {
+	background-color: #1e293b !important;
+	color: #e2e8f0 !important;
+	border-color: rgba(15, 15, 15, 0.1);
+}
+
+[data-theme="dark"] .prose pre {
+	background-color: var(--color-surface) !important;
+	color: var(--color-secondary) !important;
+	border-color: rgba(245, 245, 245, 0.08);
+}
+
+/* Blockquotes */
+.prose blockquote {
+	color: var(--color-secondary);
+	border-left-color: var(--color-accent);
+}
+
+/* Lists */
+.prose li {
+	color: var(--color-secondary);
+}
+
+/* Tables */
+.prose table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.9em;
+}
+
+.prose thead th {
+	color: var(--color-foreground);
+	font-weight: 600;
+	text-align: left;
+	padding: 0.75rem 1rem;
+	border-bottom: 2px solid var(--border-strong);
+}
+
+.prose tbody td {
+	padding: 0.75rem 1rem;
+	border-bottom: 1px solid var(--border-default);
+	color: var(--color-secondary);
+}
+
+.prose tbody tr:last-child td {
+	border-bottom: none;
+}
+
+:root .prose thead {
+	background-color: var(--surface-secondary);
+}
+
+:root .prose tbody tr:nth-child(even) {
+	background-color: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] .prose thead {
+	background-color: var(--surface-tertiary);
+}
+
+[data-theme="dark"] .prose tbody tr:nth-child(even) {
+	background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Images - Contain dark-background diagrams in light mode */
 .prose img:not(.not-diagram) {
 	border-radius: var(--radius-lg);
 	border: 1px solid var(--border-default);
