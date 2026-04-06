@@ -1086,6 +1086,23 @@
 	}
 }
 
+/* Prose Images - Contain dark-background diagrams in light mode */
+.prose img:not(.not-diagram) {
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--border-default);
+	box-shadow: var(--shadow-sm);
+}
+
+:root .prose img:not(.not-diagram) {
+	border-color: rgba(15, 15, 15, 0.15);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .prose img:not(.not-diagram) {
+	border-color: rgba(245, 245, 245, 0.08);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 @layer utilities {
 	/* Text Colors */
 	.text-foreground { color: var(--color-foreground); }
