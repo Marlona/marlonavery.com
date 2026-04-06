@@ -97,6 +97,18 @@ Global site and profile settings in `src/config.ts`:
 
 Automatic via GitHub Actions (`.github/workflows/astro.yml`) on push to `main`. Builds and deploys to GitHub Pages.
 
+## CRITICAL: Visual Changes Must Be Verified in Chrome
+
+Any change that affects what the user sees — CSS, images, diagrams, layout, components — **must be visually verified in the browser before committing**. JS computed style audits are not sufficient.
+
+1. Start the dev server (`npm run dev`) if not already running
+2. Open the affected page in Chrome using browser automation tools
+3. **Take a screenshot** and visually confirm the change renders correctly
+4. Check **both light and dark mode** (toggle via the theme button in the header)
+5. If you cannot see it in Chrome, it did not happen — do not commit unverified visual changes
+
+This applies to: CSS changes, image/diagram replacements, component layout changes, new UI sections, theme-related fixes, and any content that renders differently between light/dark modes.
+
 ## Gotchas
 
 - **Tailwind v4**: Uses new CSS-first config in `src/styles/global.css`, not `tailwind.config.js`
