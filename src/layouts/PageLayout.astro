@@ -32,10 +32,15 @@ const currentPath = normalizePath(Astro.url.pathname);
 	<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-[var(--color-accent)] focus:text-white focus:rounded-md focus:outline-none focus:ring-2 focus:ring-white">
 		Skip to main content
 	</a>
-	<header class="border-b border-[var(--border-default)] sticky top-0 z-50 bg-[var(--color-surface)]/80 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-[var(--color-surface)]/60 relative">
-		<nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-			<a href={`${base}/`} class="text-lg font-semibold text-foreground tracking-tight hover:text-accent transition-colors">
-				{SITE_CONFIG.name}
+	<header class="sticky top-0 z-50 backdrop-blur-xl backdrop-saturate-150 relative" style="border-bottom: 1px solid var(--border-hair); background: color-mix(in srgb, var(--bg) 82%, transparent);">
+		<nav class="container mx-auto px-4 flex items-center justify-between" style="height: var(--header-h);">
+			<a href={`${base}/`} class="flex items-center gap-2.5 text-foreground hover:opacity-90 transition-opacity">
+				<span class="grid place-items-center" style="width: 30px; height: 30px; background: var(--accent); border-radius: 8px; box-shadow: inset 0 -2px 0 rgba(0,0,0,0.12);">
+					<span style="font-family: var(--font-display); font-weight: 600; font-size: 14px; color: #fff; letter-spacing: -0.02em;">sd</span>
+				</span>
+				<span class="text-base md:text-lg" style="font-family: var(--font-display); font-weight: 500; letter-spacing: -0.02em;">
+					{SITE_CONFIG.name}
+				</span>
 			</a>
 
 			<Navigation currentPath={currentPath}>

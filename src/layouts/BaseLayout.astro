@@ -49,15 +49,15 @@ const { title, description = "Infrastructure Architect | Cloud, AI/ML, Platform 
 		<JSONLD type={type} title={title} description={description} publishDate={publishDate} breadcrumbs={breadcrumbs} />
 		<ViewTransitions />
 
-		<!-- Fonts: Newsreader (display), Public Sans (body), JetBrains Mono (code) -->
+		<!-- Fonts: Fraunces (display, soft serif with SOFT axis), Instrument Sans (body), JetBrains Mono (mono/metrics) -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<!-- Load font stylesheets non-blocking to reduce render-path delay -->
-		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-		<link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 		<noscript>
-			<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-			<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+			<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+			<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 		</noscript>
 	</head>
 	<body class="antialiased">
@@ -95,17 +95,6 @@ const { title, description = "Infrastructure Architect | Cloud, AI/ML, Platform 
 
 			document.querySelectorAll('[data-reveal]').forEach((el) => {
 				revealObserver.observe(el);
-			});
-
-			// Card glow effect - track mouse position
-			document.querySelectorAll('.card').forEach((card) => {
-				card.addEventListener('mousemove', (e) => {
-					const rect = (card as HTMLElement).getBoundingClientRect();
-					const x = e.clientX - rect.left;
-					const y = e.clientY - rect.top;
-					(card as HTMLElement).style.setProperty('--mouse-x', x + 'px');
-					(card as HTMLElement).style.setProperty('--mouse-y', y + 'px');
-				});
 			});
 
 			// Lazy image fade-in
