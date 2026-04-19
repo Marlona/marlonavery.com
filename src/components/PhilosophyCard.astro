@@ -3,16 +3,20 @@ interface Props {
 	title: string;
 	description: string;
 	icon?: string;
+	n?: string;
 }
 
-const { title, description, icon = "●" } = Astro.props;
+const { title, description, icon, n } = Astro.props;
+const marker = n ?? icon;
 ---
 
 <div class="card p-5">
-	<div class="flex items-start gap-3">
-		<span class="w-8 h-8 rounded-md bg-[var(--color-accent-bg)] text-accent flex items-center justify-center text-sm shrink-0 mt-0.5">
-			{icon}
-		</span>
+	<div class="flex items-start gap-4">
+		{marker && (
+			<span class="font-mono text-xs font-medium shrink-0 mt-1" style="color: var(--accent-deep); letter-spacing: 0.05em;">
+				{marker}
+			</span>
+		)}
 		<div>
 			<h3 class="heading-sm text-foreground mb-2">{title}</h3>
 			<p class="body-sm text-secondary leading-relaxed">{description}</p>

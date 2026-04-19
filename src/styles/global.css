@@ -2,65 +2,108 @@
 @plugin "@tailwindcss/typography";
 
 /*
- * Design System: Editorial Magazine Aesthetic
- * Typography-driven, high contrast, proof-focused
- * Fonts: Newsreader (display), Public Sans (body), JetBrains Mono (code/metrics)
+ * Design System: Warm editorial — Sekou Doumbouya Design System v2
+ * Warm cream canvas, burnt-sienna accent, ink-on-paper rhythm.
+ * Typography-led, low ornamentation, built for long reads.
+ * Fonts: Fraunces (display), Instrument Sans (body), JetBrains Mono (proof)
  */
 
 @layer base {
 	:root {
-		/* Typography - Newsreader for editorial authority, Public Sans for clean body */
-		font-family: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-		--font-headline: 'Newsreader', Georgia, 'Times New Roman', serif;
+		/* Typography */
+		font-family: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+		--font-body: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+		--font-headline: 'Fraunces', 'Charter', Georgia, 'Times New Roman', serif;
+		--font-display: 'Fraunces', 'Charter', Georgia, serif;
 		--font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 
-		/* Color Foundation - Light Mode */
-		--ink-primary: #0f0f0f;
-		--ink-secondary: #404040;
-		--ink-muted: #595959;
-		--surface-primary: #fafafa;
-		--surface-secondary: #f0f0f0;
-		--surface-tertiary: #e5e5e5;
-		--accent: #1a5a4a;
-		--accent-hover: #134840;
-		--accent-subtle: #e8f4f1;
-		--highlight: #fbbf24;
-		--highlight-bg: #fef3c7;
+		/* ---------- Warm canvas + ink (light, raw tokens — frozen) ---------- */
+		--cream: #faf9f5;
+		--cream-2: #f5f3ec;
+		--cream-3: #ecebe3;
+		--paper: #ffffff;
 
-		/* Semantic color mappings for backwards compatibility */
-		--color-bg: var(--surface-primary);
-		--color-surface: #ffffff;
-		--color-surface-elevated: #ffffff;
-		--color-foreground: var(--ink-primary);
-		--color-secondary: var(--ink-secondary);
-		--color-muted: var(--ink-muted);
-		--color-faint: #8a8a8a;
-		--color-accent: var(--accent);
-		--color-accent-hover: var(--accent-hover);
-		--color-accent-muted: #99f6e4;
-		--color-accent-bg: var(--accent-subtle);
+		--ink-1: #1a1915;
+		--ink-2: #3a3732;
+		--ink-3: #6b6762;
+		--ink-4: #9a968f;
 
-		/* Amber - For awards and special highlights */
+		/* ---------- Burnt sienna accent ---------- */
+		--coral: #c65d3a;
+		--coral-deep: #9a3f20;
+		--coral-soft: #ecc8b5;
+		--coral-wash: #f6e4d7;
+
+		/* ---------- Secondary: ink slate ---------- */
+		--slate: #2e3a46;
+		--slate-soft: #e4e8ec;
+
+		/* ---------- Highlight amber (awards only) ---------- */
+		--amber: #e3a008;
+		--amber-soft: #fdf0d0;
+
+		/* Legacy surface aliases kept for backwards compat */
+		--ink-primary: var(--ink-1);
+		--ink-secondary: var(--ink-2);
+		--ink-muted: var(--ink-3);
+		--surface-primary: var(--cream);
+		--surface-secondary: var(--cream-2);
+		--surface-tertiary: var(--cream-3);
+		--accent: var(--coral);
+		--accent-hover: var(--coral-deep);
+		--accent-subtle: var(--coral-wash);
+
+		/* Semantic color mappings */
+		--color-bg: var(--cream);
+		--color-surface: var(--paper);
+		--color-surface-elevated: var(--paper);
+		--color-foreground: var(--ink-1);
+		--color-secondary: var(--ink-2);
+		--color-muted: var(--ink-3);
+		--color-faint: var(--ink-4);
+		--color-accent: var(--coral);
+		--color-accent-hover: var(--coral-deep);
+		--color-accent-muted: var(--coral-soft);
+		--color-accent-bg: var(--coral-wash);
+
+		/* Semantic aliases for the design system */
+		--bg: var(--cream);
+		--bg-well: var(--cream-2);
+		--bg-card: var(--paper);
+		--bg-tint: var(--coral-wash);
+		--fg: var(--ink-1);
+		--fg-muted: var(--ink-2);
+		--fg-soft: var(--ink-3);
+		--fg-faint: var(--ink-4);
+		--accent-deep: var(--coral-deep);
+		--accent-soft: var(--coral-soft);
+		--accent-wash: var(--coral-wash);
+
+		/* Amber — awards */
 		--color-amber-light: #fffbeb;
-		--color-amber-bg: var(--highlight-bg);
-		--color-amber-text: #b45309;
+		--color-amber-bg: var(--amber-soft);
+		--color-amber-text: #92610a;
 
-		/* Borders - Primary depth mechanism */
-		--border-default: rgba(15, 15, 15, 0.12);
-		--border-subtle: rgba(15, 15, 15, 0.05);
-		--border-strong: rgba(15, 15, 15, 0.12);
+		/* Borders — warm, diffuse */
+		--border-hair: rgba(26, 25, 21, 0.06);
+		--border: rgba(26, 25, 21, 0.10);
+		--border-strong: rgba(26, 25, 21, 0.18);
+		/* Legacy aliases — keep callers unchanged */
+		--border-default: var(--border);
+		--border-subtle: var(--border-hair);
 
-		/* Schematic Motif Colors - Engineering notebook aesthetic */
-		--schematic-line: rgba(15, 15, 15, 0.15);
-		--schematic-grid: rgba(15, 15, 15, 0.04);
-		--schematic-annotation-bg: rgba(26, 90, 74, 0.06);
+		/* Schematic motifs — retired; aliases retained for legacy components */
+		--schematic-line: rgba(26, 25, 21, 0.12);
+		--schematic-grid: rgba(26, 25, 21, 0);
+		--schematic-annotation-bg: var(--coral-wash);
 
-		/* Shadows - Subtle, single-layer only */
-		--shadow-sm: 0 1px 2px rgba(26, 90, 74, 0.06);
-		--shadow-md: 0 2px 6px rgba(26, 90, 74, 0.08);
-		--shadow-lg: 0 4px 16px rgba(26, 90, 74, 0.12);
+		/* Shadows — warm, diffused */
+		--shadow-xs: 0 1px 2px rgba(26, 25, 21, 0.04);
+		--shadow-sm: 0 2px 8px rgba(26, 25, 21, 0.05);
+		--shadow-md: 0 8px 24px rgba(26, 25, 21, 0.07);
+		--shadow-lg: 0 20px 48px rgba(26, 25, 21, 0.10);
 
-		/* Spacing - 4px Grid */
+		/* Spacing — 4px grid */
 		--space-1: 4px;
 		--space-2: 8px;
 		--space-3: 12px;
@@ -71,69 +114,96 @@
 		--space-10: 40px;
 		--space-12: 48px;
 		--space-16: 64px;
+		--s-1: 4px;
+		--s-2: 8px;
+		--s-3: 12px;
+		--s-4: 16px;
+		--s-5: 20px;
+		--s-6: 24px;
+		--s-8: 32px;
+		--s-10: 40px;
+		--s-12: 48px;
+		--s-16: 64px;
+		--s-20: 80px;
 
 		/* Layout */
-		--header-height: 72px;
+		--header-height: 64px;
+		--header-h: 64px;
 		--container-max: 1200px;
-		--content-max: 720px;
+		--container: 1200px;
+		--content-max: 680px;
+		--content: 680px;
 		--margin-note-width: 200px;
 
-		/* Border Radius - Sharp technical feel */
-		--radius-sm: 4px;
-		--radius-md: 6px;
-		--radius-lg: 8px;
+		/* Radii — softer, modern */
+		--radius-sm: 6px;
+		--radius-md: 10px;
+		--radius-lg: 16px;
+		--radius-xl: 24px;
+		--r-sm: 6px;
+		--r-md: 10px;
+		--r-lg: 16px;
+		--r-xl: 24px;
+		--r-pill: 999px;
 
-		/* Transitions - Max 300ms for any animation */
-		--transition-fast: 150ms cubic-bezier(0.25, 1, 0.5, 1);
-		--transition-base: 200ms cubic-bezier(0.25, 1, 0.5, 1);
-		--transition-slow: 300ms cubic-bezier(0.25, 1, 0.5, 1);
+		/* Motion — 160/240/360ms */
+		--ease: cubic-bezier(0.22, 1, 0.36, 1);
+		--transition-fast: 160ms var(--ease);
+		--transition-base: 240ms var(--ease);
+		--transition-slow: 360ms var(--ease);
+		--t-fast: 160ms var(--ease);
+		--t-base: 240ms var(--ease);
+		--t-slow: 360ms var(--ease);
 	}
 
-	/* Dark Mode Theme */
+	/* Dark Mode — opt-in; only semantic aliases flip */
 	[data-theme="dark"] {
-		/* Color Foundation - Dark Mode */
-		--ink-primary: #f5f5f5;
-		--ink-secondary: #a3a3a3;
-		--ink-muted: #8a8a8a;
-		--surface-primary: #0a0a0a;
-		--surface-secondary: #171717;
-		--surface-tertiary: #262626;
-		--accent: #2dd4bf;
-		--accent-hover: #5eead4;
-		--accent-subtle: #134e4a;
+		--surface-primary: #17161a;
+		--surface-secondary: #1f1e22;
+		--surface-tertiary: #2a292d;
 
-		/* Semantic color mappings */
-		--color-bg: var(--surface-primary);
-		--color-surface: var(--surface-secondary);
-		--color-surface-elevated: var(--surface-tertiary);
-		--color-foreground: var(--ink-primary);
-		--color-secondary: var(--ink-secondary);
-		--color-muted: var(--ink-muted);
-		--color-faint: #6b6b6b;
-		--color-accent: var(--accent);
-		--color-accent-hover: var(--accent-hover);
-		--color-accent-muted: #115e59;
-		--color-accent-bg: var(--accent-subtle);
+		--color-bg: #17161a;
+		--color-surface: #201f23;
+		--color-surface-elevated: #2a292d;
+		--color-foreground: #f2efe9;
+		--color-secondary: #c9c4ba;
+		--color-muted: #9a968b;
+		--color-faint: #6b6862;
+		--color-accent: #e89072;
+		--color-accent-hover: #f4a88b;
+		--color-accent-muted: #3a251d;
+		--color-accent-bg: #2a1f1a;
 
-		/* Amber - Adjusted for dark */
+		--bg: #17161a;
+		--bg-well: #1f1e22;
+		--bg-card: #201f23;
+		--bg-tint: #2a1f1a;
+		--fg: #f2efe9;
+		--fg-muted: #c9c4ba;
+		--fg-soft: #9a968b;
+		--fg-faint: #6b6862;
+		--accent-deep: #f4a88b;
+		--accent-soft: #3a251d;
+		--accent-wash: #2a1f1a;
+
 		--color-amber-light: #422006;
-		--color-amber-bg: #78350f;
-		--color-amber-text: #fbbf24;
+		--color-amber-bg: #4a3416;
+		--color-amber-text: #e3a008;
 
-		/* Borders - Light on dark */
-		--border-default: rgba(245, 245, 245, 0.1);
-		--border-subtle: rgba(245, 245, 245, 0.06);
-		--border-strong: rgba(245, 245, 245, 0.16);
+		--border-hair: rgba(242, 239, 233, 0.06);
+		--border: rgba(242, 239, 233, 0.10);
+		--border-strong: rgba(242, 239, 233, 0.18);
+		--border-default: var(--border);
+		--border-subtle: var(--border-hair);
 
-		/* Schematic Motif Colors - Dark mode */
-		--schematic-line: rgba(245, 245, 245, 0.12);
-		--schematic-grid: rgba(245, 245, 245, 0.03);
-		--schematic-annotation-bg: rgba(45, 212, 191, 0.08);
+		--schematic-line: rgba(242, 239, 233, 0.12);
+		--schematic-grid: rgba(242, 239, 233, 0);
+		--schematic-annotation-bg: #2a1f1a;
 
-		/* Shadows - Darker */
-		--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 8px rgba(45, 212, 191, 0.03);
-		--shadow-md: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 12px rgba(45, 212, 191, 0.04);
-		--shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 20px rgba(45, 212, 191, 0.06);
+		--shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+		--shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+		--shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+		--shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.6);
 	}
 
 	/* Base Styles */
@@ -143,7 +213,11 @@
 		text-rendering: optimizeLegibility;
 		scroll-behavior: smooth;
 		scroll-padding-top: calc(var(--header-height) + 16px);
+		background: var(--bg);
+		color-scheme: light;
 	}
+
+	html[data-theme="dark"] { color-scheme: dark; }
 
 	body {
 		font-family: inherit;
@@ -153,38 +227,22 @@
 		transition: background-color var(--transition-base), color var(--transition-base);
 	}
 
-	/* Subtle noise + grid texture for tactile depth */
-	body::before {
-		content: '';
-		position: fixed;
-		inset: 0;
-		z-index: -2;
-		background-image:
-			linear-gradient(var(--schematic-grid) 1px, transparent 1px),
-			linear-gradient(90deg, var(--schematic-grid) 1px, transparent 1px);
-		background-size: 40px 40px;
-		pointer-events: none;
-		opacity: 0.5;
-	}
-
-	body::after {
-		content: '';
-		position: fixed;
-		inset: 0;
-		z-index: -1;
-		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-		pointer-events: none;
-		opacity: 0.3;
-	}
-
-	/* Typography Scale - Editorial Magazine Style */
+	/* Typography Scale — Fraunces display, soft serif with SOFT axis */
 	h1, h2, h3, h4, h5, h6 {
 		font-family: var(--font-headline);
-		font-weight: 600;
+		font-weight: 500;
 		letter-spacing: -0.02em;
-		line-height: 1.25;
+		line-height: 1.15;
 		color: var(--color-foreground);
+		font-variation-settings: "opsz" 48, "SOFT" 100;
 	}
+
+	h1 { font-size: clamp(40px, 5vw, 64px); font-weight: 400; letter-spacing: -0.035em; line-height: 1.05; }
+	h2 { font-size: clamp(28px, 3vw, 40px); font-weight: 400; letter-spacing: -0.025em; line-height: 1.1; }
+	h3 { font-size: clamp(22px, 2.2vw, 28px); font-weight: 500; }
+	h4 { font-size: 20px; font-weight: 500; }
+	h5 { font-size: 16px; font-weight: 600; }
+	h6 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--font-mono); color: var(--color-muted); font-weight: 500; }
 
 	/* Monospace for Data & Metrics */
 	code, pre, .mono {
@@ -220,46 +278,19 @@
 }
 
 @layer components {
-	/* Card Component */
+	/* Card Component — warm surface, soft radius, diffused shadow on hover */
 	.card {
 		position: relative;
-		background: var(--color-surface);
-		border: 0.5px solid var(--border-default);
-		border-radius: var(--radius-lg);
-		transition: transform 200ms ease, box-shadow 200ms ease, border-color var(--transition-fast);
-		/* 3D tilt perspective on card hover */
-		transform-style: preserve-3d;
-		perspective: 1000px;
-	}
-
-	.card::before {
-		content: '';
-		position: absolute;
-		top: var(--mouse-y, 50%);
-		left: var(--mouse-x, 50%);
-		width: 300px;
-		height: 300px;
-		background: radial-gradient(circle, var(--color-accent-bg) 0%, transparent 70%);
-		transform: translate(-50%, -50%);
-		opacity: 0;
-		transition: opacity var(--transition-base);
-		pointer-events: none;
-		z-index: 0;
-	}
-
-	.card:hover::before {
-		opacity: 1;
-	}
-
-	.card > * {
-		position: relative;
-		z-index: 1;
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+		border-radius: var(--r-lg);
+		transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-fast);
 	}
 
 	.card:hover {
-		transform: translateY(-3px) rotateX(1deg);
+		transform: translateY(-3px);
 		border-color: var(--border-strong);
-		box-shadow: var(--shadow-lg);
+		box-shadow: var(--shadow-md);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -268,29 +299,32 @@
 		}
 	}
 
-	[data-theme="dark"] .card:hover {
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-	}
-
 	.card-award {
 		background: linear-gradient(135deg, var(--color-amber-light) 0%, var(--color-amber-bg) 100%);
-		border: 0.5px solid var(--border-default);
-		border-radius: var(--radius-lg);
+		border: 1px solid var(--border);
+		border-radius: var(--r-lg);
 	}
 
-	/* Badge Component */
+	/* Featured card — accent wash surface */
+	.card-featured {
+		background: var(--accent-wash);
+		border: 1px solid var(--border);
+		border-radius: var(--r-lg);
+	}
+
+	/* Badge Component — soft pill, warm tones */
 	.badge {
 		display: inline-flex;
 		align-items: center;
-		padding: var(--space-1) var(--space-2);
+		padding: 3px 10px;
 		font-size: 11px;
 		font-weight: 500;
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		border-radius: var(--radius-sm);
-		background: var(--color-bg);
-		color: var(--color-muted);
-		border: 0.5px solid var(--border-default);
+		letter-spacing: 0.08em;
+		border-radius: var(--r-pill);
+		background: var(--bg-well);
+		color: var(--fg-soft);
+		border: 1px solid var(--border-hair);
 	}
 
 	.badge-accent {
@@ -367,66 +401,71 @@
 		color: #c4b5fd;
 	}
 
-	/* Button Components */
+	/* Button Components — pill CTA, warm hover lift */
 	.btn {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		gap: var(--space-2);
-		padding: var(--space-3) var(--space-4);
+		padding: 13px 22px;
 		font-size: 14px;
 		font-weight: 500;
-		border-radius: var(--radius-md);
+		border-radius: var(--r-pill);
 		transition:
-			background-color var(--transition-fast),
-			color var(--transition-fast),
-			border-color var(--transition-fast),
-			box-shadow var(--transition-fast),
-			transform var(--transition-fast);
+			background-color var(--t-fast),
+			color var(--t-fast),
+			border-color var(--t-fast),
+			box-shadow var(--t-fast),
+			transform var(--t-fast);
 		cursor: pointer;
 		white-space: nowrap;
 	}
 
 	.btn-primary {
-		background: var(--color-foreground);
-		color: var(--color-surface);
+		background: var(--fg);
+		color: var(--bg);
 		border: none;
 	}
 
 	.btn-primary:hover {
-		background: var(--color-secondary);
+		background: var(--ink-2);
 		transform: translateY(-1px);
 	}
 
 	[data-theme="dark"] .btn-primary {
-		background: var(--color-accent);
-		color: #0a0a0a;
+		background: var(--fg);
+		color: var(--bg);
 	}
 
 	[data-theme="dark"] .btn-primary:hover {
-		background: var(--color-accent-hover);
+		background: var(--fg-muted);
 	}
 
 	.btn-secondary {
-		background: var(--color-surface);
-		color: var(--color-foreground);
-		border: 0.5px solid var(--border-strong);
+		background: transparent;
+		color: var(--fg);
+		border: 1px solid var(--border-strong);
 	}
 
 	.btn-secondary:hover {
-		background: var(--color-bg);
-		border-color: var(--color-foreground);
+		background: var(--bg-card);
+		border-color: var(--fg);
+		transform: translateY(-1px);
 	}
 
 	.btn-accent {
-		background: var(--color-accent);
-		color: white;
+		background: var(--accent);
+		color: #fff;
 		border: none;
 	}
 
 	.btn-accent:hover {
-		background: var(--color-accent-hover);
+		background: var(--accent-deep);
 		transform: translateY(-1px);
+	}
+
+	[data-theme="dark"] .btn-accent {
+		color: var(--bg);
 	}
 
 	/* Link Styles - Underline reveal on hover */
@@ -462,7 +501,7 @@
 		background: var(--color-accent-bg);
 		color: var(--color-accent);
 		border-color: var(--color-accent);
-		box-shadow: 0 0 8px rgba(45, 212, 191, 0.15);
+		box-shadow: var(--shadow-xs);
 	}
 
 	/* Timeline Component */
@@ -506,13 +545,13 @@
 		}
 	}
 
-	/* ProofStrip Component - Editorial Ruler Bar */
+	/* ProofStrip Component — inline hairline band, no boxed strip */
 	.proof-strip {
 		position: relative;
-		background: var(--surface-secondary);
-		border-top: 1px solid var(--border-default);
-		border-bottom: 1px solid var(--border-default);
-		padding: var(--space-3) 0;
+		background: transparent;
+		border-top: 1px solid var(--border);
+		border-bottom: 1px solid var(--border);
+		padding: var(--space-5) 0;
 	}
 
 	.proof-strip-inner {
@@ -761,16 +800,18 @@
 	 * Engineering notebook aesthetic elements
 	 * ========================================== */
 
-	/* Kicker - Section overline text */
+	/* Kicker - Mono overline above section headings */
 	.kicker {
 		font-family: var(--font-mono);
 		font-size: 12px;
 		font-weight: 500;
 		text-transform: uppercase;
-		letter-spacing: 0.12em;
-		color: var(--color-accent);
+		letter-spacing: 0.14em;
+		color: var(--accent-deep);
 		margin-bottom: var(--space-2);
 	}
+
+	[data-theme="dark"] .kicker { color: var(--accent); }
 
 	/* Reference Marker - Numbered notation */
 	.ref-marker {
@@ -891,37 +932,29 @@
 		color: var(--color-muted);
 	}
 
-	/* Pull Quote - Editorial highlight */
+	/* Pull Quote — italic Fraunces in a well, top/bottom borders only */
 	.pull-quote {
 		position: relative;
-		padding: var(--space-6) var(--space-8);
-		font-family: var(--font-headline);
-		font-size: 24px;
-		font-weight: 500;
+		padding: var(--space-8) var(--space-6);
+		font-family: var(--font-display);
+		font-size: clamp(22px, 2.4vw, 30px);
+		font-weight: 300;
 		font-style: italic;
-		line-height: 1.4;
-		color: var(--color-foreground);
-		border-left: 3px solid var(--color-accent);
-		background: var(--schematic-annotation-bg);
+		line-height: 1.35;
+		color: var(--fg);
+		background: var(--bg-well);
+		border-top: 1px solid var(--border);
+		border-bottom: 1px solid var(--border);
+		max-width: 100%;
 	}
 
-	.pull-quote::before {
-		content: '"';
-		position: absolute;
-		top: var(--space-2);
-		left: var(--space-3);
-		font-family: var(--font-headline);
-		font-size: 48px;
-		font-weight: 700;
-		color: var(--color-accent);
-		opacity: 0.3;
-		line-height: 1;
-	}
-
-	@media (min-width: 768px) {
-		.pull-quote {
-			font-size: 28px;
-		}
+	.pull {
+		font-family: var(--font-display);
+		font-size: clamp(22px, 2.4vw, 30px);
+		font-weight: 300;
+		font-style: italic;
+		line-height: 1.35;
+		color: var(--fg);
 	}
 
 	/* Annotation - Inline note styling */
@@ -934,38 +967,21 @@
 		border-radius: var(--radius-sm);
 	}
 
-	/* Focus area card with animated border */
+	/* Focus area card — accent-wash hover on warm surface */
 	.focus-card-hover {
 		position: relative;
-		z-index: 0;
+		transition: border-color var(--t-fast), background var(--t-fast), transform var(--t-fast);
 	}
 
-	.focus-card-hover::before {
-		content: '';
-		position: absolute;
-		inset: -1px;
-		border-radius: calc(var(--radius-lg) + 1px);
-		background: linear-gradient(135deg, var(--color-accent), transparent, var(--color-accent));
-		background-size: 300% 300%;
-		z-index: -1;
-		opacity: 0;
-		transition: opacity var(--transition-base);
-	}
-
-	.focus-card-hover:hover::before {
-		opacity: 1;
-		animation: border-gradient 3s ease infinite;
-	}
-
-	@keyframes border-gradient {
-		0%, 100% { background-position: 0% 50%; }
-		50% { background-position: 100% 50%; }
+	.focus-card-hover:hover {
+		border-color: var(--accent);
+		background: var(--accent-wash);
+		transform: translateY(-2px);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.focus-card-hover:hover::before {
-			animation: none;
-			opacity: 0.5;
+		.focus-card-hover:hover {
+			transform: none;
 		}
 	}
 
@@ -1061,28 +1077,11 @@
 		pointer-events: auto;
 	}
 
-	/* CTA gradient animation */
+	/* CTA band — quiet warm well, no shimmer */
 	.cta-gradient {
-		background: linear-gradient(
-			135deg,
-			var(--surface-secondary) 0%,
-			var(--color-accent-bg) 50%,
-			var(--surface-secondary) 100%
-		);
-		background-size: 200% 200%;
-		animation: cta-shimmer 6s ease-in-out infinite;
-	}
-
-	@keyframes cta-shimmer {
-		0%, 100% { background-position: 0% 50%; }
-		50% { background-position: 100% 50%; }
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.cta-gradient {
-			animation: none;
-			background: var(--surface-secondary);
-		}
+		background: var(--bg-well);
+		border-top: 1px solid var(--border);
+		border-bottom: 1px solid var(--border);
 	}
 }
 
@@ -1225,28 +1224,25 @@
 
 	/* Typography Scale - Magazine Editorial Style */
 
-	/* Display - Hero statement only (72px / 48px) */
+	/* Display — Hero statement (Fraunces, light weight, italic accent) */
 	.display {
-		font-family: var(--font-headline);
-		font-size: 48px;
-		font-weight: 700;
-		letter-spacing: -0.03em;
-		line-height: 1.05;
+		font-family: var(--font-display);
+		font-size: clamp(40px, 6vw, 72px);
+		font-weight: 300;
+		letter-spacing: -0.04em;
+		line-height: 1.08;
+		font-variation-settings: "opsz" 144, "SOFT" 100;
 	}
+	.display em { font-style: italic; font-weight: 400; color: var(--accent); }
 
-	@media (min-width: 768px) {
-		.display {
-			font-size: 72px;
-		}
-	}
-
-	/* Heading XL - Page titles (48px / 36px) */
+	/* Heading XL — Page titles */
 	.heading-xl {
 		font-family: var(--font-headline);
 		font-size: 36px;
-		font-weight: 700;
+		font-weight: 400;
 		letter-spacing: -0.03em;
 		line-height: 1.1;
+		font-variation-settings: "opsz" 96, "SOFT" 100;
 	}
 
 	@media (min-width: 768px) {
@@ -1255,48 +1251,52 @@
 		}
 	}
 
-	/* Heading LG - Section heads (32px / 28px) */
+	/* Heading LG — Section heads */
 	.heading-lg {
 		font-family: var(--font-headline);
 		font-size: 28px;
-		font-weight: 600;
-		letter-spacing: -0.02em;
-		line-height: 1.2;
+		font-weight: 400;
+		letter-spacing: -0.025em;
+		line-height: 1.15;
+		font-variation-settings: "opsz" 72, "SOFT" 100;
 	}
+	.heading-lg em { font-style: italic; color: var(--accent); font-weight: 400; }
 
 	@media (min-width: 768px) {
 		.heading-lg {
-			font-size: 32px;
+			font-size: 40px;
 		}
 	}
 
-	/* Heading MD - Card titles (24px / 20px) */
+	/* Heading MD — Card titles */
 	.heading-md {
 		font-family: var(--font-headline);
-		font-size: 20px;
-		font-weight: 600;
+		font-size: 22px;
+		font-weight: 500;
 		letter-spacing: -0.02em;
-		line-height: 1.25;
+		line-height: 1.2;
+		font-variation-settings: "opsz" 48, "SOFT" 100;
 	}
 
 	@media (min-width: 768px) {
 		.heading-md {
-			font-size: 24px;
+			font-size: 26px;
 		}
 	}
 
-	/* Heading SM - Labels (18px / 16px) */
+	/* Heading SM — Card/label titles */
 	.heading-sm {
 		font-family: var(--font-headline);
-		font-size: 16px;
-		font-weight: 600;
+		font-size: 17px;
+		font-weight: 500;
 		letter-spacing: -0.01em;
 		line-height: 1.3;
+		font-variation-settings: "opsz" 36, "SOFT" 100;
 	}
 
 	@media (min-width: 768px) {
 		.heading-sm {
-			font-size: 18px;
+			font-size: 19px;
 		}
 	}
 
@@ -1427,33 +1427,11 @@
 		}
 	}
 
-	/* Animated gradient text */
+	/* Accent-colored italic emphasis — replaces animated gradient */
 	.text-gradient {
-		background: linear-gradient(
-			135deg,
-			var(--color-accent) 0%,
-			#5eead4 25%,
-			var(--color-accent) 50%,
-			#5eead4 75%,
-			var(--color-accent) 100%
-		);
-		background-size: 200% auto;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-		animation: gradient-shift 4s ease-in-out infinite;
-	}
-
-	@keyframes gradient-shift {
-		0%, 100% { background-position: 0% center; }
-		50% { background-position: 100% center; }
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.text-gradient {
-			animation: none;
-			background-position: 0% center;
-		}
+		font-style: italic;
+		color: var(--accent);
+		font-weight: 400;
 	}
 
 	/* Accent line animation */

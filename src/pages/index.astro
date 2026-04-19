@@ -7,10 +7,6 @@ import { getCollection } from 'astro:content';
 import { SITE_CONFIG } from '../config';
 import { getBasePath, withBasePath } from '../utils/paths';
 import { formatDate } from '../utils/dates';
-import BoltIcon from '../components/icons/BoltIcon.astro';
-import TargetIcon from '../components/icons/TargetIcon.astro';
-import TrendUpIcon from '../components/icons/TrendUpIcon.astro';
-
 // Data imports
 import { STATS, PROOF_METRICS, EXTERNAL_ENGAGEMENT, getFocusAreasPreviews, getQuickNavItems } from '../data/homepage';
 import { PODCAST_LINKS } from '../data/podcast';
@@ -87,41 +83,29 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 
 <PageLayout title={`${SITE_CONFIG.name} | ${SITE_CONFIG.title}`} description={SITE_CONFIG.description}>
 
-	<!-- Hero Section - Editorial Magazine Style -->
-	<section class="py-16 md:py-24 relative" data-hero style="background: radial-gradient(ellipse 80% 50% at 20% 40%, rgba(45, 212, 191, 0.08) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 80% 20%, rgba(45, 212, 191, 0.04) 0%, transparent 60%);">
+	<!-- Hero Section — Warm editorial -->
+	<section class="py-20 md:py-28 relative" data-hero>
 		<div class="max-w-6xl mx-auto px-4">
-			<!-- Editorial layout with optional photo -->
 			<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 				<!-- Main content column -->
 				<div class="lg:col-span-8">
-					<!-- Horizontal rule - editorial style -->
-					<div class="h-1 bg-[var(--color-accent)] mb-8 animate-accent-line"></div>
-
-					<!-- Display headline -->
-					<h1 class="display text-foreground mb-6">
-						From cloud foundations<br class="hidden md:block" />
-						<span class="text-gradient">to AI infrastructure.</span>
-					</h1>
-
-					<!-- Dek (subheadline) - Value proposition -->
-					<p class="body-lg text-secondary mb-4 max-w-2xl">
-						I build the platforms that power both traditional services and AI workloads.
-						Twenty years of infrastructure experience, now focused on the systems
-						that make LLMs, training pipelines, and model serving production-ready.
-					</p>
-
-					<!-- Scale descriptors (typing effect) -->
-					<div class="mb-6 body-sm font-mono h-6">
-						<span class="text-muted">Focus: </span>
-						<span id="typing-text" class="text-accent font-semibold"></span>
-						<span class="typing-cursor text-accent">|</span>
+					<!-- Status pill -->
+					<div class="inline-flex items-center gap-2 mb-7 px-3 py-1.5 rounded-full border text-xs font-medium"
+						style="background: var(--bg-card); border-color: var(--border); color: var(--fg-muted);">
+						<span style="width: 6px; height: 6px; background: var(--accent); border-radius: 50%;"></span>
+						{SITE_CONFIG.currentRole} · {SITE_CONFIG.currentCompany}
 					</div>
 
-					<!-- Differentiator -->
-					<p class="body-md text-foreground mb-6 max-w-xl pl-4 border-l-2 border-[var(--color-accent)]">
-						Not just strategy. I design the infrastructure, build the first versions,
-						and drive adoption. The same approach that scaled cloud platforms
-						now applied to AI infrastructure.
+					<!-- Display headline — Fraunces, light weight, italic accent -->
+					<h1 class="display text-foreground mb-10" style="max-width: 960px;">
+						From cloud foundations to <em>AI infrastructure.</em>
+					</h1>
+
+					<!-- Dek — value proposition -->
+					<p class="body-lg text-secondary mb-9" style="max-width: 640px;">
+						Twenty years turning business strategy into distributed systems that stay up at scale —
+						from multi-region networks to GPU-ready compute and LLM serving. I lead by solving hard
+						problems alongside the team, not from a slide deck.
 					</p>
 
 					<!-- Byline with disambiguation (visually hidden, kept for crawlers) -->
@@ -131,22 +115,22 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 					</p>
 
 					<!-- CTA buttons -->
-					<div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12">
+					<div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
 						<a href={withBasePath('/contact#contact-form')} class="btn btn-primary">
-							Contact Sekou
-						</a>
-						<a href={withBasePath('/experience')} class="btn btn-secondary">
-							View Experience
+							Contact Sekou <span aria-hidden="true">→</span>
 						</a>
 						<a href={withBasePath('/projects')} class="btn btn-secondary">
-							See Case Studies
+							See case studies
+						</a>
+						<a href={withBasePath('/experience')} class="btn btn-secondary">
+							View experience
 						</a>
 					</div>
 				</div>
 
 				<!-- Editorial portrait column -->
 				<div class="lg:col-span-4 order-first lg:order-none">
-					<figure class="relative mb-6 lg:mb-0 bg-[var(--surface-tertiary)] rounded-lg">
+					<figure class="relative mb-6 lg:mb-0 rounded-2xl" style="background: var(--bg-well);">
 						<img
 							src={`${base}/headshot.jpg`}
 							alt={SITE_CONFIG.name}
@@ -155,16 +139,17 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 							loading="eager"
 							fetchpriority="high"
 							decoding="async"
-							class="w-32 h-40 sm:w-36 sm:h-44 lg:w-full lg:h-auto lg:aspect-[3/4] object-cover rounded-lg border border-[var(--border-default)] mx-auto lg:mx-0"
+							class="w-32 h-40 sm:w-36 sm:h-44 lg:w-full lg:h-auto lg:aspect-[3/4] object-cover mx-auto lg:mx-0"
+							style="border-radius: var(--r-lg); border: 1px solid var(--border);"
 							onerror={`this.style.display='none';this.nextElementSibling.style.display='flex'`}
 						/>
 						<div
-							style="display:none"
-							class="w-32 h-40 sm:w-36 sm:h-44 lg:w-full lg:aspect-[3/4] items-center justify-center rounded-lg border border-[var(--border-default)] mx-auto lg:mx-0 bg-[var(--color-accent-bg)] text-[var(--color-accent)]"
+							style="display:none; border-radius: var(--r-lg); border: 1px solid var(--border); background: var(--accent-wash); color: var(--accent-deep);"
+							class="w-32 h-40 sm:w-36 sm:h-44 lg:w-full lg:aspect-[3/4] items-center justify-center mx-auto lg:mx-0"
 						>
-							<span class="text-2xl lg:text-5xl font-semibold" style={`font-family:var(--font-headline)`}>{initials}</span>
+							<span class="text-2xl lg:text-5xl" style={`font-family:var(--font-display); font-weight: 500; letter-spacing: -0.02em;`}>{initials}</span>
 						</div>
-						<figcaption class="hidden lg:block mt-3 body-sm text-muted italic">
+						<figcaption class="hidden lg:block mt-3 body-sm text-muted italic" style="font-family: var(--font-display);">
 							{SITE_CONFIG.currentRole} at {SITE_CONFIG.currentCompany}
 						</figcaption>
 					</figure>
@@ -202,29 +187,23 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 			</a>
 		</div>
 
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 			<div class="card p-6" data-reveal-item>
-				<div class="w-8 h-8 rounded-md bg-[var(--color-accent-bg)] text-[var(--color-accent)] flex items-center justify-center mb-3">
-					<BoltIcon class="w-5 h-5" />
-				</div>
+				<span class="font-mono text-xs font-medium mb-4 inline-block" style="color: var(--accent-deep); letter-spacing: 0.05em;">01</span>
 				<h3 class="heading-sm text-foreground mb-2">Player-Coach</h3>
 				<p class="body-sm text-muted">
 					40% hands-on with code and design reviews. I lead by solving hard problems alongside the team.
 				</p>
 			</div>
 			<div class="card p-6" data-reveal-item>
-				<div class="w-8 h-8 rounded-md bg-[var(--color-accent-bg)] text-[var(--color-accent)] flex items-center justify-center mb-3">
-					<TargetIcon class="w-5 h-5" />
-				</div>
+				<span class="font-mono text-xs font-medium mb-4 inline-block" style="color: var(--accent-deep); letter-spacing: 0.05em;">02</span>
 				<h3 class="heading-sm text-foreground mb-2">Platform as Product</h3>
 				<p class="body-sm text-muted">
 					Internal platforms should treat developers as customers. Golden-path solutions that reduce cognitive load.
 				</p>
 			</div>
 			<div class="card p-6" data-reveal-item>
-				<div class="w-8 h-8 rounded-md bg-[var(--color-accent-bg)] text-[var(--color-accent)] flex items-center justify-center mb-3">
-					<TrendUpIcon class="w-5 h-5" />
-				</div>
+				<span class="font-mono text-xs font-medium mb-4 inline-block" style="color: var(--accent-deep); letter-spacing: 0.05em;">03</span>
 				<h3 class="heading-sm text-foreground mb-2">Knowledge Multiplier</h3>
 				<p class="body-sm text-muted">
 					My success metric: teams more capable after working with me. 20+ engineers mentored to senior+.
@@ -487,54 +466,5 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 			</a>
 		</div>
 	</section>
-
-<script>
-    let typingTimeout: ReturnType<typeof setTimeout>;
-    document.addEventListener('astro:page-load', () => {
-        if (typingTimeout) clearTimeout(typingTimeout);
-
-        const phrases = [
-            'AI/ML Infrastructure',
-            'Multi-region platforms',
-            'LLM serving systems',
-            'GPU orchestration',
-            'Platform engineering',
-            'Cost optimization at scale'
-        ];
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const el = document.getElementById('typing-text');
-
-        if (el) {
-            function type() {
-                const current = phrases[phraseIndex];
-                if (isDeleting) {
-                    el!.textContent = current.substring(0, charIndex - 1);
-                    charIndex--;
-                } else {
-                    el!.textContent = current.substring(0, charIndex + 1);
-                    charIndex++;
-                }
-
-                let delay = isDeleting ? 30 : 60;
-
-                if (!isDeleting && charIndex === current.length) {
-                    delay = 2000;
-                    isDeleting = true;
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    phraseIndex = (phraseIndex + 1) % phrases.length;
-                    delay = 400;
-                }
-
-                typingTimeout = setTimeout(type, delay);
-            }
-
-            // Start after a brief delay
-            typingTimeout = setTimeout(type, 800);
-        }
-    });
-</script>
 
 </PageLayout>
