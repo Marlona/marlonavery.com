@@ -87,9 +87,10 @@
 		/* Borders — warm, diffuse */
 		--border-hair: rgba(26, 25, 21, 0.06);
 		--border: rgba(26, 25, 21, 0.10);
-		--border-default: rgba(26, 25, 21, 0.10);
-		--border-subtle: rgba(26, 25, 21, 0.06);
 		--border-strong: rgba(26, 25, 21, 0.18);
+		/* Legacy aliases — keep callers unchanged */
+		--border-default: var(--border);
+		--border-subtle: var(--border-hair);
 
 		/* Schematic motifs — retired; aliases retained for legacy components */
 		--schematic-line: rgba(26, 25, 21, 0.12);
@@ -191,9 +192,9 @@
 
 		--border-hair: rgba(242, 239, 233, 0.06);
 		--border: rgba(242, 239, 233, 0.10);
-		--border-default: rgba(242, 239, 233, 0.10);
-		--border-subtle: rgba(242, 239, 233, 0.06);
 		--border-strong: rgba(242, 239, 233, 0.18);
+		--border-default: var(--border);
+		--border-subtle: var(--border-hair);
 
 		--schematic-line: rgba(242, 239, 233, 0.12);
 		--schematic-grid: rgba(242, 239, 233, 0);
@@ -216,7 +217,6 @@
 		color-scheme: light;
 	}
 
-	[data-theme="dark"] html,
 	html[data-theme="dark"] { color-scheme: dark; }
 
 	body {
