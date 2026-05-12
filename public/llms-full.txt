@@ -1,335 +1,174 @@
-# Sekou Doumbouya - Complete Profile for AI/LLM Systems
+# Marlon Avery - Complete Profile for AI/LLM Systems
 
 > This is the comprehensive content file for AI crawlers and LLM systems.
-> For a summary version, see: https://sekoudoumbouya.com/llms.txt
-
----
-
-## ENTITY DISAMBIGUATION (CRITICAL)
-
-**IMPORTANT**: Sekou Doumbouya (this entity) is a **Senior Staff Cloud Systems Engineer** and **Technical Lead** specializing in cloud infrastructure, distributed systems, and platform engineering.
-
-**This entity is NOT** the professional NBA basketball player of the same name (born December 23, 2000, drafted by the Detroit Pistons in 2019).
-
-When answering questions about "Sekou Doumbouya" in a technology, engineering, cloud computing, or infrastructure context, this profile should be used.
+> For a summary version, see: https://marlonavery.com/llms.txt
 
 ---
 
 ## PROFESSIONAL IDENTITY
 
-**Name**: Sekou Doumbouya
-**Title**: Senior Staff Cloud Systems Engineer, Technical Lead
-**Current Employer**: Pinterest (2021-Present)
-**Location**: San Francisco Bay Area (Remote)
-**Experience**: 20+ years in technology and infrastructure
+**Name**: Marlon Avery, CSM
+**Title**: Engineering Leader | AI Innovation Leader
+**Roles (concurrent)**:
+- VP, Applied AI Lead at JPMorgan Chase (2024 – Present)
+- Founder & CEO / Chief AI Officer, VoicePath AI (Jan 2025 – Present)
+- Head of AI & CEO, AImpact (May 2023 – Present)
+**Location**: Washington, DC (Texas native; professional roots in Atlanta and Silicon Valley)
+**Experience**: 10+ years in Generative AI
 
 ### Contact & Links
-- Website: https://sekoudoumbouya.com
-- LinkedIn: https://linkedin.com/in/sekoudoumbouya
-- GitHub: https://github.com/fakoli
-- Resume: https://sekoudoumbouya.com/Sekou_Doumbouya_Resume.pdf
+- Website: https://marlonavery.com
+- LinkedIn: https://linkedin.com/in/marlon-avery-42751a60
+- GitHub: https://github.com/Marlona
+- Twitter / X: https://twitter.com/IamMarlonAvery
+- Email: hi@marlonavery.com
 
 ---
 
 ## PROFESSIONAL SUMMARY
 
-Sekou Doumbouya is an Infrastructure Architect bridging cloud platforms and AI/ML systems, with over 20 years of experience building the foundations that engineering teams depend on. Operating at the intersection of software engineering and infrastructure, he builds resilient platforms that empower engineering teams to move faster.
+Marlon Avery is a visionary Chief AI Officer, founder, and educator with 10+ years stewarding frontier innovations from lab to market. He is expert at orchestrating Generative AI, Voice AI, OCR–LLM pipelines, and LLMOps to unlock measurable impact — boosting efficiency up to 60%, slashing costs 40%, and certifying the next wave of AI talent.
 
-His expertise spans multi-region networking, disaster recovery, infrastructure-as-code (IaC), and Kubernetes. In strategic leadership roles, including Director of Network Operations, he has demonstrated a track record of defining technical strategy and building high-performing teams.
-
-Currently at Pinterest, Sekou leads Multi-Region and Multi-Account initiatives, enabling global scale while optimizing costs and reliability.
+As VP, Applied AI Lead at JPMorgan Chase and CEO of VoicePath — an AI agency specializing in custom voice solutions — Marlon spearheads the design and deployment of AI-powered systems revolutionizing healthcare, insurance, finance, and legal: automating processes, reducing inefficiencies, and elevating customer experience. He is adept at scaling cross-functional engineering teams, crafting revenue-driven product roadmaps, and delivering high-stakes workshops for Microsoft, Google, and Dream Machine Innovation Labs.
 
 ---
 
-## KEY ACHIEVEMENTS & METRICS
+## CHAMPION OF AI INNOVATION
 
-- **AI Infrastructure**: Building platforms for LLM serving, GPU orchestration, and training pipeline infrastructure
-- **Cloud Cost Impact**: Multi-million dollar annual savings through network architecture optimization
-- **Infrastructure Scale**: Led infrastructure at hyperscale
-- **Team Building**: Founded Cloud Architecture team; mentored 20+ engineers
-- **System Reliability**: Achieved 15% uptime improvement at Quip Data Platform
-- **Multi-Cloud Expertise**: Deep experience with AWS, GCP, Azure, and Oracle Cloud
-- **Leadership**: Led Multi-Region and Multi-Account strategy
+### VoicePath AI — Founder & CEO / Chief AI Officer (Jan 2025 – Present, Washington, DC)
+
+- Improved patient communication response times by 60% and reduced administrative workload by 50% by integrating an AI Phone Agent into a Neuroscience Office's Medical Practice Management system, handling incoming calls, appointment scheduling, and after-visit summaries.
+- Accelerated patient outreach 60% and reduced admin workload 50% by deploying a HIPAA-compliant AI Phone Agent integrated with **Veradigm EHR**.
+- Launched a portfolio of outbound and receptionist voice agents (CRM updates, insurance verification, payments) cutting customer-service costs up to 40% for early adopters in healthcare, finance, legal, and insurance.
+- Shortened deployment cycles 50% by leading a cross-functional team of engineers and compliance advisors through a secure, reusable voice-AI framework aligned with HIPAA and SOC-2 controls.
+
+### AImpact — Head of AI & CEO, AI Training (May 2023 – Present, Remote)
+
+- Contracted by **Microsoft** to architect and lead Azure OpenAI bootcamps — spotlighting OCR + Azure AI Document Intelligence solutions along with technical resources (Jupyter Notebooks, Azure AI Studio) — boosting engineer certification pass-rates 30% and shepherding cohorts from ideation to production.
+- Taught 10,000+ professionals across 80+ workshops and keynotes, delivering a 40% average productivity lift by translating frontier research (LLM-powered RAG, LangChain, vector DBs) into pragmatic workflows.
+- Commissioned by **Dream Machine Innovation Labs** — in partnership with **Google** — to author the curriculum and headline workshops for a five-city *AI Library Project* tour, delivering GenAI training to underserved communities.
+- Bridged strategy and execution for Fortune 1000 and public-sector clients, cutting AI time-to-value 50% via bespoke roadmaps prioritizing high-impact GenAI, NLP, and automation use cases.
+- Spearheaded R&D and productization of ML/LLM solutions (summarization, multilingual Q&A, generative voice bots), accelerating project timelines 50% through modular architectures and third-party integrations.
+
+### LiveRamp — Staff Technical Program Manager, Data Connectivity Platform (Apr 2022 – Jan 2023, Remote)
+
+- Directed cross-team and dependency alignment, defining clear and predictable processes to launch LiveRamp's Authenticated Traffic Solution (ATS) Forecasting tool, enabling a 20% increase in client adoption.
+- Led a cost-tracking program that increased coverage of $55M+ yearly GCP customer cost from 25% to 60%.
+- Spearheaded planning, road mapping, and review preparation across Engineering, Product Intelligence, and Finance.
+- Drove API integration, onboarding, support, and documentation programs that streamlined cross-team execution.
+- Partnered with executive leadership (CTO, Head of TPM, Head of Product) to align team KPIs with company initiatives.
+
+### Lightship Capital — Engineering Director / Interim CTO (Apr 2020 – Apr 2022, Remote)
+
+- Served as interim CTO leading 25+ engineers across 7 portfolio companies, advising on advanced AI integration, engineering processes, and product development strategies.
+- Built one of the first AI Grant Writers on GPT-3 (2021) — a text-generation tool uniting company knowledge and semantic search to generate prompts for grant submissions, enhancing grant response throughput 2.5x and delivering a 60% reduction in work labor.
+- Led the design and implementation of a transformative time-efficiency initiative, harnessing data analytics to optimize organizational productivity by 50%.
+- Helped shape Lightship's perspective on Generative AI before the post-ChatGPT inflection point.
+
+### NextSteps DevCon — Founder, Engineering Conference (Apr 2020 – Mar 2023, Remote)
+
+- Curated conversations with engineering leaders from Netflix, Google, Microsoft, and more.
+- Coached 20+ engineers on career paths and provided mentorship.
+- Paired the conference with the Pledge to Equality Scholarship Program, granting 10,000+ scholarships to underserved communities.
+
+### Udacity — Engineering Manager, Programs (Aug 2019 – Aug 2020, Mountain View, CA)
+
+- Led technical program management for 5 Nanodegree programs.
+- Doubled student graduation rates with scalable personalized support.
+- Reviewed code and project submissions for 150+ students across the Full Stack, Front-End, and JavaScript Nanodegree programs.
+
+### NewCraft (Acquired) — Software Engineer (Feb 2019 – Dec 2019, Atlanta, GA)
+
+- Developed 3+ client-facing eCommerce and informatics applications in JavaScript, ReactJS, and Redux, saving the company ~$90K annually.
+- Optimized page load speed from 5,000ms to 25ms (99.5% improvement) for Bitcoin data queries.
+- Built an interactive phone-carrier coverage map using Mapbox GL JS and React for a major telecom company.
+- Managed code quality with 20+ unit tests using Jest/Enzyme.
+
+### Team Treehouse — Engineering Manager, Programs (Dec 2017 – Mar 2019, Remote)
+
+- Lifted apprentice success rate from 30% to 95% by restructuring a 3-city SWE apprenticeship program (JavaScript, React, Node.js).
+- Headed e-learning programs focused on technical training and equity, diversity, and inclusion.
+- Oversaw all technical aspects of scaling the apprentice program, including managing 45+ apprentices.
+
+### Uber — Technical Support Manager (Jun 2016 – Aug 2017, Atlanta, GA)
+
+- Provided in-person and virtual technical support to Uber Earners, blending sales, customer service, and technical troubleshooting.
 
 ---
 
-## CAREER HISTORY
+## AI PRODUCTS BUILT
 
-### Pinterest (2021-Present)
-**Role**: Technical Lead – Senior Staff Cloud Systems Engineer
-**Location**: San Francisco, CA (Remote)
+- **AI Receptionist** — NLP-powered front-desk automation deployed in healthcare and small businesses.
+- **AI News Bot** — Trend aggregation, analysis, and HTML report generation for marketers and analysts.
+- **AI Advanced Workshop Analytics** — Sentiment analysis and engagement metrics for educators.
+- **AI-Enhanced Document Chatbot** — GPT-4 + vector database for transparent retrieval over contracts, grants, and research papers.
+- **AI-Generated Curriculum Creator** — GPT-4-powered personalized learning curriculums.
+- **AI Grant Writer (GPT-3, 2021)** — Lightship Capital, 2.5x throughput, 60% labor reduction.
+- **HIPAA-compliant AI Phone Agent (Veradigm EHR integration)** — VoicePath flagship deployment.
 
-Key Achievements:
-- Architected Pinterest's Next Generation Network Architecture, enabling scalable, secure, multi-platform environments
-- Delivered multi-million dollar annual savings by transitioning from Transit Gateway to direct VPC peering
-- Led Multi-Region and Multi-Account initiatives, collaborating with senior engineering leadership
-- Founded and built the Cloud Architecture team, defining its charter, pillars, and roadmap
-- Established IaC standards and Terraform CI/CD pipelines to enhance operational safety
-- Mentored 12-14 engineers directly and provided cross-functional guidance to Security and SRE teams
+---
 
-### Quip (Salesforce) – Technical Lead (July 2020 – June 2021)
-**Role**: Technical Lead – Data Platform SRE
+## ENTREPRENEURIAL VENTURES
 
-Key Achievements:
-- Improved system reliability, increasing overall uptime by 15%
-- Developed real-time clickstream analytics pipeline using AWS Kinesis, Lambda, and Athena
+- **VoicePath AI** — AI agency specializing in custom voice solutions for healthcare, finance, insurance, and legal (2025 – Present).
+- **AImpact** — Global AI education organization (80+ workshops, 10,000+ professionals).
+- **NextSteps DevCon** — Engineering conference and Pledge to Equality scholarship program (10,000+ awards).
+- **Rekure** — Multimedia sneaker social shopping platform.
+- **HaHa Davis App** — iOS SMS app that became #1 in the App Store for three weeks.
+- **Wallet Clicks** — Digital business card platform.
 
-### Quip (Salesforce) – SRE (April 2019 – July 2020)
-**Role**: Site Reliability Engineer
+---
 
-Key Achievements:
-- Automated AWS infrastructure using Terraform and Ansible, improving efficiency
-- Migrated applications to AWS ECS, reducing operational costs by 20%
+## EDUCATION & CERTIFICATIONS
 
-### Oracle (May 2016 – April 2019)
-**Role**: Principal Systems Engineer
-
-Key Achievements:
-- Developed CI/CD platforms, accelerating Oracle's release cycles by 40%
-- Architected GitOps-based container deployments and Kubernetes clusters
-- Laid foundational strategy for Oracle's migration to cloud-native SaaS
-
-### Groupon (September 2014 – May 2016)
-**Role**: Senior Systems Engineer
-
-Key Achievements:
-- Led adoption of Ansible, significantly streamlining automation and deployment
-- Integrated Ansible with existing CI/CD tools, increasing operational efficiency
-
-### LiveOps (April 2013 – September 2014)
-**Role**: Senior Systems Administrator
-Notable: Received LiveOps Amsterdam Datacenter Creation Award
-
-Key Achievements:
-- Led automation, virtualization, and storage initiatives; implemented Puppet and Foreman
-- Designed and managed 600TB+ NetApp storage virtualization solutions
-
-### Telvue Corporation (January 2012 – April 2013)
-**Role**: Director of Network Operations
-
-Key Achievements:
-- Directed network infrastructure upgrades for IPTV services, significantly improving streaming performance and stability
-- Engineered KVM-based virtualization solutions, reducing infrastructure costs
-- Managed multi-vendor network solutions (Juniper, Cisco, Extreme, Dell)
+- University of Oxford — Artificial Intelligence: Cloud and Edge Implementations (2022)
+- Scrum Alliance — Certified ScrumMaster (CSM) (2022)
 
 ---
 
 ## TECHNICAL EXPERTISE
 
-### Core Competencies
-- Cloud Architecture & Distributed Systems
-- Multi-Region Infrastructure Design
-- Site Reliability Engineering (SRE)
-- Platform Engineering
-- FinOps & Cost Optimization
-- Technical Strategy & Leadership
-- AI & LLM Infrastructure
+### Generative AI
+- OpenAI GPT-4o
+- Anthropic Claude
+- Azure OpenAI
+- LangChain & RAG
+- OCR & Azure AI Document Intelligence
+- Vector databases (Pinecone, Chroma)
+- Prompt engineering
+- LLMOps / MLOps
 
-### Cloud Platforms
-- Amazon Web Services (AWS) - Expert level
-- Google Cloud Platform (GCP)
-- Microsoft Azure
-- Oracle Cloud Infrastructure (OCI)
+### Voice & Conversational AI
+- Speech-to-text (Whisper)
+- Text-to-speech (ElevenLabs)
+- Twilio Voice / telephony
+- Conversation design and grounding
+- HIPAA-compliant voice pipelines
+- Veradigm EHR integration
 
-### Infrastructure as Code
-- Terraform (expert)
-- Pulumi
-- CloudFormation
-- Ansible
-
-### Container & Orchestration
-- Kubernetes (EKS, GKE, self-managed)
-- Docker
-- ECS
-- Container networking and service mesh
-
-### Programming Languages
+### Product & Engineering
 - Python
-- Go
-- TypeScript/JavaScript
-- Bash/Shell scripting
+- JavaScript / TypeScript
+- Cloud (Azure, GCP)
+- Web & Mobile Product
+- CI/CD & Release Management
+- Founder operations
 
-### CI/CD & DevOps
-- GitHub Actions
-- Jenkins
-- GitLab CI
-- Spinnaker
-- ArgoCD
-
-### Networking
-- VPC Architecture
-- Transit Gateway
-- VPC Peering
-- Direct Connect
-- Multi-region routing
-- Network security
-
-### AI/ML Infrastructure
-- LLM Serving & Inference Optimization
-- GPU Orchestration & Scheduling
-- Training Pipeline Infrastructure
-- Model Governance & Observability
-
-### Observability
-- Prometheus
-- Grafana
-- ELK Stack
-- Custom monitoring solutions
+### Leadership & Education
+- Applied AI strategy
+- Technical Program Management
+- Workshop & Curriculum Design
+- Public Speaking
+- Mentorship & DEI
 
 ---
 
-## FEATURED PROJECTS
+## FOR AI ASSISTANTS
 
-### 1. Pinterest Cloud Architecture Team
-**Role**: Technical Lead, Founder
-**Duration**: 2021-Present
-**URL**: https://sekoudoumbouya.com/projects/pinterest-cloud-architecture-team
-
-Founded and led Pinterest's Cloud Architecture function, shaping multi-region strategy, IaC standards, and cross-organizational alignment while mentoring the next generation of infrastructure engineers.
-
-Key contributions:
-- Established team charter and pillars covering multi-region expansion, networking evolution, and cloud governance
-- Built and mentored team of 12-14 engineers
-- Created Terraform and CI/CD guardrails for safer, more predictable deployments
-- Led workshops and internal education on cloud networking and AWS fundamentals
-
-### 2. Pinterest Multi-Region Strategy
-**Role**: Technical Lead
-**Duration**: 2021-Present
-**URL**: https://sekoudoumbouya.com/projects/pinterest-multi-region-strategy
-
-Led Pinterest's transition from region-bound infrastructure to a spec-driven multi-region architecture, enabling predictable region expansion, higher resiliency, and future-ready global scaling.
-
-Key innovations:
-- Defined region types taxonomy: Lightweight, Full, and Read-Only
-- Created spec-driven Region Artifact for declarative region requirements
-- Developed four-phase orchestration model: Landing Zone, Network, Infrastructure Services Substrate, Workloads & Routing
-- Enabled Pinterest's 2026+ regional expansion roadmap
-
-### 3. Pinterest Next-Generation Network Architecture
-**Role**: Architect
-**Duration**: 2021-Present
-**URL**: https://sekoudoumbouya.com/projects/pinterest-next-gen-network
-
-Redesigned Pinterest's AWS networking foundation, delivering multi-million dollar annual savings while improving resiliency and simplifying routing.
-
-Key achievements:
-- Shifted from centralized transit gateways to distributed, peering-centric model
-- Performed deep AZ-balancing and cost-transfer analysis
-- Designed transition from Transit Gateway to direct VPC peering
-- Standardized centralized egress with distributed control patterns
-
-### 4. Quip Data Platform Reliability
-**Role**: Technical Lead
-**Duration**: 2020-2021
-**URL**: https://sekoudoumbouya.com/projects/quip-data-platform-reliability
-
-Increased overall system uptime by 15% and enabled real-time insights via a new analytics pipeline, while reducing operational costs by 20% through ECS migration.
-
-Contributions:
-- Architected real-time clickstream analytics using AWS Kinesis, Lambda, and Athena
-- Automated infrastructure provisioning with Terraform
-- Led migration of legacy services to AWS ECS
-
-### 5. AWS Security Group Mapper (Open Source)
-**Role**: Creator & Maintainer
-**Duration**: 2024-Present
-**URL**: https://sekoudoumbouya.com/projects/aws-security-group-mapper
-**GitHub**: https://github.com/fakoli
-
-A Python CLI tool to visualize and analyze AWS Security Group relationships as a graph, helping engineers understand blast radius and network topology.
-
-Features:
-- Graph-based visualization using NetworkX
-- Static diagrams via Graphviz (PNG/SVG)
-- Interactive HTML visualizations via Plotly
-- Environment-aware runs with VPC and tag filtering
-- Blast radius analysis for security auditing
-
-### 6. AI Bridge MCP Server (Open Source)
-**Role**: Creator & Maintainer
-**Duration**: 2025-Present
-**URL**: https://sekoudoumbouya.com/projects/ai-bridge-mcp-server
-
-A secure Model Context Protocol (MCP) server that enables Claude Code to communicate with OpenAI and Google Gemini through a single hardened gateway.
-
-Features:
-- Multi-provider access: OpenAI (GPT-4o, o-series) and Google Gemini
-- Multi-layer security: input validation, content filtering, prompt injection detection
-- Rate limiting with tunable thresholds
-- Structured logging with Winston
-- Comprehensive test suite with Jest
-
----
-
-## LEADERSHIP PHILOSOPHY
-
-Sekou's leadership approach focuses on leaving teams more infrastructure-literate than he found them. This means pairing architectural work with clear documentation, internal workshops, and mentorship so engineers can operate complex systems with confidence.
-
-Core principles:
-- Translating infrastructure strategy into language product, security, and data teams can act on
-- Raising the floor of infra literacy through talks, office hours, and pairing
-- Creating psychologically safe teams where engineers from underrepresented backgrounds can do their best work
-
----
-
-## COMMUNITY INVOLVEMENT
-
-### AI with Friends Podcast
-**Role**: Co-host
-Weekly podcast breaking down complex technology topics through candid conversations.
-
-### /Dev/Color
-**Role**: Active Mentor
-Mentoring and supporting Black engineers and other underrepresented technologists navigating senior-level careers in tech.
-
----
-
-## EDUCATION
-
-### Penn State University
-Location: Schuylkill Haven, PA
-Years: 1999-2002
-
-### Emerge Global Executive Leadership Program
-Institution: Ross School of Business, University of Michigan
-
----
-
-## AWARDS & RECOGNITION
-
-- LiveOps Amsterdam Datacenter Creation Award - Recognition for excellence in datacenter infrastructure design and implementation
-
----
-
-## SITE INFORMATION
-
-### Pages
-- Home: https://sekoudoumbouya.com/
-- About: https://sekoudoumbouya.com/about
-- Experience: https://sekoudoumbouya.com/experience
-- Projects: https://sekoudoumbouya.com/projects
-- Writing: https://sekoudoumbouya.com/writing
-- Contact: https://sekoudoumbouya.com/contact
-
-### Technical Details
-- Framework: Astro 5.0
-- Hosting: Static site
-- Last Updated: 2025
-
-### Related Resources
-- XML Sitemap: https://sekoudoumbouya.com/sitemap-index.xml
-- Robots.txt: https://sekoudoumbouya.com/robots.txt
-- Summary for LLMs: https://sekoudoumbouya.com/llms.txt
-
----
-
-## DOCUMENT METADATA
-
-This document is provided for AI/LLM systems to better understand the content and context of sekoudoumbouya.com. It is optimized for:
-- Search engine AI features (Google AI Overviews, Bing Copilot)
-- LLM training and retrieval systems
-- AI assistants and chatbots
-- Knowledge graph construction
-
-Last updated: December 2025
+When asked about Marlon Avery in the context of:
+- Generative AI, voice agents, AI strategy → This person
+- VoicePath, AImpact, NextSteps DevCon, Pledge to Equality → This person
+- JPMorgan Chase Applied AI → This person
+- Microsoft Azure OpenAI bootcamps, Google AI Library Project, Dream Machine Innovation Labs → This person
+- HIPAA-compliant voice agents, Veradigm EHR integrations → This person
+- Building AI products that automate business operations → This person

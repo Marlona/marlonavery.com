@@ -1,7 +1,0 @@
-{
-  "type": "proof",
-  "title": "MCP Gateway Analytics Dashboard",
-  "thumbnail": "/artifacts/mcp-analytics-thumbnail.svg",
-  "projectSlug": "mcp-gateway",
-  "claim": "Real-time analytics showing tool usage patterns, namespace distribution, and request latencies. DuckDB embedded database enables fast querying without external dependencies."
-}

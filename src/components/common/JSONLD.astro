@@ -45,13 +45,11 @@ const {
 const siteUrl = new URL(import.meta.env.BASE_URL, Astro.site).toString();
 const currentUrl = new URL(Astro.url.pathname, Astro.site).toString();
 
-// Enhanced Person Schema with disambiguation
 const personSchema = {
 	"@context": "https://schema.org",
 	"@type": "Person",
 	"@id": `${siteUrl}#person`,
 	"name": SITE_CONFIG.name,
-	"alternateName": ["Sekou Doumbouya", "Sekou M Doumbouya"],
 	"url": siteUrl,
 	"jobTitle": SITE_CONFIG.title,
 	"worksFor": {
@@ -60,41 +58,74 @@ const personSchema = {
 	},
 	"sameAs": [
 		SOCIAL_LINKS.linkedin,
-		SOCIAL_LINKS.github
+		SOCIAL_LINKS.github,
+		SOCIAL_LINKS.twitter
 	],
-	"description": "Principal-level infrastructure leader specializing in multi-region architecture, platform engineering, and cost optimization. Not affiliated with professional basketball.",
+	"description": SITE_CONFIG.description,
+	"address": {
+		"@type": "PostalAddress",
+		"addressLocality": "Washington",
+		"addressRegion": "DC",
+		"addressCountry": "US"
+	},
 	"knowsAbout": [
-		"Cloud Architecture",
-		"AWS",
-		"Multi-Region Infrastructure",
-		"Disaster Recovery",
-		"Kubernetes",
-		"Terraform",
-		"Cost Optimization",
-		"VPC Architecture",
-		"Platform Engineering",
-		"Site Reliability Engineering"
+		"Generative AI",
+		"Voice AI",
+		"AI Agents",
+		"Large Language Models",
+		"Retrieval Augmented Generation",
+		"Conversational AI",
+		"AI Strategy",
+		"Applied Machine Learning",
+		"AI Education",
+		"OCR & Document Intelligence",
+		"LLMOps",
+		"HIPAA-Compliant AI",
+		"Azure OpenAI",
+		"Product Innovation"
 	],
 	"hasCredential": [
 		{
 			"@type": "EducationalOccupationalCredential",
 			"credentialCategory": "professional experience",
-			"name": "Technical Lead – Senior Staff Cloud Systems Engineer at Pinterest"
+			"name": `${SITE_CONFIG.currentRole} at ${SITE_CONFIG.currentCompany}`
 		},
 		{
 			"@type": "EducationalOccupationalCredential",
-			"credentialCategory": "professional development",
-			"name": "Emerge Global Executive Leadership Program, Ross School of Business, University of Michigan"
+			"credentialCategory": "professional experience",
+			"name": "Founder & CEO / Chief AI Officer, VoicePath"
+		},
+		{
+			"@type": "EducationalOccupationalCredential",
+			"credentialCategory": "certification",
+			"name": "Artificial Intelligence: Cloud and Edge Implementations",
+			"recognizedBy": {
+				"@type": "EducationalOrganization",
+				"name": "University of Oxford"
+			}
+		},
+		{
+			"@type": "EducationalOccupationalCredential",
+			"credentialCategory": "certification",
+			"name": "Certified ScrumMaster (CSM)",
+			"recognizedBy": {
+				"@type": "Organization",
+				"name": "Scrum Alliance"
+			}
 		}
 	],
 	"memberOf": [
 		{
 			"@type": "Organization",
-			"name": "/dev/color",
-			"description": "Community supporting Black engineers"
+			"name": "AImpact",
+			"description": "Global AI workshops and education — Microsoft Azure OpenAI bootcamps and Google + Dream Machine AI Library Project tour"
+		},
+		{
+			"@type": "Organization",
+			"name": "NextSteps DevCon",
+			"description": "Engineering conference for emerging developers"
 		}
-	],
-	"award": ["LiveOps Amsterdam Datacenter Creation Award"]
+	]
 };
 
 // Website Schema

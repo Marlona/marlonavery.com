@@ -6,7 +6,7 @@ If you discover a security vulnerability in this project, please report it respo
 
 ### How to Report
 
-**Email:** Send details to the repository maintainer via the contact information in the README or open a [GitHub Security Advisory](https://github.com/fakoli/sekoudoumbouya/security/advisories/new).
+**Email:** Send details to the repository maintainer via the contact information in the README or open a [GitHub Security Advisory](https://github.com/Marlona/marlonavery.com/security/advisories/new).
 
 ### What to Include
 

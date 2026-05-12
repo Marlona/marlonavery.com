@@ -3,36 +3,31 @@
  */
 
 export const SITE_CONFIG = {
-	// Personal Information - Middle initial for disambiguation from basketball player
-	name: "Sekou M. Doumbouya",
-	shortName: "Sekou Doumbouya", // For backwards compatibility
-	title: "Infrastructure Architect | Cloud, AI/ML, Platform Engineering",
-	email: "sdoumbouya81@gmail.com",
-	description: "Infrastructure architect bridging cloud platforms and AI/ML systems. 20+ years building the foundations that engineering teams build on, from multi-region networks to GPU-ready compute and LLM serving infrastructure.",
+	name: "Marlon Avery",
+	shortName: "Marlon Avery",
+	title: "VP of Applied AI Lead | Generative AI Builder & Educator",
+	email: "hi@marlonavery.com",
+	description: "Marlon Avery is a generative AI leader building voice and agentic systems that automate operations and elevate customer experience. VP of Applied AI Lead at JPMorgan Chase, Founder & CEO of VoicePath, Head of AI at AImpact (Microsoft Azure OpenAI bootcamps + Google AI Library Project). Based in Washington, DC.",
 
-	// Social Profiles
-	githubUsername: "fakoli",
-	linkedInUsername: "sekoudoumbouya",
+	githubUsername: "Marlona",
+	linkedInUsername: "marlon-avery-42751a60",
+	twitterHandle: "IamMarlonAvery",
 
-	// Current Employment
-	currentCompany: "Pinterest",
-	currentRole: "Senior Staff Cloud Systems Engineer",
+	currentCompany: "JPMorgan Chase",
+	currentRole: "VP, Applied AI Lead",
 
-	// Feature Flags
-	availableForHire: false,
+	availableForHire: true,
 
-	// Google Search Console verification (leave empty to omit the meta tag)
 	googleSiteVerification: '',
 } as const;
 
-// Derived social links
 export const SOCIAL_LINKS = {
 	github: `https://github.com/${SITE_CONFIG.githubUsername}`,
 	linkedin: `https://linkedin.com/in/${SITE_CONFIG.linkedInUsername}`,
+	twitter: `https://twitter.com/${SITE_CONFIG.twitterHandle}`,
 	email: `mailto:${SITE_CONFIG.email}`,
 } as const;
 
-// Navigation configuration - Updated for redesign
 export const NAV_LINKS = [
 	{ href: '/about', label: 'About' },
 	{ href: '/experience', label: 'Experience' },
@@ -41,5 +36,4 @@ export const NAV_LINKS = [
 	{ href: '/contact', label: 'Contact' },
 ] as const;
 
-// Resume path - points to the latest resume PDF in public/
-export const RESUME_PATH = '/Sekou_Doumbouya_Resume_2025.pdf';
+export const RESUME_PATH = '/Marlon_Avery_Resume.pdf';

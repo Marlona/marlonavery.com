@@ -1,7 +1,0 @@
-{
-  "type": "diagram",
-  "title": "Temporal Workflow DAG Architecture",
-  "thumbnail": "/artifacts/temporal-dag-thumbnail.svg",
-  "projectSlug": "temporal-terraform-orchestrator",
-  "claim": "This diagram shows the DAG-based workflow architecture where parent workflows orchestrate child Terraform workflows with automatic dependency resolution and output propagation between workspaces."
-}

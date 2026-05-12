@@ -1,7 +1,0 @@
-{
-  "type": "code",
-  "title": "Claude Code Plugin Marketplace",
-  "thumbnail": "/artifacts/fakoli-plugins-thumbnail.png",
-  "projectSlug": "fakoli-plugins",
-  "claim": "Plugin marketplace ecosystem for Claude Code with validation tooling, manifest schemas, and starter templates enabling developers to discover, share, and install productivity-enhancing plugins."
-}

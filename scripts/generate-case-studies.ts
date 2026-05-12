@@ -32,10 +32,10 @@ import {
 import type { RepoSource, GeneratorConfig } from './lib/types.js';
 
 // Configuration
-const GITHUB_USERNAME = 'fakoli';
+const GITHUB_USERNAME = 'Marlona';
 const PROJECTS_DIR = 'src/content/projects';
 const REPO_LIMIT = 20;
-const EXCLUDE_REPOS = ['sekoudoumbouya', 'fakoli']; // Exclude portfolio repo
+const EXCLUDE_REPOS = ['marlonavery.com', 'marlonavery']; // Exclude portfolio repo
 
 /**
  * Parse a .env file and return key-value pairs

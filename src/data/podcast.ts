@@ -30,11 +30,6 @@ export const PODCAST_HOSTS = [
 		title: 'VP of Engineering, LiveNation',
 		description: 'Global entertainment engineering leader',
 	},
-	{
-		name: 'Sekou Doumbouya',
-		title: 'Senior Staff Cloud Systems Engineer',
-		description: 'Cloud infrastructure and platform engineering expert',
-	},
 ] as const;
 
 // Recent episodes - update periodically

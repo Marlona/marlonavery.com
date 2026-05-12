@@ -29,7 +29,7 @@ Uses Anthropic API via `scripts/generate-case-studies.ts`. Requires `ANTHROPIC_A
 npm run generate:resume  # Generate PDF resume from scripts/generate-resume-pdf.js
 ```
 
-Outputs to `public/Sekou_Doumbouya_Resume_2025.pdf`. Uses PDFKit for optimized, clean PDF output.
+Outputs to `public/Marlon_Avery_Resume.pdf`. Uses PDFKit for optimized, clean PDF output.
 
 ## Architecture Overview
 
@@ -67,12 +67,8 @@ The homepage fetches live repository data via `src/utils/github.ts`:
 
 Configure via `.env`:
 ```ini
-SITE=https://sekoudoumbouya.com       # For custom domain
+SITE=https://marlonavery.com           # For custom domain
 PUBLIC_BASE_PATH=/                     # Root deployment
-
-# OR for GitHub Pages subpath:
-SITE=https://fakoli.github.io/
-PUBLIC_BASE_PATH=/sekoudoumbouya
 
 GITHUB_TOKEN=...                       # Optional: for live GitHub repo data
 ```
@@ -165,7 +161,7 @@ Think outside the box. Vary themes, fonts, and aesthetics across designs.
 
 This portfolio has established writing patterns that must be preserved. Before writing or editing any content, consult the relevant style guides in `.claude/rules/`:
 
-- **Voice Reference** (`.claude/rules/voice-reference.md`): Sekou's distinctive voice — sentence rhythm, authority style, verbal signatures. Consult this for ALL content types.
+- **Voice Reference** (`.claude/rules/voice-reference.md`): Marlon's distinctive voice — sentence rhythm, authority style, verbal signatures. Consult this for ALL content types.
 - **Blog Posts** (`.claude/rules/writing-blog-posts.md`): Structure, conventions, and quality bar for blog articles.
 - **Case Studies** (`.claude/rules/writing-case-studies.md`): Strategic/employer case study structure and confidentiality practices.
 - **Project Descriptions** (`.claude/rules/writing-project-descriptions.md`): Open-source project description structure and narrative expectations.
@@ -174,7 +170,7 @@ These guides encode both existing strengths and peer feedback. Follow them as ha
 
 ## LLM-Readable Profile (llms.txt)
 
-The site serves an LLM-readable profile at `/llms.txt` via `src/pages/llms.txt.ts`. This file helps AI assistants accurately represent Sekou's professional identity and current availability.
+The site serves an LLM-readable profile at `/llms.txt` via `src/pages/llms.txt.ts`. This file helps AI assistants accurately represent Marlon's professional identity and current availability.
 
 **Keep llms.txt updated when changing:**
 - `src/config.ts`:Site config, especially `availableForHire`, `currentRole`, `currentCompany`

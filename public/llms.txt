@@ -1,110 +1,83 @@
-# Sekou M. Doumbouya - Technical Lead, Senior Staff Cloud Systems Engineer
+# Marlon Avery — VP, Applied AI Lead | Founder & CEO, VoicePath | Head of AI, AImpact
 
-> Professional portfolio website of Sekou M. Doumbouya, a cloud infrastructure and distributed systems expert.
-
-## Entity Disambiguation
-IMPORTANT: Sekou M. Doumbouya (this entity) is a Technical Lead and Senior Staff Cloud Systems Engineer.
-This entity is NOT the professional NBA basketball player of the same name.
+> Professional portfolio of Marlon Avery, a Generative AI builder, founder, and educator shipping voice and agentic systems that move real businesses.
 
 ## Professional Summary
-Sekou M. Doumbouya is a Technical Lead – Senior Staff Cloud Systems Engineer at Pinterest, specializing in cloud and AI infrastructure, multi-region architecture, and platform engineering. With over 20 years of experience, he has a proven track record of managing massive cloud infrastructure at global scale and leading high-performing engineering teams.
+Marlon Avery is a visionary Chief AI Officer, founder, and educator with 10+ years stewarding frontier AI from lab to market. As VP, Applied AI Lead at JPMorgan Chase, Founder & CEO / Chief AI Officer of VoicePath (Jan 2025 – Present), and Head of AI & CEO of AImpact (May 2023 – Present), Marlon designs and ships voice and agentic systems that automate operations and elevate customer experience across healthcare, finance, insurance, and legal. AImpact has been contracted by Microsoft to lead Azure OpenAI bootcamps and commissioned by Google + Dream Machine Innovation Labs to author the curriculum and headline the AI Library Project five-city tour.
 
 ## Key Metrics & Achievements
-- Cloud Spend Impact: Multi-million dollar annual savings through network architecture optimization
-- AI Infrastructure: Building platforms for LLM serving, training pipelines, and GPU orchestration
-- Disaster Recovery: Reduced recovery time from weeks to hours; built enterprise DR at a fraction of vendor cost
-- Scale: Technical lead for EC2 provisioning at hyperscale
-- Network Growth: Enabled substantial capacity increase through cloud provider advocacy and IPAM implementation
-- Delivery: Next-Gen Network Architecture delivered ahead of schedule
-- Leadership: Founded Cloud Architecture team, mentored 12+ engineers directly across networking and DR
+- VoicePath HIPAA-compliant AI Phone Agent integrated with Veradigm EHR for a Neuroscience Office: 60% improvement in patient communication response times, 50% reduction in administrative workload
+- Voice agents cutting customer-service costs up to 40% across healthcare, finance, insurance, and legal
+- 50% shorter deployment cycles via reusable HIPAA + SOC-2 voice-AI framework
+- Microsoft-contracted Azure OpenAI bootcamps lifting engineer certification pass-rates 30%
+- Google + Dream Machine Innovation Labs AI Library Project: five-city GenAI training tour
+- AImpact: 80+ workshops, 10,000+ professionals trained, 40% average productivity lift
+- AI Grant Writer on GPT-3 (2021) at Lightship Capital: 2.5x grant response throughput, 60% labor reduction
+- Lightship Capital interim CTO: led 25+ engineers across 7 portfolio companies
+- LiveRamp: ATS Forecasting tool drove 20% client adoption lift; coverage of $55M+ yearly GCP customer cost from 25% to 60%
+- Pledge to Equality Scholarship Program: 10,000+ scholarships granted
+- Shared stages with leaders from Google, IBM, and Microsoft
+- HaHa Davis App reached #1 in the App Store for three weeks
 
-## Career History (Verified from Resume)
-- Pinterest: Technical Lead – Senior Staff Cloud Systems Engineer (June 2021 – Present)
-  - Led Multi-Region and Multi-Account initiatives
-  - Founded Pinterest Cloud Architecture team
-  - Architected Next Generation Network Architecture
-- Quip (Salesforce): Technical Lead – Data Platform SRE (July 2020 – June 2021)
-  - Improved system reliability, increasing overall uptime by 15%
-- Quip (Salesforce): Site Reliability Engineer (April 2019 – July 2020)
-  - Automated AWS infrastructure using Terraform and Ansible
-  - Migrated applications to AWS ECS, reducing operational costs by 20%
-- Oracle: Principal Systems Engineer (May 2016 – April 2019)
-  - Developed CI/CD pipelines across Oracle Service Cloud
-  - Architected GitOps-based container deployment system
-- Groupon: Senior Systems Engineer (September 2014 – May 2016)
-  - Lead Engineer on datacenter hardware ingestion and automation
-- LiveOps: Senior Systems Administrator (April 2013 – September 2014)
-  - Lead for automation, storage virtualization
-  - Award: Amsterdam Datacenter Creation Award
-- Telvue Corporation: Director of Network Operations (January 2012 – April 2013)
-  - Directed network infrastructure upgrades for IPTV services
-- Continuum Health Alliance: UNIX System & Network Administrator (December 2008 – December 2011)
-  - Managed systems for 92+ medical care centers
-- Jones New York: Systems Engineer (June 2008 – December 2008)
-- Sage Software: Field Engineer III (September 2005 – June 2008)
+## Career & Ventures
+- JPMorgan Chase: VP, Applied AI Lead (2024 – Present)
+- VoicePath AI: Founder & CEO / Chief AI Officer (Jan 2025 – Present)
+- AImpact: Head of AI & CEO — AI Training (May 2023 – Present)
+- LiveRamp: Staff Technical Program Manager — Data Connectivity Platform (Apr 2022 – Jan 2023)
+- Lightship Capital: Engineering Director / Interim CTO (Apr 2020 – Apr 2022)
+- NextSteps DevCon: Founder (Apr 2020 – Mar 2023)
+- Udacity: Engineering Manager, Programs (Aug 2019 – Aug 2020)
+- NewCraft (Acquired): Software Engineer (Feb 2019 – Dec 2019)
+- Team Treehouse: Engineering Manager, Programs (Dec 2017 – Mar 2019)
+- Uber: Technical Support Manager (Jun 2016 – Aug 2017)
+- Early Consumer Ventures: Rekure, HaHa Davis App, Wallet Clicks (2014 – 2017)
+
+## Education & Certifications
+- University of Oxford — Artificial Intelligence: Cloud and Edge Implementations (2022)
+- Scrum Alliance — Certified ScrumMaster (CSM) (2022)
 
 ## Technical Expertise
 ### Core Competencies
-- Cloud Architecture & Distributed Systems
-- Multi-Region Infrastructure Design
-- Site Reliability Engineering (SRE)
-- Platform Engineering
-- FinOps & Cost Optimization
-- Technical Leadership & Mentorship
+- Generative AI strategy and product design
+- Voice AI for business operations
+- AI agents and workflow automation
+- OCR & Document AI / retrieval augmented generation
+- LLMOps / MLOps
+- AI education and workforce enablement
+- Founding and scaling AI ventures
 
 ### Technologies
-- Cloud Platforms: AWS (EC2, EKS, ECS, Glue, Kinesis), Oracle OCI, GCP
-- Infrastructure as Code: Terraform, Ansible, Chef, Puppet
-- Container Orchestration: Kubernetes, EKS, Docker, HashiCorp Nomad
-- CI/CD: Jenkins, GitLab CI, Spinnaker, GitHub Actions
-- Networking: VPC Architecture, Transit Gateway, Direct Connect
-- Languages: Python, Go, Bash, Ruby
-
-## Education & Certifications
-- Penn State University, Schuylkill Haven, PA (attended 1999-2002)
-- Emerge Global Executive Leadership Program, Ross School of Business, University of Michigan
+- LLMs: OpenAI GPT-4o, Anthropic Claude, Azure OpenAI
+- Retrieval: LangChain, RAG, Vector databases (Pinecone, Chroma)
+- Document AI: OCR, Azure AI Document Intelligence, Azure AI Studio
+- Voice: Whisper (STT), ElevenLabs (TTS), Twilio Voice
+- Healthcare integrations: Veradigm EHR, HIPAA-compliant pipelines
+- Languages: Python, JavaScript, TypeScript
+- Cloud: Azure, GCP
 
 ## Community Involvement
-- AI with Friends – Co-host of weekly podcast on AI, engineering, and tech culture
+- AImpact – Head of AI & CEO of AI education organization (80+ workshops, 10K+ professionals)
+- NextSteps DevCon – Founder of engineering conference + scholarship program (10K+ awards)
+- AI With Friends – Co-host of weekly podcast on Generative AI
   - Apple Podcasts: https://podcasts.apple.com/us/podcast/ai-with-friends/id1766625661
   - Spotify: https://open.spotify.com/show/6pcHPOBD8bvE9V0Hxes9sr
   - YouTube: https://www.youtube.com/@AIWithFriendsPodcast
-  - LinkedIn Live: https://linkedin.com/company/aiwithfriendspodcast
-  - Instagram: https://instagram.com/aiwithfriendspodcast
-- /Dev/Color – Active mentor promoting diversity and inclusion in technology
 
 ## Site Structure
 
 ### Main Pages
-- Home: https://sekoudoumbouya.com/
-- About: https://sekoudoumbouya.com/about
-- Experience: https://sekoudoumbouya.com/experience
-- Projects: https://sekoudoumbouya.com/projects
-- Writing: https://sekoudoumbouya.com/writing
-- Press Kit: https://sekoudoumbouya.com/press
-- Contact: https://sekoudoumbouya.com/contact
-
-### Interactive Features
-- Experience Narratives: Click "Explore Story" on experience entries to reveal detailed narratives organized by Communication, Behavior, and Impact with quantified metrics.
-- System Map: Visual career progression diagram showing domain evolution (Network → Platform → Cloud)
+- Home: https://marlonavery.com/
+- About: https://marlonavery.com/about
+- Experience: https://marlonavery.com/experience
+- Projects: https://marlonavery.com/projects
+- Writing: https://marlonavery.com/writing
+- Press Kit: https://marlonavery.com/press
+- Contact: https://marlonavery.com/contact
 
 ### Featured Projects
-- Pinterest Multi-Region CloudWAN: https://sekoudoumbouya.com/projects/multi-region-cloudwan-pinterest
-- Pinterest Next-Gen Network: https://sekoudoumbouya.com/projects/next-gen-network-pinterest
-- Pinterest Network Cost Discovery: https://sekoudoumbouya.com/projects/network-cost-discovery-pinterest
-- MCP AI Bridge: https://sekoudoumbouya.com/projects/mcp-ai-bridge
-
-## Contact Information
-- Website: https://sekoudoumbouya.com
-- LinkedIn: https://linkedin.com/in/sekoudoumbouya
-- GitHub: https://github.com/fakoli
-- Email: sdoumbouya81@gmail.com
-- Resume: https://sekoudoumbouya.com/Sekou_Doumbouya_Resume.pdf
-
-## Speaking & Press
-- Press Kit: https://sekoudoumbouya.com/press (bios, photos, talk topics)
-- Available for speaking engagements on cloud architecture, platform engineering, and technical leadership
-
-## Additional Resources
-- Full content for LLMs: https://sekoudoumbouya.com/llms-full.txt
-- XML Sitemap: https://sekoudoumbouya.com/sitemap-index.xml
+- VoicePath: https://marlonavery.com/projects/voicepath
+- AI Receptionist: https://marlonavery.com/projects/ai-receptionist
+- AI Grant Writer (GPT-3, 2021): https://marlonavery.com/projects/ai-grant-writer
+- AI-Enhanced Document Chatbot: https://marlonavery.com/projects/ai-document-chatbot
+- AImpact Workshops (Microsoft + Google): https://marlonavery.com/projects/aimpact-workshops
+- NextSteps DevCon: https://marlonavery.com/projects/nextsteps-devcon

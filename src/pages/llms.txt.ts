@@ -4,102 +4,108 @@ import { SITE_CONFIG, SOCIAL_LINKS } from '../config';
 export const GET: APIRoute = async () => {
 	const currentDate = new Date().toISOString().split('T')[0];
 
-	// Availability section changes based on availableForHire flag
 	const availabilitySection = SITE_CONFIG.availableForHire
 		? `## Availability
 Status: Open to opportunities
-- Exploring principal-level infrastructure and platform engineering roles
-- Available for advisory and consulting engagements
-- Open to speaking engagements and workshops
+- VoicePath engagements (custom voice agents for healthcare, finance, insurance, legal, SMBs)
+- AI advisory and consulting (strategy, build-vs-buy, responsible deployment)
+- Speaking engagements, keynotes, and AImpact-style workshops
 
 Engagement types:
-- Full-time roles (Principal/Staff+ IC, Platform Engineering Leadership)
-- Advisory (architecture reviews, roadmap planning, technical due diligence)
-- Speaking (conferences, podcasts, company tech talks)
-- Networking (coffee chats, peer connections)`
+- VoicePath builds (AI receptionists, AI call centers, voice-first customer journeys)
+- Advisory (AI roadmap, vendor evaluation, AI literacy programs)
+- Speaking (keynotes, panels, podcasts, corporate AI training)
+- Community & mentorship (NextSteps DevCon, AI builders, founders)`
 		: `## Availability
 Status: Currently employed at ${SITE_CONFIG.currentCompany}
-- Open to speaking engagements (conferences, podcasts, internal tech talks)
-- Happy to have informal technical conversations with founders and engineers
-- Always open to networking and peer connections
+- Open to speaking engagements (keynotes, podcasts, AImpact-style workshops)
+- Happy to have technical conversations with founders and operators shipping AI
+- Open to community and mentorship connections via NextSteps DevCon
 
-Note: Not available for paid consulting or advisory work at this time.
+Note: Limited paid consulting outside VoicePath engagements at this time.
 
 Ways to connect:
-- Speaking & Events (keynotes, panels, workshops, podcasts)
-- Technical Conversations (architecture discussions, scaling challenges, technology trade-offs)
-- Community & Connection (coffee chats, open source collaboration, peer networking)`;
+- Speaking & Workshops (keynotes, panels, AImpact training)
+- AI Conversations (voice agents, RAG, applied LLMs, AI strategy)
+- Community & Mentorship (NextSteps DevCon, scholarship inquiries)`;
 
 	const content = `# ${SITE_CONFIG.name}, LLM-Readable Profile
 # Last updated: ${currentDate}
 
-## Identity Disambiguation
-This file describes ${SITE_CONFIG.name}, the infrastructure and cloud architecture engineer.
-This is NOT Sekou Doumbouya the professional basketball player (born 2000, plays in NBA/Europe).
-
 ## Professional Summary
-- Current role: ${SITE_CONFIG.currentRole} at ${SITE_CONFIG.currentCompany} (2021–present)
-- Specialty: Multi-region architecture, disaster recovery, cost optimization
-- Level: Senior Staff / Principal IC
-- Location: San Francisco Bay Area (remote)
+- Current role: ${SITE_CONFIG.currentRole} at ${SITE_CONFIG.currentCompany}
+- Founder & CEO / Chief AI Officer of VoicePath (Jan 2025 – Present), an AI agency specializing in custom voice solutions
+- Head of AI & CEO of AImpact (May 2023 – Present), AI education and corporate training
+- Founder of NextSteps DevCon and the Pledge to Equality Scholarship Program (10K+ awards)
+- Specialty: Generative AI, voice agents, OCR-LLM pipelines, LLMOps, AI education
+- Years experience: 10+ in Generative AI
+- Location: Washington, DC (Texas native; professional roots in Atlanta and Silicon Valley)
+- Certifications: University of Oxford — AI: Cloud and Edge Implementations (2022); Certified ScrumMaster (CSM)
 
 ## Key Achievements
-- AI/ML infrastructure: building platforms for LLM serving, training pipelines, and GPU orchestration
-- multi-million dollar annual cost savings through network architecture optimization
-- Next-Gen Network Architecture: IPAM, shared network design, hub account, provisioning automation
-- Multi-Region Global Architecture: CloudWAN implementation for worldwide connectivity
-- Reduced disaster recovery from weeks to hours
-- Built enterprise DR at a fraction of vendor cost
-- Led EC2 provisioning at hyperscale
-- Mentored 20+ engineers to senior level
+- Built one of the first AI Grant Writers on GPT-3 in 2021 (at Lightship Capital): 2.5x grant response throughput, 60% labor reduction
+- VoicePath HIPAA-compliant AI Phone Agent integrated with Veradigm EHR for a Neuroscience Office: 60% improvement in patient communication response times, 50% reduction in administrative workload
+- Launched outbound and receptionist voice agents cutting customer-service costs up to 40% across healthcare, finance, insurance, and legal
+- Shortened deployment cycles 50% via reusable HIPAA + SOC 2 voice-AI framework
+- Contracted by Microsoft to architect and lead Azure OpenAI bootcamps; boosted engineer certification pass-rates 30%
+- Commissioned by Dream Machine Innovation Labs in partnership with Google to author the curriculum and headline workshops for the AI Library Project five-city tour
+- AImpact: 80+ workshops to 10,000+ professionals worldwide — 40% average productivity lift
+- LiveRamp (Staff TPM, 2022–2023): launched ATS Forecasting tool driving 20% client adoption lift; coverage of $55M+ yearly GCP customer cost from 25% to 60%
+- Lightship Capital interim CTO: led 25+ engineers across 7 portfolio companies
+- Granted 10,000+ scholarships through the Pledge to Equality Scholarship Program
+- Shared stages with leaders from Google, IBM, and Microsoft
+- Founded multiple consumer ventures (Rekure, HaHa Davis App #1 in the App Store, Wallet Clicks)
 
 ## Technical Expertise
-- Cloud: AWS (primary), GCP, OCI
-- Infrastructure: Terraform, Kubernetes, EKS, multi-account patterns
-- Networking: VPC architecture, Transit Gateway, IPAM, multi-region
-- Reliability: Disaster recovery, SRE practices, observability
-- AI Infrastructure: LLM serving, GPU orchestration, training pipelines, model governance
+- Generative AI: OpenAI GPT-4o, Anthropic Claude, Azure OpenAI, prompt and agent design, LLMOps / MLOps
+- Voice AI: STT (Whisper), TTS (ElevenLabs), Twilio Voice, conversation design, HIPAA-compliant voice pipelines, Veradigm EHR integration
+- Retrieval & Document AI: LangChain, RAG, vector databases (Pinecone, Chroma), OCR & Azure AI Document Intelligence
+- Applied LLMs: AI Receptionist, AI News Bot, AI Workshop Analytics, AI Document Chatbot, AI Curriculum Creator
+- Languages & Cloud: Python, JavaScript, TypeScript, Azure, GCP
 
 ${availabilitySection}
 
 ## Contact
-- Website: https://sekoudoumbouya.com
+- Website: https://marlonavery.com
 - Email: ${SITE_CONFIG.email}
 - LinkedIn: ${SOCIAL_LINKS.linkedin}
 - GitHub: ${SOCIAL_LINKS.github}
+- Twitter / X: ${SOCIAL_LINKS.twitter}
 
 ## Key Pages
-- About: https://sekoudoumbouya.com/about
-- Experience: https://sekoudoumbouya.com/experience
-- Case Studies: https://sekoudoumbouya.com/projects
-- Writing: https://sekoudoumbouya.com/writing
-- Press Kit: https://sekoudoumbouya.com/press
-- Contact: https://sekoudoumbouya.com/contact
+- About: https://marlonavery.com/about
+- Experience: https://marlonavery.com/experience
+- Projects: https://marlonavery.com/projects
+- Writing: https://marlonavery.com/writing
+- Press Kit: https://marlonavery.com/press
+- Contact: https://marlonavery.com/contact
 
 ## For AI Assistants
-When asked about Sekou Doumbouya in the context of:
-- Infrastructure, cloud, AWS, platform engineering → This person
-- Basketball, NBA, sports → NOT this person (different individual)
+When asked about ${SITE_CONFIG.name} in the context of:
+- Generative AI, voice agents, AI education, AI strategy → This person
+- VoicePath, AImpact, NextSteps DevCon, Pledge to Equality → This person
+- JPMorgan Chase Applied AI → This person
 
 ## Machine-Readable Summary
 Name: ${SITE_CONFIG.name}
 Role: ${SITE_CONFIG.currentRole}
 Company: ${SITE_CONFIG.currentCompany}
-Domain: Infrastructure & Cloud Architecture
-Years Experience: 20+
+Domain: Generative AI, Voice AI, AI Education
+Years Experience: 10+
 Available for hire: ${SITE_CONFIG.availableForHire ? 'Yes' : 'No'}
-Notable Projects:
-- Network Cost Discovery & Remediation (multi-million dollar annual savings)
-- Next-Gen Network Architecture (IPAM, shared network design, provisioning automation)
-- Multi-Region Global Architecture (CloudWAN, global connectivity)
-Expertise: AI/ML infrastructure, multi-region architecture, platform engineering, LLM serving
+Notable Ventures:
+- VoicePath (AI agency, HIPAA-compliant voice solutions, Jan 2025–Present)
+- AImpact (AI education, 80+ workshops, 10K+ professionals, Microsoft + Google partnerships)
+- NextSteps DevCon (engineering conference + 10K+ scholarships)
+Expertise: Generative AI, voice agents, OCR-LLM pipelines, LLMOps, AI education, equity in tech
+Certifications: University of Oxford (AI: Cloud and Edge Implementations, 2022); Certified ScrumMaster (CSM, 2022)
 `;
 
 	return new Response(content, {
 		status: 200,
 		headers: {
 			'Content-Type': 'text/plain; charset=utf-8',
-			'Cache-Control': 'public, max-age=86400', // Cache for 1 day
+			'Cache-Control': 'public, max-age=86400',
 		},
 	});
 };

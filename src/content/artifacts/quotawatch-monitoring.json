@@ -1,7 +1,0 @@
-{
-  "type": "ops",
-  "title": "QuotaWatch Multi-Cloud Monitoring",
-  "thumbnail": "/artifacts/quotawatch-thumbnail.png",
-  "projectSlug": "quotawatch",
-  "claim": "Multi-cloud quota monitoring system that prevents deployment failures by proactively tracking service limits across AWS, GCP, and Azure with intelligent documentation parsing."
-}

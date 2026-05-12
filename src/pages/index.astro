@@ -39,41 +39,43 @@ const featuredProjects = allProjects
 // Get dynamic data
 const focusAreas = getFocusAreasPreviews();
 
-// LLM Profile data - Enhanced with additional fields
 const llmProfileData = {
 	name: SITE_CONFIG.name,
-	disambiguation: 'Infrastructure and cloud architecture engineer (not the professional basketball player)',
 	title: SITE_CONFIG.title,
 	currentRole: SITE_CONFIG.currentRole,
 	currentCompany: SITE_CONFIG.currentCompany,
-	yearsExperience: 20,
+	yearsExperience: 10,
 	domains: [
-		'AI/ML Infrastructure',
-		'Cloud Architecture',
-		'Platform Engineering',
-		'LLM Serving & GPU Orchestration',
+		'Generative AI',
+		'Voice AI & Conversational Agents',
+		'AI Agents & Automation',
+		'AI Education & Workshops',
 	],
 	techStack: [
-		'AWS (EC2, EKS, ECS, Kinesis)',
-		'Terraform',
-		'Kubernetes',
-		'Python, Go, Bash',
+		'OpenAI GPT-4o / Anthropic Claude',
+		'Azure OpenAI · LangChain · RAG',
+		'OCR & Document Intelligence',
+		'Vector DBs (Pinecone, Chroma)',
+		'LLMOps / MLOps',
+		'Python · TypeScript · Azure · GCP',
 	],
 	expertise: [
-		'AI/ML infrastructure and LLM serving',
-		'Multi-region AWS architecture',
-		'Platform engineering and developer experience',
-		'GPU orchestration and training infrastructure',
-		'Cost optimization at scale',
-		'Infrastructure as Code and automation',
+		'Generative AI strategy and product design',
+		'Voice AI for business operations',
+		'AI agents and workflow automation',
+		'Document AI and retrieval augmented generation',
+		'AI education and workforce enablement',
+		'Founding and scaling AI ventures',
 	],
 	notableAchievements: [
-		'Building AI infrastructure platforms for LLM serving and training workloads',
-		'Multi-million dollar annual infrastructure cost savings',
-		'Reduced DR recovery from weeks to hours',
-		'Built enterprise DR at a fraction of vendor cost',
-		'Led multi-region expansion across 4 AWS regions',
-		'Mentored 12+ engineers to senior-level roles',
+		'Founder & CEO / Chief AI Officer of VoicePath — HIPAA-compliant voice agents (Veradigm EHR), 60% faster patient comms, 50% less admin workload',
+		'VP, Applied AI Lead at JPMorgan Chase',
+		'Built one of the first AI Grant Writers on GPT-3 (2021) — 2.5x throughput, 60% labor reduction',
+		'Contracted by Microsoft to architect Azure OpenAI bootcamps — 30% lift in certification pass-rates',
+		'Commissioned by Google + Dream Machine Innovation Labs for the AI Library Project five-city tour',
+		'Trained 10,000+ professionals across 80+ AImpact workshops worldwide — 40% average productivity lift',
+		'Founded NextSteps DevCon and Pledge to Equality (10K+ scholarships)',
+		'Oxford-certified in AI: Cloud and Edge Implementations (2022); Certified ScrumMaster (CSM)',
 	],
 };
 
@@ -98,29 +100,23 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 
 					<!-- Display headline — Fraunces, light weight, italic accent -->
 					<h1 class="display text-foreground mb-10" style="max-width: 960px;">
-						From cloud foundations to <em>AI infrastructure.</em>
+						Generative AI that <em>moves real businesses.</em>
 					</h1>
 
 					<!-- Dek — value proposition -->
 					<p class="body-lg text-secondary mb-9" style="max-width: 640px;">
-						Twenty years turning business strategy into distributed systems that stay up at scale —
-						from multi-region networks to GPU-ready compute and LLM serving. I lead by solving hard
-						problems alongside the team, not from a slide deck.
-					</p>
-
-					<!-- Byline with disambiguation (visually hidden, kept for crawlers) -->
-					<p class="sr-only">
-						{SITE_CONFIG.name}, infrastructure/cloud architecture leader.
-						Not the basketball player.
+						A decade orchestrating Generative AI, Voice AI, OCR-LLM pipelines, and LLMOps from lab to market.
+						I ship the systems I lead — HIPAA-compliant voice agents at VoicePath, Microsoft-contracted Azure OpenAI bootcamps,
+						and the Google + Dream Machine AI Library Project tour for 10,000+ AImpact attendees.
 					</p>
 
 					<!-- CTA buttons -->
 					<div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
 						<a href={withBasePath('/contact#contact-form')} class="btn btn-primary">
-							Contact Sekou <span aria-hidden="true">→</span>
+							Work with me <span aria-hidden="true">→</span>
 						</a>
 						<a href={withBasePath('/projects')} class="btn btn-secondary">
-							See case studies
+							See AI ventures
 						</a>
 						<a href={withBasePath('/experience')} class="btn btn-secondary">
 							View experience
@@ -164,7 +160,7 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 	<!-- Tech Stack Marquee -->
 	<div class="overflow-hidden border-y border-[var(--border-subtle)] py-3 mb-8">
 		<div class="tech-marquee flex gap-8 whitespace-nowrap">
-			{['AWS', 'Terraform', 'Kubernetes', 'Python', 'Go', 'Docker', 'CloudWAN', 'IPAM', 'EKS', 'Prometheus', 'Grafana', 'Jenkins', 'GPU Orchestration', 'LLM Serving', 'VPC Architecture', 'Disaster Recovery', 'AWS', 'Terraform', 'Kubernetes', 'Python', 'Go', 'Docker', 'CloudWAN', 'IPAM', 'EKS', 'Prometheus', 'Grafana', 'Jenkins', 'GPU Orchestration', 'LLM Serving', 'VPC Architecture', 'Disaster Recovery'].map(tech => (
+			{['GPT-4o', 'Voice AI', 'LangChain', 'RAG', 'Azure OpenAI', 'OCR & Document Intelligence', 'Pinecone', 'Chroma', 'AI Agents', 'Python', 'TypeScript', 'Anthropic Claude', 'Whisper', 'ElevenLabs', 'Twilio', 'Veradigm EHR', 'HIPAA-Compliant AI', 'LLMOps', 'Azure', 'GCP', 'Conversational AI', 'GPT-4o', 'Voice AI', 'LangChain', 'RAG', 'Azure OpenAI', 'OCR & Document Intelligence', 'Pinecone', 'Chroma', 'AI Agents', 'Python', 'TypeScript', 'Anthropic Claude', 'Whisper', 'ElevenLabs', 'Twilio', 'Veradigm EHR', 'HIPAA-Compliant AI', 'LLMOps', 'Azure', 'GCP', 'Conversational AI'].map(tech => (
 				<span class="text-xs font-mono text-muted uppercase tracking-widest">{tech}</span>
 			))}
 		</div>
@@ -179,7 +175,7 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 	<section class="max-w-6xl mx-auto mb-24 px-4 scroll-reveal" data-reveal>
 		<div class="flex justify-between items-end mb-6">
 			<div>
-				<p class="kicker"><span class="font-mono text-accent opacity-50 mr-1">01.</span> Leadership Philosophy</p>
+				<p class="kicker"><span class="font-mono text-accent opacity-50 mr-1">01.</span> Operating Philosophy</p>
 				<h2 class="heading-lg text-foreground">How I Work</h2>
 			</div>
 			<a href={`${base}/about#how-i-lead`} class="hidden md:inline-flex items-center link body-sm">
@@ -190,23 +186,23 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 			<div class="card p-6" data-reveal-item>
 				<span class="font-mono text-xs font-medium mb-4 inline-block" style="color: var(--accent-deep); letter-spacing: 0.05em;">01</span>
-				<h3 class="heading-sm text-foreground mb-2">Player-Coach</h3>
+				<h3 class="heading-sm text-foreground mb-2">Operator-Builder</h3>
 				<p class="body-sm text-muted">
-					40% hands-on with code and design reviews. I lead by solving hard problems alongside the team.
+					I ship the systems I lead. Strategy without keyboard time produces decks, not products customers can feel.
 				</p>
 			</div>
 			<div class="card p-6" data-reveal-item>
 				<span class="font-mono text-xs font-medium mb-4 inline-block" style="color: var(--accent-deep); letter-spacing: 0.05em;">02</span>
-				<h3 class="heading-sm text-foreground mb-2">Platform as Product</h3>
+				<h3 class="heading-sm text-foreground mb-2">Voice as the New UI</h3>
 				<p class="body-sm text-muted">
-					Internal platforms should treat developers as customers. Golden-path solutions that reduce cognitive load.
+					Conversation is the most natural interface humans have. The next decade of software will sound, not just look.
 				</p>
 			</div>
 			<div class="card p-6" data-reveal-item>
 				<span class="font-mono text-xs font-medium mb-4 inline-block" style="color: var(--accent-deep); letter-spacing: 0.05em;">03</span>
-				<h3 class="heading-sm text-foreground mb-2">Knowledge Multiplier</h3>
+				<h3 class="heading-sm text-foreground mb-2">Reduce the Fear</h3>
 				<p class="body-sm text-muted">
-					My success metric: teams more capable after working with me. 20+ engineers mentored to senior+.
+					Most resistance to AI is anxiety dressed up as skepticism. 100+ workshops and 10K+ attendees later, I know the cure is access.
 				</p>
 			</div>
 		</div>
@@ -223,8 +219,8 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 		<div class="flex justify-between items-end mb-8">
 			<div>
 				<p class="kicker"><span class="font-mono text-accent opacity-50 mr-1">02.</span> Proof of Impact</p>
-				<h2 class="heading-lg text-foreground mb-2">Featured Case Studies</h2>
-				<p class="body-md text-muted">Decision cards showing how problems were solved.</p>
+				<h2 class="heading-lg text-foreground mb-2">Featured AI Ventures</h2>
+				<p class="body-md text-muted">Voice systems, AI products, and applied generative AI shipped to real customers.</p>
 			</div>
 			<a href={withBasePath('/projects')} class="hidden md:inline-flex items-center link body-sm">
 				View all projects &rarr;
@@ -293,8 +289,8 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 		<div class="flex justify-between items-end mb-8">
 			<div>
 				<p class="kicker"><span class="font-mono text-accent opacity-50 mr-1">03.</span> Domains</p>
-				<h2 class="heading-lg text-foreground mb-2">Technical Focus Areas</h2>
-				<p class="body-md text-muted">Where I invest my engineering energy.</p>
+				<h2 class="heading-lg text-foreground mb-2">Where I Spend My Time</h2>
+				<p class="body-md text-muted">Five domains where Generative AI meets real business.</p>
 			</div>
 			<a href={`${base}/about#technical-focus-areas`} class="hidden md:inline-flex items-center link body-sm">
 				View details &rarr;
@@ -324,7 +320,7 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 				<div>
 					<p class="kicker"><span class="font-mono text-accent opacity-50 mr-1">04.</span> Community</p>
 					<h2 class="heading-md text-foreground mb-1">Beyond the Day Job</h2>
-					<p class="body-sm text-muted">Thought leadership, community, and open source.</p>
+					<p class="body-sm text-muted">Workshops, scholarships, speaking, and the AI With Friends podcast.</p>
 				</div>
 				<div class="flex items-center gap-4">
 					<a href={`${base}/press`} class="link body-sm whitespace-nowrap">
@@ -344,7 +340,7 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 
 			<!-- Podcast Platform Links -->
 			<div class="pt-4 border-t border-[var(--border-subtle)]">
-				<p class="label mb-3">Listen to AI with Friends</p>
+				<p class="label mb-3">Listen to AI With Friends</p>
 				<div class="flex flex-wrap gap-2">
 					<a
 						href={PODCAST_LINKS.apple}
@@ -454,11 +450,11 @@ const initials = SITE_CONFIG.name.split(' ').map(n => n[0]).join('');
 	<!-- CTA Section -->
 	<section class="cta-gradient relative overflow-hidden">
 		<div class="max-w-3xl mx-auto px-4 py-16 text-center">
-			<h2 class="heading-lg text-foreground mb-4">Let's Connect</h2>
+			<h2 class="heading-lg text-foreground mb-4">Let's Build Something</h2>
 			<p class="body-lg text-secondary mb-8 leading-relaxed">
 				{SITE_CONFIG.availableForHire
-					? "Looking for speaking engagements, advisory opportunities, or your next infrastructure leader? Let's talk."
-					: "Interested in AI infrastructure, platform engineering, or just want to connect? I'm always happy to talk shop."}
+					? "Voice AI, agents, advisory, keynotes, or workshops — if it's about Generative AI in the real world, I want to hear about it."
+					: "Curious about Generative AI, voice agents, or AI strategy? I'm always happy to compare notes."}
 			</p>
 			<a href={withBasePath('/contact')} class="btn btn-accent">
 				Get in Touch

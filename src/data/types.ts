@@ -70,12 +70,13 @@ export interface CompetencyGroup {
 }
 
 /**
- * Education entry
+ * Education / certification entry
  */
 export interface EducationItem {
 	school: string;
-	location: string;
+	location?: string;
 	years: string;
+	degree?: string;
 }
 
 /**

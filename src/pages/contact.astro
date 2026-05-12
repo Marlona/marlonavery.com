@@ -16,16 +16,16 @@ const faqItems = SITE_CONFIG.availableForHire
 	: CONTACT_FAQ_BASE;
 
 const formSubmitEndpoint = `https://formsubmit.co/${encodeURIComponent(SITE_CONFIG.email)}`;
-const urgentInquiryLink = `mailto:${SITE_CONFIG.email}?subject=Urgent%20Inquiry%20-%20sekoudoumbouya.com`;
+const urgentInquiryLink = `mailto:${SITE_CONFIG.email}?subject=Urgent%20Inquiry%20-%20marlonavery.com`;
 ---
 
-<PageLayout title={`Contact | ${SITE_CONFIG.name}`} description={`Connect with ${SITE_CONFIG.name} for speaking engagements, technical conversations, and networking in infrastructure and platform engineering.`}>
+<PageLayout title={`Contact | ${SITE_CONFIG.name}`} description={`Connect with ${SITE_CONFIG.name} for AI consulting, speaking engagements, workshops, and partnerships.`}>
 	<section class="max-w-4xl mx-auto px-4 py-12">
 		<!-- Hero -->
 		<div class="mb-12">
 			<h1 class="heading-xl text-foreground mb-4">Let's Connect</h1>
 			<p class="body-lg text-secondary max-w-2xl">
-				I enjoy meeting people building interesting things. Whether you're scaling AI infrastructure, organizing an event, navigating a technical challenge, or just want to exchange ideas, reach out.
+				I enjoy meeting people building things that matter. Whether you're shipping AI into production, planning a workshop, exploring a partnership, or just want to compare notes on what's coming next, reach out.
 			</p>
 		</div>
 
@@ -71,7 +71,7 @@ const urgentInquiryLink = `mailto:${SITE_CONFIG.email}?subject=Urgent%20Inquiry%
 							method="POST"
 							class="space-y-3"
 						>
-							<input type="hidden" name="_subject" value="New contact form inquiry from sekoudoumbouya.com" />
+							<input type="hidden" name="_subject" value="New contact form inquiry from marlonavery.com" />
 							<input type="hidden" name="_template" value="table" />
 							<input
 								type="text"

@@ -1,0 +1,40 @@
+{
+    "bios": [
+        {
+            "label": "One-liner",
+            "wordCount": 22,
+            "content": "Visionary Chief AI Officer, founder, and educator with 10+ years stewarding frontier AI from lab to market — VoicePath, AImpact, JPMorgan Chase."
+        },
+        {
+            "label": "Short Bio (~110 words)",
+            "wordCount": 110,
+            "content": "Marlon Avery is Founder & CEO / Chief AI Officer of VoicePath, an AI agency specializing in HIPAA-compliant voice solutions, and serves as VP, Applied AI Lead at JPMorgan Chase. With 10+ years in Generative AI, he has built tools like the AI Receptionist (integrated with Veradigm EHR) — improving patient communication response times by 60% and cutting customer-service costs up to 40%. As Head of AI & CEO of AImpact, he has been contracted by Microsoft to lead Azure OpenAI bootcamps and commissioned by Google + Dream Machine for the AI Library Project tour. He has trained 10,000+ professionals across 80+ workshops and granted 10,000+ Pledge to Equality scholarships."
+        }
+    ],
+    "topics": [
+        {
+            "title": "Voice AI in Production",
+            "abstract": "What it actually takes to ship a voice agent customers trust — latency, grounding, escalation, and the operational patterns that separate demos from deployments.",
+            "duration": "30-45 min",
+            "audience": ["Founders", "Product Leaders", "AI Engineers"]
+        },
+        {
+            "title": "Voice AI in Healthcare: HIPAA-Compliant Production Deployment",
+            "abstract": "Inside VoicePath's Veradigm EHR integration for a Neuroscience Office — 60% faster patient comms, 50% less admin workload — and the HIPAA + SOC-2 framework that lets us repeat it.",
+            "duration": "30-45 min",
+            "audience": ["Healthcare CTOs", "Practice Leaders", "AI Engineers"]
+        },
+        {
+            "title": "Reducing the Fear of AI",
+            "abstract": "Lessons from delivering 80+ AImpact workshops to 10,000+ professionals — including Microsoft Azure OpenAI bootcamps and the Google + Dream Machine AI Library Project tour.",
+            "duration": "30 min",
+            "audience": ["Educators", "Corporate L&D", "Community Leaders"]
+        },
+        {
+            "title": "Equity by Design",
+            "abstract": "How NextSteps DevCon and the Pledge to Equality Scholarship Program have granted 10,000+ scholarships — a blueprint for technologists who want their work to widen access.",
+            "duration": "45 min",
+            "audience": ["DEI Leaders", "Conference Organizers", "Technologists"]
+        }
+    ]
+}

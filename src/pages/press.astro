@@ -6,52 +6,54 @@ import { PODCAST_INFO, PODCAST_LINKS, PODCAST_HOSTS, RECENT_EPISODES, TOTAL_EPIS
 
 const base = getBasePath();
 
-// Bio variants - Updated with accurate career history from resume
 const bios = {
-	oneLiner: `Infrastructure architect bridging cloud platforms and AI/ML systems. Building the foundations that make both traditional services and AI workloads production-ready.`,
-	short: `${SITE_CONFIG.name} is an Infrastructure Architect bridging cloud platforms and AI/ML systems, with over 20 years of experience at hyperscale consumer platforms. He leads multi-region initiatives delivering multi-million dollar infrastructure cost savings and reducing disaster recovery from weeks to hours. Previously, he held senior engineering roles at Quip (Salesforce), Oracle, Groupon, and LiveOps.`,
-	full: `${SITE_CONFIG.name} is an Infrastructure Architect bridging cloud platforms and AI/ML systems at a hyperscale consumer platform, where he leads Multi-Region and Multi-Account Architecture. With over 20 years of experience building cloud platforms at scale, Sekou specializes in the intersection of hands-on engineering and strategic architecture.
+	oneLiner: `Visionary Chief AI Officer, founder, and educator with 10+ years stewarding frontier AI from lab to market — VoicePath, AImpact, JPMorgan Chase.`,
+	short: `${SITE_CONFIG.name} is Founder & CEO / Chief AI Officer of VoicePath, an AI agency specializing in HIPAA-compliant voice solutions, and serves as VP, Applied AI Lead at JPMorgan Chase. With 10+ years in Generative AI, he has built tools like the AI Receptionist (integrated with Veradigm EHR), AI News Bot, and Advanced Workshop Analytics — improving patient communication response times by 60% and cutting customer-service costs up to 40%. As Head of AI & CEO of AImpact, he has been contracted by Microsoft to lead Azure OpenAI bootcamps and commissioned by Google + Dream Machine Innovation Labs to headline the AI Library Project five-city tour. He has trained 10,000+ professionals across 80+ workshops and granted 10,000+ Pledge to Equality scholarships.`,
+	full: `${SITE_CONFIG.name} is a visionary in the Generative AI space — a Chief AI Officer, founder, and educator with 10+ years stewarding frontier innovations from lab to market. As VP, Applied AI Lead at JPMorgan Chase and Founder & CEO / Chief AI Officer of VoicePath, an AI agency specializing in custom voice solutions, Marlon spearheads the design and deployment of AI-powered systems revolutionizing healthcare, insurance, finance, and legal — automating processes, reducing inefficiencies, and elevating customer experience. VoicePath's flagship deployment — a HIPAA-compliant AI Phone Agent integrated with Veradigm EHR for a Neuroscience Office — improved patient communication response times by 60% and reduced administrative workload by 50%, with reusable HIPAA + SOC-2 controls cutting deployment cycles in half.
 
-In his current role, he led a major VPC architecture transformation delivering multi-million dollar annual savings, redesigning multi-region network architecture to eliminate Transit Gateway bottlenecks while maintaining zero production downtime. He also founded the Cloud Architecture team and built enterprise-grade disaster recovery capability, reducing recovery from weeks to hours at a fraction of vendor cost.
+His portfolio of AI tools includes the AI Receptionist (NLP-powered front-desk automation), AI News Bot (trend aggregation and summarization for marketers), AI Advanced Workshop Analytics (sentiment and engagement insights for educators), AI-Enhanced Document Chatbot (GPT-4 + vector database for complex document QA), and AI-Generated Curriculum Creator (personalized learning design). Prior to VoicePath, Marlon led the Activation org at LiveRamp as Staff TPM and served as Engineering Director / Interim CTO at Lightship Capital, where he built one of the first AI Grant Writers on GPT-3 in 2021 — driving 2.5x grant response throughput and a 60% reduction in labor.
 
-Before Pinterest, Sekou served as Technical Lead – Data Platform SRE at Quip (Salesforce), where he improved system reliability by 15%. At Oracle, he was Principal Systems Engineer developing CI/CD pipelines and GitOps-based container deployments. Earlier roles include Senior Systems Engineer at Groupon, Senior Systems Administrator at LiveOps (where he received the Amsterdam Datacenter Creation Award), and Director of Network Operations at Telvue Corporation.
+As Head of AI & CEO of AImpact, Marlon has been contracted by Microsoft to architect and lead Azure OpenAI bootcamps that lifted engineer certification pass-rates 30%, and commissioned by Dream Machine Innovation Labs in partnership with Google to author the curriculum and headline the AI Library Project — a five-city tour delivering Generative AI training to underserved communities. AImpact has trained 10,000+ professionals across 80+ workshops with a 40% average productivity lift. As founder of NextSteps DevCon and the Pledge to Equality Scholarship Program, he has granted 10,000+ scholarships. He has shared stages with leaders from Google, IBM, and Microsoft. His entrepreneurial ventures also include Rekure (sneaker social shopping platform), the HaHa Davis App (#1 in the App Store for three weeks), and Wallet Clicks (digital business cards).
 
-Sekou is an active mentor in the /dev/color community and co-hosts the "AI with Friends" podcast.
-
-${SITE_CONFIG.name} is not affiliated with Sekou Doumbouya, the professional basketball player.`
+Marlon holds a certification in Artificial Intelligence: Cloud and Edge Implementations from the University of Oxford (2022) and is a Certified ScrumMaster. A Texas native with professional roots in Atlanta and Silicon Valley, Marlon is now based in Washington, DC. His mission: inspire creativity, reduce fear around AI, and drive positive change through technology.`
 };
 
-// Talk topics
 const talkTopics = [
 	{
-		title: 'AI Infrastructure for the Rest of Us',
-		abstract: 'How traditional infrastructure engineers can bridge into AI/ML platform roles. Covers GPU orchestration, LLM serving patterns, training pipeline design, and the organizational patterns that make AI infrastructure teams successful.',
+		title: 'Voice AI in Production: Lessons From Building Real Receptionists',
+		abstract: 'What it actually takes to ship a voice agent that customers trust — latency budgets, NLP grounding, escalation paths, and the operational patterns that separate demos from deployments in healthcare, finance, and legal.',
 		duration: '30-45 min',
-		audience: ['Infrastructure Engineers', 'Platform Teams', 'Engineering Leaders'],
+		audience: ['Founders', 'Product Leaders', 'AI Engineers'],
 	},
 	{
-		title: 'Multi-Region Architecture at Hyperscale',
-		abstract: 'A deep dive into building resilient multi-region systems for hundreds of millions of users. Covers VPC architecture patterns, disaster recovery strategies, and the tradeoffs between Transit Gateway and VPC peering at scale.',
+		title: 'The Generative AI Operating System for SMBs',
+		abstract: 'A practical playbook for embedding GPT, voice, and document AI into the back-office of small and mid-sized businesses — what to automate first, what to leave alone, and how to measure ROI inside 90 days.',
 		duration: '30-45 min',
-		audience: ['Platform Engineers', 'SREs', 'Cloud Architects'],
+		audience: ['Operators', 'Consultants', 'Small Business Owners'],
 	},
 	{
-		title: 'The 8-Figure Migration: Cost Optimization Without Downtime',
-		abstract: 'Case study of a major infrastructure transformation that delivered multi-million dollar annual savings while maintaining zero production downtime. Discusses parallel migration strategies, rollback planning, and stakeholder communication.',
+		title: 'Reducing the Fear of AI: Demystification at Scale',
+		abstract: 'Lessons from delivering 80+ AImpact workshops to 10,000+ professionals — including Microsoft Azure OpenAI bootcamps and the Google + Dream Machine AI Library Project tour. How to teach AI to non-technical audiences, what people actually need to know, and how to convert anxiety into capability.',
 		duration: '30 min',
-		audience: ['Engineering Leaders', 'Cloud Architects', 'Finance Partners'],
+		audience: ['Educators', 'Corporate L&D', 'Community Leaders'],
 	},
 	{
-		title: 'Player-Coach Leadership in Platform Engineering',
-		abstract: 'How to stay technically relevant while leading at the staff+ level. Balancing hands-on work with strategic influence, building trust through expertise, and mentoring without micromanaging.',
+		title: 'Voice AI in Healthcare: Inside a HIPAA-Compliant Production Deployment',
+		abstract: 'A look inside VoicePath\'s flagship integration with Veradigm EHR for a Neuroscience Office — 60% faster patient communication, 50% less admin workload — and the HIPAA + SOC-2 framework that lets us repeat it.',
+		duration: '30-45 min',
+		audience: ['Healthcare CTOs', 'Practice Leaders', 'AI Engineers'],
+	},
+	{
+		title: 'Predicting the Next Wave of GenAI: Agents, Voice, and Beyond',
+		abstract: 'A founder\'s view on where Generative AI is heading next — the emergence of long-running agents, voice as the default interface, and what enterprise AI teams should be building today to be relevant in 18 months.',
 		duration: '30 min',
-		audience: ['Senior Engineers', 'Engineering Managers', 'Tech Leads'],
+		audience: ['Engineering Leaders', 'CTOs', 'AI Product Managers'],
 	},
 	{
-		title: 'Building DR Capability at a Fraction of Vendor Cost',
-		abstract: 'Building enterprise-grade DR capability in-house instead of buying. Covers tool selection, automation patterns, testing strategies, and the business case for building vs. buying.',
+		title: 'Equity by Design: Building Tech for the People Left Out of It',
+		abstract: 'How NextSteps DevCon and the Pledge to Equality Scholarship Program have granted 10,000+ scholarships to underserved communities. A blueprint for technologists who want their work to widen access, not narrow it.',
 		duration: '45 min',
-		audience: ['SREs', 'Platform Engineers', 'Engineering Leaders'],
+		audience: ['DEI Leaders', 'Conference Organizers', 'Technologists'],
 	},
 ];
 

@@ -11,228 +11,238 @@ import type {
 	CommunityItem,
 } from './types';
 
-/**
- * Leadership principles
- */
 export const LEADERSHIP_PRINCIPLES: PhilosophyCardData[] = [
 	{
-		title: 'Lead by Example',
+		title: 'Operator, Not Spectator',
 		description:
-			'Player-coach who tackles complex problems alongside the team. 40% of my time stays hands-on with code and design reviews.',
+			'Strategy without keyboard time produces decks. I lead from inside the work — building, shipping, and iterating alongside the team.',
 		icon: '⚡',
 	},
 	{
-		title: 'Small Teams, Big Impact',
+		title: 'Reduce the Fear',
 		description:
-			'4-6 person pods maximize velocity and ownership. Tight feedback loops beat large committees.',
-		icon: '🎯',
+			'Most resistance to AI is anxiety in disguise. Demystification is leverage — for teams, customers, and entire industries.',
+		icon: '🌱',
 	},
 	{
-		title: 'Mentorship as Multiplier',
+		title: 'Voice as the New UI',
 		description:
-			'Helping others level up compounds into organizational gains. I measure success by team capability growth.',
-		icon: '📈',
+			'The most natural interface humans have is conversation. The next decade of software will sound, not just look.',
+		icon: '🎙️',
 	},
 	{
-		title: 'High-Trust, Inclusive Culture',
+		title: 'Equity by Design',
 		description:
-			'Psychological safety enables high performance. Diverse perspectives make better systems.',
+			'Access compounds, and so does its absence. Through NextSteps DevCon and Pledge to Equality, I build pipelines that widen who gets to build the future.',
 		icon: '🤝',
 	},
 	{
-		title: 'Cross-Functional Connector',
+		title: 'Predict the Curve',
 		description:
-			'Bridging engineering with product, design, and data science. Shared context creates alignment.',
-		icon: '🔗',
+			'Generative AI moves on a quarterly cadence. I build for what is true 18 months from now, not just what shipped last week.',
+		icon: '🔭',
 	},
 ];
 
-/**
- * Strategic approach cards
- */
 export const STRATEGIC_APPROACH: PhilosophyCardData[] = [
 	{
-		title: 'Aligning Tech with Business',
+		title: 'AI for Real Work',
 		description:
-			'Translate strategy into executable plans, communicate technical realities back to leadership.',
+			'Demos are easy. Production is the bar. Every product I ship answers a real operator question, not a research question.',
 		icon: '📊',
 	},
 	{
-		title: 'Looking Around Corners',
+		title: 'Founder Discipline',
 		description:
-			"Anticipate scaling challenges before they're urgent. Proactive architecture over reactive firefighting.",
-		icon: '🔭',
-	},
-	{
-		title: 'Influence Without Authority',
-		description:
-			'Lead through credibility and trust as a senior IC. Build consensus across org boundaries.',
-		icon: '🎪',
-	},
-	{
-		title: 'Builder at Heart',
-		description:
-			'Drive change through tangible results, not slide decks. Ship working systems that prove the vision.',
+			'VoicePath, AImpact, NextSteps DevCon — multiple ventures running in parallel teaches you what to delegate and what to own.',
 		icon: '🛠️',
 	},
+	{
+		title: 'Teach What You Build',
+		description:
+			'Workshops, talks, and writing turn lessons into leverage. 10,000+ AImpact attendees later, teaching is how I keep my own thinking honest.',
+		icon: '📚',
+	},
+	{
+		title: 'Bias Toward Voice',
+		description:
+			'Conversational interfaces are leaving text behind. I bet the next wave of consumer and enterprise AI will be heard before it is read.',
+		icon: '🎧',
+	},
 ];
 
-/**
- * Technical focus areas with detailed content
- */
 export const FOCUS_AREAS: FocusAreaFull[] = [
 	{
-		id: 'platform-engineering',
-		title: 'Platform Engineering & Developer Experience',
+		id: 'voice-ai',
+		title: 'Voice AI for Business Operations',
 		summary:
-			'Building internal platforms that treat developers as customers. Self-service infrastructure that accelerates delivery.',
+			'Conversational agents that replace fragile IVRs, overworked receptionists, and high-friction call flows with natural, grounded conversation.',
 		details: [
-			'Platform-as-product mindset with clear value propositions',
-			'Golden-path solutions abstracting infrastructure complexity',
-			'Self-service CI/CD, monitoring, and provisioning capabilities',
-			'FinOps integration for cost visibility and optimization',
+			'AI Receptionists for healthcare, legal, and SMBs',
+			'AI Call Centers for high-volume customer interactions',
+			'STT, LLM reasoning, RAG grounding, and natural TTS pipelines',
+			'Escalation patterns that make human handoff a feature, not a fallback',
 		],
-		metrics: 'Lead time, onboarding friction, infrastructure costs',
+		metrics: 'First-contact resolution, missed-call recovery, customer satisfaction',
 	},
 	{
-		id: 'sre-scalability',
-		title: 'Site Reliability Engineering & Scalability',
+		id: 'ai-agents',
+		title: 'AI Agents & Workflow Automation',
 		summary:
-			'Designing distributed systems that stay up at scale. From SLOs to chaos engineering.',
+			'Long-running agents that complete real work — scheduling, document QA, research, and operational tasks — across business surfaces.',
 		details: [
-			'Distributed systems and multi-region deployments',
-			'Performance optimization and database scalability',
-			'Observability: dashboards, SLOs, root cause analysis',
-			'Chaos engineering and automated recovery patterns',
+			'Agent design patterns: planner, executor, critic',
+			'Tool use and integration with CRM, calendar, and document stacks',
+			'Safety and escalation patterns for production agents',
+			'Cost and latency tuning for always-on workflows',
 		],
-		metrics: 'Availability, latency percentiles, incident recovery time',
+		metrics: 'Tasks completed, escalation rate, cost per resolution',
 	},
 	{
-		id: 'ai-infrastructure',
-		title: 'AI & LLM Infrastructure',
+		id: 'applied-llms',
+		title: 'Applied LLMs',
 		summary:
-			'Building the compute, networking, and platform foundations that make AI workloads production-ready. From GPU orchestration to model serving pipelines.',
+			'Productized GPT and Claude workflows that solve concrete business problems — document QA, content generation, research summarization, curriculum design.',
 		details: [
-			'LLM serving infrastructure and inference optimization',
-			'GPU cluster orchestration and scheduling',
-			'AI platform standardization and governance',
-			'Training pipeline infrastructure and data movement',
+			'AI-Enhanced Document Chatbot (GPT-4 + vector DB)',
+			'AI News Bot for marketers and analysts',
+			'AI-Generated Curriculum Creator for educators',
+			'Prompt and retrieval architecture for high-trust use cases',
 		],
-		metrics: 'Inference latency, GPU utilization, model deployment velocity',
+		metrics: 'Time saved per workflow, accuracy on grounded answers, adoption',
 	},
 	{
-		id: 'ai-ml-infrastructure',
-		title: 'AI Platform Governance & Observability',
+		id: 'ai-education',
+		title: 'AI Education & Workforce Enablement',
 		summary:
-			'Ensuring AI systems are observable, governable, and cost-effective. Building the guardrails that let teams move fast without creating risk.',
+			'Workshops, talks, and curricula that turn AI anxiety into AI capability — for executives, operators, educators, and creatives.',
 		details: [
-			'ML observability: drift detection, accuracy monitoring',
-			'Governance frameworks for responsible AI deployment',
-			'Cost management for GPU and inference workloads',
-			'Security and compliance for AI/ML systems',
+			'AImpact: 80+ workshops to 10,000+ professionals — 40% avg productivity lift',
+			'Microsoft-contracted Azure OpenAI bootcamps — 30% lift in cert pass-rates',
+			'Google + Dream Machine AI Library Project five-city tour',
+			'Curriculum spanning prompt engineering, agents, OCR-LLM pipelines, and voice AI',
 		],
-		metrics: 'Model performance, compliance adherence, cost per inference',
+		metrics: 'Attendees trained, certification pass-rate lift, corporate engagements',
 	},
 	{
-		id: 'cloud-native-evolution',
-		title: 'Cloud-Native Evolution',
+		id: 'equity-in-tech',
+		title: 'Equity in Tech',
 		summary:
-			'Evaluating emerging technologies and driving adoption of what actually works.',
+			'Programs and platforms that widen access to engineering education and AI — built so the next generation of builders looks more like the world they are building for.',
 		details: [
-			'Evaluating emerging CNCF projects for fit',
-			'Serverless, edge computing, and orchestration advances',
-			'Infrastructure-as-code and security automation',
-			'PoC development for promising technologies',
+			'NextSteps DevCon: conference and mentorship community',
+			'Pledge to Equality Scholarship Program (10K+ awards)',
+			'Pipeline programs for underserved technologists',
+			'Speaking and advocacy on inclusive AI futures',
 		],
-		metrics: 'Adoption success rate, innovation velocity, technical debt reduction',
+		metrics: 'Scholarships granted, attendee outcomes, sponsor partnerships',
 	},
 ];
 
-/**
- * External engagement sections
- */
 export const EXTERNAL_ENGAGEMENT: Record<string, EngagementSection> = {
 	speaking: {
 		title: 'Speaking & Thought Leadership',
 		items: [
-			'Conference talks on cloud architecture, SRE, and AI infrastructure',
-			'Technical blog posts and case studies',
-			'Podcast co-host: AI with Friends',
+			'Keynotes alongside leaders from Google, IBM, and Microsoft',
+			'AImpact: 80+ workshops to 10K+ professionals worldwide',
+			'Microsoft-contracted Azure OpenAI bootcamps',
+			'Google + Dream Machine AI Library Project tour',
 		],
 	},
 	community: {
-		title: 'Community & Open Source',
+		title: 'Community & Education',
 		items: [
-			'Contributing to infrastructure tools and frameworks',
-			'Developer evangelism and internal talks shared externally',
-			'Building bridges between practitioners and tooling vendors',
+			'Founder of NextSteps DevCon',
+			'Pledge to Equality Scholarship Program (10K+ awards)',
+			'Mentorship for emerging engineers and founders',
 		],
 	},
 	dei: {
-		title: 'DEI Advocacy',
+		title: 'Equity Advocacy',
 		items: [
-			'Active mentor at /dev/color',
-			'Building inclusive engineering cultures',
-			'Speaking on inclusive leadership in tech',
+			'Pipeline programs for underserved communities',
+			'Inclusive AI and product practices',
+			'Speaking on equity in the AI era',
 		],
 	},
 };
 
-/**
- * Core competency groups
- */
 export const COMPETENCY_GROUPS: CompetencyGroup[] = [
 	{
-		title: 'Cloud & Platform',
+		title: 'Generative AI',
 		skills: [
-			'Multi-Region Architecture',
-			'AWS / OCI / GCP',
-			'Kubernetes / EKS / ECS',
-			'Terraform / IaC',
+			'OpenAI GPT-4o',
+			'Anthropic Claude',
+			'Azure OpenAI',
+			'LangChain & RAG',
+			'OCR & Document Intelligence',
+			'Vector DBs (Pinecone, Chroma)',
+			'Prompt Engineering',
+			'LLMOps / MLOps',
 		],
 	},
 	{
-		title: 'Networking & Reliability',
-		skills: ['Network Architecture', 'VPC Design', 'SRE Practices', 'Observability Stack'],
-	},
-	{
-		title: 'AI & Automation',
-		skills: ['LLM Serving Infrastructure', 'GPU Orchestration', 'AI Platform Engineering', 'ML Pipeline Architecture'],
-	},
-	{
-		title: 'Leadership & Strategy',
+		title: 'Voice & Conversational AI',
 		skills: [
-			'Technical Strategy',
-			'Team Building',
-			'Cross-Functional Leadership',
-			'Mentorship',
+			'STT (Whisper)',
+			'TTS (ElevenLabs)',
+			'Twilio Voice / Telephony',
+			'Conversation Design',
+			'HIPAA-Compliant Voice Pipelines',
+			'Veradigm EHR Integration',
+		],
+	},
+	{
+		title: 'Product & Engineering',
+		skills: [
+			'Python',
+			'TypeScript / JavaScript',
+			'Cloud (Azure, GCP)',
+			'Web & Mobile Product',
+			'CI/CD & Release Management',
+			'Founder Operations',
+		],
+	},
+	{
+		title: 'Leadership & Education',
+		skills: [
+			'Applied AI Strategy',
+			'Technical Program Management',
+			'Workshop & Curriculum Design',
+			'Public Speaking',
+			'Mentorship & DEI',
+			'Certified ScrumMaster (CSM)',
 		],
 	},
 ];
 
-/**
- * Education entries
- */
 export const EDUCATION: EducationItem[] = [
 	{
-		school: 'Penn State University',
-		location: 'Schuylkill Haven, PA',
-		years: '1999–2002',
+		school: 'University of Oxford',
+		degree: 'Artificial Intelligence: Cloud and Edge Implementations',
+		years: '2022',
+	},
+	{
+		school: 'Scrum Alliance',
+		degree: 'Certified ScrumMaster (CSM)',
+		years: '2022',
 	},
 ];
 
-/**
- * Community involvement
- */
 export const COMMUNITY: CommunityItem[] = [
 	{
-		role: 'Co-host',
-		org: 'AI with Friends',
-		desc: 'Weekly podcast breaking down complex technology topics through candid conversations.',
+		role: 'Head of AI & CEO',
+		org: 'AImpact',
+		desc: '80+ AI workshops delivered globally to more than 10,000 professionals, demystifying Generative AI for businesses and underserved communities. Microsoft Azure OpenAI bootcamp lead and Google + Dream Machine AI Library Project headliner.',
 	},
 	{
-		role: 'Active Mentor',
-		org: '/dev/color',
-		desc: 'Mentoring and supporting Black engineers and other underrepresented technologists navigating senior-level careers in tech.',
+		role: 'Founder',
+		org: 'NextSteps DevCon',
+		desc: 'Engineering conference and community for emerging developers, paired with the Pledge to Equality Scholarship Program (10K+ awards).',
+	},
+	{
+		role: 'Co-host',
+		org: 'AI With Friends',
+		desc: 'Weekly conversations on the latest in Generative AI, agents, voice, and the future of work.',
 	},
 ];

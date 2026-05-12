@@ -1,7 +1,0 @@
-{
-  "type": "diagram",
-  "title": "AWS Security Group Graph Mapper",
-  "thumbnail": "/artifacts/security-group-mapper-thumbnail.png",
-  "projectSlug": "aws-security-group-mapper",
-  "claim": "Graph-based visualization tool for AWS Security Groups that maps relationships, highlights blast radius, and surfaces overly permissive rules and unexpected transitive trusts."
-}

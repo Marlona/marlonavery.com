@@ -15,7 +15,7 @@ export async function GET(context: APIContext) {
 	return rss({
 		title: `${SITE_CONFIG.name} - Technical Insights`,
 		description: SITE_CONFIG.description,
-		site: context.site || 'https://sekoudoumbouya.com',
+		site: context.site || 'https://marlonavery.com',
 		items: sortedPosts.map((post) => ({
 			title: post.data.title,
 			pubDate: post.data.publishDate,

@@ -7,79 +7,75 @@ import type { GitHubRepo } from '../utils/github';
 
 /**
  * Names of pinned repositories to display on homepage
+ * Update this list as new flagship repos are added.
  */
-export const PINNED_REPO_NAMES = [
-	'mcp-ai-bridge',
-	'AwsSecurityMapper',
-	'ai-driven-temporal-to-IAC',
-	'xenon-notes',
-	'sekoudoumbouya',
-	'my-ai-study-buddy',
+export const PINNED_REPO_NAMES: readonly string[] = [
+	'ecommerce',
+	'qa-app',
+	'airbnb-clone',
+	'Mini-Netflix',
+	'liquidate-loans',
+	'hackerrankSolutions-JavaScript',
 ] as const;
 
 /**
- * Fallback repository data when GitHub API is unavailable
+ * Fallback repository data when GitHub API is unavailable.
+ * Replace these short descriptions with your own copy as needed.
  */
 export const FALLBACK_REPOS: GitHubRepo[] = [
 	{
-		name: 'mcp-ai-bridge',
-		full_name: `${SITE_CONFIG.githubUsername}/mcp-ai-bridge`,
-		description:
-			'Secure MCP server integrating Claude Code with OpenAI and Google Gemini APIs. Features multi-layer security, content filtering, and rate limiting.',
-		html_url: `https://github.com/${SITE_CONFIG.githubUsername}/mcp-ai-bridge`,
+		name: 'ecommerce',
+		full_name: `${SITE_CONFIG.githubUsername}/ecommerce`,
+		description: 'JavaScript e-commerce experiment exploring product, cart, and checkout flows.',
+		html_url: `https://github.com/${SITE_CONFIG.githubUsername}/ecommerce`,
 		language: 'JavaScript',
-		stargazers_count: 4,
-		topics: ['mcp', 'ai', 'security', 'openai', 'gemini'],
-	},
-	{
-		name: 'AwsSecurityMapper',
-		full_name: `${SITE_CONFIG.githubUsername}/AwsSecurityMapper`,
-		description:
-			'Python tool that visualizes AWS security group relationships with interactive Plotly graphs. Supports multi-region and cross-VPC analysis.',
-		html_url: `https://github.com/${SITE_CONFIG.githubUsername}/AwsSecurityMapper`,
-		language: 'Python',
-		stargazers_count: 1,
-		topics: ['aws', 'security', 'visualization', 'networking'],
-	},
-	{
-		name: 'ai-driven-temporal-to-IAC',
-		full_name: `${SITE_CONFIG.githubUsername}/ai-driven-temporal-to-IAC`,
-		description:
-			'Temporal-based workflow orchestration for multi-workspace Terraform deployments with dependency resolution and MCP server integration.',
-		html_url: `https://github.com/${SITE_CONFIG.githubUsername}/ai-driven-temporal-to-IAC`,
-		language: 'Go',
-		stargazers_count: 2,
-		topics: ['temporal', 'terraform', 'iac', 'workflow'],
-	},
-	{
-		name: 'xenon-notes',
-		full_name: `${SITE_CONFIG.githubUsername}/xenon-notes`,
-		description:
-			'AI-powered notetaking app for Apple platforms built with Swift and RealityKit.',
-		html_url: `https://github.com/${SITE_CONFIG.githubUsername}/xenon-notes`,
-		language: 'Swift',
-		stargazers_count: 2,
-		topics: ['swift', 'ai', 'ios', 'notes'],
-	},
-	{
-		name: 'sekoudoumbouya',
-		full_name: `${SITE_CONFIG.githubUsername}/sekoudoumbouya`,
-		description:
-			'Building bridges between bytes – infrastructure case studies & technical musings.',
-		html_url: `https://github.com/${SITE_CONFIG.githubUsername}/sekoudoumbouya`,
-		language: 'Astro',
-		stargazers_count: 1,
-		topics: ['portfolio', 'astro', 'infrastructure'],
-	},
-	{
-		name: 'my-ai-study-buddy',
-		full_name: `${SITE_CONFIG.githubUsername}/my-ai-study-buddy`,
-		description:
-			'AI-powered learning platform for visual learners. Features course authoring, flashcard ratings, progress tracking, code sandboxes, and AI content generation.',
-		html_url: `https://github.com/${SITE_CONFIG.githubUsername}/my-ai-study-buddy`,
-		language: 'TypeScript',
 		stargazers_count: 0,
-		topics: ['ai', 'education', 'typescript', 'learning'],
+		topics: ['javascript', 'ecommerce'],
+	},
+	{
+		name: 'qa-app',
+		full_name: `${SITE_CONFIG.githubUsername}/qa-app`,
+		description: 'A Q&A web app exploring conversational interfaces and dynamic content.',
+		html_url: `https://github.com/${SITE_CONFIG.githubUsername}/qa-app`,
+		language: 'JavaScript',
+		stargazers_count: 0,
+		topics: ['javascript', 'qa'],
+	},
+	{
+		name: 'airbnb-clone',
+		full_name: `${SITE_CONFIG.githubUsername}/airbnb-clone`,
+		description: 'Airbnb-style listings clone — a study in modern marketplace UI patterns.',
+		html_url: `https://github.com/${SITE_CONFIG.githubUsername}/airbnb-clone`,
+		language: 'JavaScript',
+		stargazers_count: 0,
+		topics: ['javascript', 'marketplace'],
+	},
+	{
+		name: 'Mini-Netflix',
+		full_name: `${SITE_CONFIG.githubUsername}/Mini-Netflix`,
+		description: 'A small streaming-style UI exploring the consumer entertainment surface.',
+		html_url: `https://github.com/${SITE_CONFIG.githubUsername}/Mini-Netflix`,
+		language: 'JavaScript',
+		stargazers_count: 0,
+		topics: ['javascript', 'streaming'],
+	},
+	{
+		name: 'liquidate-loans',
+		full_name: `${SITE_CONFIG.githubUsername}/liquidate-loans`,
+		description: 'A fintech-flavored experiment exploring loan liquidation flows.',
+		html_url: `https://github.com/${SITE_CONFIG.githubUsername}/liquidate-loans`,
+		language: 'JavaScript',
+		stargazers_count: 0,
+		topics: ['javascript', 'fintech'],
+	},
+	{
+		name: 'hackerrankSolutions-JavaScript',
+		full_name: `${SITE_CONFIG.githubUsername}/hackerrankSolutions-JavaScript`,
+		description: 'A working notebook of JavaScript HackerRank solutions and patterns.',
+		html_url: `https://github.com/${SITE_CONFIG.githubUsername}/hackerrankSolutions-JavaScript`,
+		language: 'JavaScript',
+		stargazers_count: 0,
+		topics: ['javascript', 'algorithms'],
 	},
 ];
 
@@ -91,12 +87,10 @@ export function mergeReposWithFallback(
 	repoData: (GitHubRepo | null)[],
 	fallbacks: GitHubRepo[]
 ): GitHubRepo[] {
-	// If all API calls failed, return fallbacks entirely
 	if (repoData.every((repo) => repo === null)) {
 		return fallbacks;
 	}
 
-	// Otherwise merge: use live data when available, fallback otherwise
 	return repoData
 		.map((repo, index) => repo || fallbacks[index] || null)
 		.filter((repo): repo is GitHubRepo => repo !== null);

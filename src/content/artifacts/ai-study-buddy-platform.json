@@ -1,7 +1,0 @@
-{
-  "type": "code",
-  "title": "AI Study Platform",
-  "thumbnail": "/artifacts/ai-study-buddy-thumbnail.png",
-  "projectSlug": "my-ai-study-buddy",
-  "claim": "Full-stack learning platform combining spaced repetition, course authoring, and AI-powered content generation with multi-provider support for Claude and Gemini APIs."
-}

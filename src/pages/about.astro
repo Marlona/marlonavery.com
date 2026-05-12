@@ -16,40 +16,42 @@ import {
 } from '../data/about';
 ---
 
-<PageLayout title={`About | ${SITE_CONFIG.name}`} description={`About ${SITE_CONFIG.name} - ${SITE_CONFIG.title} with 20+ years of experience building resilient cloud platforms.`}>
+<PageLayout title={`About | ${SITE_CONFIG.name}`} description={`About ${SITE_CONFIG.name} — ${SITE_CONFIG.title}. A decade building Generative AI products, voice systems, and developer communities.`}>
 	<section class="max-w-4xl mx-auto px-4 py-12">
 		<h1 class="heading-xl text-foreground mb-8">About Me</h1>
 
-		<!-- Introduction with disambiguation (once) -->
 		<div class="prose prose-lg text-secondary mb-16 max-w-none">
 			<p class="mb-6 body-lg leading-relaxed">
-				I'm <strong class="text-foreground">{SITE_CONFIG.name}</strong>, an infrastructure architect building the bridge between cloud platforms and AI systems <span class="text-muted">(not the basketball player)</span>. I'm a <strong class="text-foreground">builder who happens to lead</strong>. With over <strong class="text-foreground">20 years</strong> in infrastructure and platform engineering, I've spent my career designing systems that multiply team impact. Now I'm applying that same approach to AI infrastructure: making LLM serving, training pipelines, and GPU orchestration as reliable and accessible as the cloud platforms I've been building for two decades.
+				I'm <strong class="text-foreground">{SITE_CONFIG.name}</strong>, a Generative AI builder, founder, and educator. As <strong class="text-foreground">VP, Applied AI Lead at JPMorgan Chase</strong> and <strong class="text-foreground">Founder & CEO / Chief AI Officer of VoicePath</strong>, I design and ship AI systems that automate real business operations and elevate customer experience — HIPAA-compliant voice agents integrated with EHRs, AI document tools for legal and finance, and applied LLM workflows for the back office of small and mid-sized businesses.
 			</p>
 			<p class="mb-6 body-lg leading-relaxed">
-				Currently at <strong class="text-foreground">{SITE_CONFIG.currentCompany}</strong>, I lead Cloud Architecture and multi-region initiatives. I'm increasingly focused on the infrastructure patterns that make AI workloads production-ready: the compute orchestration, networking, and platform abstractions that let ML teams move fast without building everything from scratch.
+				Outside the day job, I run <strong class="text-foreground">AImpact</strong>, an AI education organization contracted by <strong class="text-foreground">Microsoft</strong> to architect Azure OpenAI bootcamps and commissioned by <strong class="text-foreground">Google + Dream Machine Innovation Labs</strong> to author the curriculum and headline the <em>AI Library Project</em> — a five-city tour bringing GenAI training to underserved communities. Across 80+ workshops, AImpact has trained 10,000+ professionals with a 40% average productivity lift.
+			</p>
+			<p class="mb-6 body-lg leading-relaxed">
+				I founded <strong class="text-foreground">NextSteps DevCon</strong> and the <strong class="text-foreground">Pledge to Equality Scholarship Program</strong>, which has granted 10,000+ scholarships to underserved communities. I've shared stages with leaders from Google, IBM, and Microsoft, and built one of the first AI Grant Writers on GPT-3 in 2021 (2.5x throughput, 60% labor reduction) — well before the rest of the world caught on.
 			</p>
 			<p class="body-lg leading-relaxed">
-				My approach: design systems that make complex capabilities accessible. Whether it's a global network backbone or an LLM serving platform, the best infrastructure disappears into the background while the teams using it get more productive.
+				My approach: ship the systems I lead. The best AI doesn't replace people — it removes the work that was burning them out and gives them more room to do the things only they can do. A Texas native with professional roots in Atlanta and Silicon Valley, I'm now based in <strong class="text-foreground">Washington, DC</strong>.
 			</p>
 		</div>
 
 		<!-- Quick Stats -->
 		<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
 			<div class="text-center p-4 border border-[var(--border-subtle)] rounded-lg">
-				<div class="text-2xl font-bold text-accent font-mono">20+</div>
-				<div class="body-sm text-muted mt-1">Years Experience</div>
+				<div class="text-2xl font-bold text-accent font-mono">10+</div>
+				<div class="body-sm text-muted mt-1">Years in GenAI</div>
 			</div>
 			<div class="text-center p-4 border border-[var(--border-subtle)] rounded-lg">
-				<div class="text-2xl font-bold text-accent font-mono">20+</div>
-				<div class="body-sm text-muted mt-1">Engineers Mentored</div>
+				<div class="text-2xl font-bold text-accent font-mono">10K+</div>
+				<div class="body-sm text-muted mt-1">Scholarships</div>
+			</div>
+			<div class="text-center p-4 border border-[var(--border-subtle)] rounded-lg">
+				<div class="text-2xl font-bold text-accent font-mono">80+</div>
+				<div class="body-sm text-muted mt-1">Workshops Delivered</div>
 			</div>
 			<div class="text-center p-4 border border-[var(--border-subtle)] rounded-lg">
 				<div class="text-2xl font-bold text-accent font-mono">5+</div>
-				<div class="body-sm text-muted mt-1">Focus Areas</div>
-			</div>
-			<div class="text-center p-4 border border-[var(--border-subtle)] rounded-lg">
-				<div class="text-2xl font-bold text-accent font-mono">40%</div>
-				<div class="body-sm text-muted mt-1">Hands-On Time</div>
+				<div class="body-sm text-muted mt-1">Ventures Founded</div>
 			</div>
 		</div>
 
@@ -57,7 +59,7 @@ import {
 		<div id="how-i-lead" class="mb-16 scroll-mt-8">
 			<h2 class="heading-lg text-foreground mb-6">How I Lead</h2>
 			<p class="body-md text-secondary mb-8 max-w-3xl">
-				Leadership at the principal level means setting direction while staying hands-on. I believe in leaving teams more capable than I found them.
+				A decade running ventures and enterprise AI teams in parallel teaches you that leadership is operator-first. Strategy without keyboard time produces decks; the work happens inside the work.
 			</p>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 				{LEADERSHIP_PRINCIPLES.map(principle => (
@@ -70,7 +72,7 @@ import {
 		<div id="strategic-approach" class="mb-16 scroll-mt-8">
 			<h2 class="heading-lg text-foreground mb-6">Strategic Approach</h2>
 			<p class="body-md text-secondary mb-8 max-w-3xl">
-				Principal engineers influence through expertise and trust, not organizational authority. These principles guide how I drive technical direction.
+				Generative AI moves on a quarterly cadence. I build for what is true 18 months from now, not just what shipped last week.
 			</p>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 				{STRATEGIC_APPROACH.map(item => (
@@ -81,9 +83,9 @@ import {
 
 		<!-- Technical Focus Areas -->
 		<div id="technical-focus-areas" class="mb-16 scroll-mt-8">
-			<h2 class="heading-lg text-foreground mb-6">Technical Focus Areas</h2>
+			<h2 class="heading-lg text-foreground mb-6">Where I Spend My Time</h2>
 			<p class="body-md text-secondary mb-8 max-w-3xl">
-				Where I invest my engineering energy. These four domains represent the intersection of my expertise and current interests.
+				Five domains where Generative AI meets real business — voice, agents, applied LLMs, education, and equity in tech.
 			</p>
 			<div class="grid grid-cols-1 gap-6">
 				{FOCUS_AREAS.map(area => (
@@ -103,7 +105,7 @@ import {
 		<div id="external-engagement" class="mb-16 scroll-mt-8">
 			<h2 class="heading-lg text-foreground mb-6">External Engagement</h2>
 			<p class="body-md text-secondary mb-8 max-w-3xl">
-				Building community beyond the day job. I believe senior engineers have a responsibility to share knowledge and lift others.
+				Workshops, scholarships, speaking, and the AI With Friends podcast — the work that happens in parallel with the day job, and often does just as much.
 			</p>
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 				{Object.values(EXTERNAL_ENGAGEMENT).map(section => (
@@ -142,28 +144,27 @@ import {
 			</div>
 		</div>
 
-		<!-- Education & Development -->
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-			<div>
-				<h2 class="heading-lg text-foreground mb-6">Education & Development</h2>
-				<div class="space-y-6">
-					{EDUCATION.map(edu => (
-						<div>
-							<h3 class="font-semibold text-foreground">{edu.school}</h3>
-							<p class="body-sm text-muted">{edu.location} · {edu.years}</p>
+		<!-- Education & Certifications -->
+		{EDUCATION.length > 0 && (
+			<div id="education" class="mb-16 scroll-mt-8">
+				<h2 class="heading-lg text-foreground mb-6">Education & Certifications</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					{EDUCATION.map(item => (
+						<div class="card p-6">
+							<h3 class="font-semibold text-foreground mb-1">{item.school}</h3>
+							{item.degree && (
+								<p class="body-sm text-secondary mb-2">{item.degree}</p>
+							)}
+							<div class="badge badge-accent text-xs">{item.years}</div>
 						</div>
 					))}
-					<div>
-						<h3 class="font-semibold text-foreground">Emerge Global Executive Leadership Program</h3>
-						<p class="body-sm text-muted">Ross School of Business, University of Michigan</p>
-					</div>
 				</div>
 			</div>
-		</div>
+		)}
 
-		<!-- Community & Awards -->
+		<!-- Community -->
 		<div class="border-t border-[var(--border-default)] pt-12">
-			<h2 class="heading-lg text-foreground mb-8">Community & Awards</h2>
+			<h2 class="heading-lg text-foreground mb-8">Community</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 				{COMMUNITY.map(item => (
 					<div class="card p-6">
@@ -172,11 +173,6 @@ import {
 						<p class="body-sm text-secondary">{item.desc}</p>
 					</div>
 				))}
-				<div class="card-award p-6">
-					<h3 class="font-semibold text-foreground mb-1">LiveOps Amsterdam Datacenter Creation Award</h3>
-					<div class="badge badge-award text-xs mb-3">Honors & Awards</div>
-					<p class="body-sm text-secondary">Recognition for excellence in datacenter infrastructure design and implementation.</p>
-				</div>
 			</div>
 		</div>
 	</section>

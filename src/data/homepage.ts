@@ -12,148 +12,131 @@ import type {
 	ProofMetric,
 } from './types';
 
-/**
- * Proof strip metrics for the sticky bar on the homepage
- */
 export const PROOF_METRICS: ProofMetric[] = [
-	{ value: '20+', label: 'Years', highlight: false },
-	{ value: 'Multi-M', label: 'Saved', highlight: true },
-	{ value: '20+', label: 'Mentored', highlight: false },
-	{ value: '5+', label: 'Focus Areas', highlight: false },
+	{ value: '10+', label: 'Years in GenAI', highlight: false },
+	{ value: '10K+', label: 'Scholarships', highlight: true },
+	{ value: '80+', label: 'Workshops', highlight: false },
+	{ value: '5+', label: 'Ventures', highlight: false },
 ];
 
-/**
- * Impact-focused statistics for homepage hero
- */
 export const STATS: StatItem[] = [
-	{ label: 'Years Building at Scale', value: '20+' },
-	{ label: 'Infrastructure Cost Savings', value: 'Multi-M' },
-	{ label: 'Engineers Mentored to Senior+', value: '20+' },
-	{ label: 'Technical Focus Areas', value: '5+' },
+	{ label: 'Years in Generative AI', value: '10+' },
+	{ label: 'Scholarships Awarded', value: '10K+' },
+	{ label: 'Workshops Delivered', value: '80+' },
+	{ label: 'Ventures Founded', value: '5+' },
 ];
 
-/**
- * Leadership philosophy cards
- */
 export const PHILOSOPHY_CARDS: PhilosophyCardData[] = [
 	{
-		title: 'Player-Coach Leadership',
+		title: 'AI Should Reduce Fear',
 		description:
-			'I lead by solving hard problems alongside the team. 40% of my time stays in code and design reviews.',
+			'Most resistance to AI is anxiety dressed up as skepticism. I build and teach with that in mind.',
+		icon: '🌱',
+	},
+	{
+		title: 'Voice Is the New UI',
+		description:
+			'Conversation is the most natural interface humans have. The next decade of software will sound, not just look.',
+		icon: '🎙️',
+	},
+	{
+		title: 'Operator-Builder',
+		description:
+			'I ship the systems I lead. Strategy without keyboard time produces decks, not products.',
 		icon: '⚡',
 	},
 	{
-		title: 'Platform as Product',
+		title: 'Equity By Design',
 		description:
-			'Internal platforms should treat developers as customers. I build golden-path solutions that reduce cognitive load.',
-		icon: '🎯',
-	},
-	{
-		title: 'Strategic Translation',
-		description:
-			'I bridge engineering and business, ensuring technical decisions align with company goals.',
-		icon: '🔗',
-	},
-	{
-		title: 'Knowledge Multiplication',
-		description: 'My success metric: teams more capable after working with me.',
-		icon: '📈',
+			'10K+ scholarships through Pledge to Equality. Access compounds — and so does its absence.',
+		icon: '🤝',
 	},
 ];
 
-/**
- * Technical focus areas preview (links to about page sections)
- */
 export function getFocusAreasPreviews(): FocusAreaPreview[] {
 	const base = getBasePath();
 	return [
 		{
-			title: 'Platform Engineering',
-			subtitle: 'DevEx & Tooling',
-			href: `${base}/about#platform-engineering`,
+			title: 'Voice AI',
+			subtitle: 'Receptionists & Call Centers',
+			href: `${base}/about#voice-ai`,
 		},
 		{
-			title: 'SRE & Scalability',
-			subtitle: 'Reliability at Scale',
-			href: `${base}/about#sre-scalability`,
+			title: 'AI Agents',
+			subtitle: 'Long-Running Workflows',
+			href: `${base}/about#ai-agents`,
 		},
 		{
-			title: 'AI & LLM Infra',
-			subtitle: 'GPU & Model Serving',
-			href: `${base}/about#ai-infrastructure`,
+			title: 'Applied LLMs',
+			subtitle: 'GPT for Real Work',
+			href: `${base}/about#applied-llms`,
 		},
 		{
-			title: 'AI/ML Infrastructure',
-			subtitle: 'Observability & Governance',
-			href: `${base}/about#ai-ml-infrastructure`,
+			title: 'AI Education',
+			subtitle: 'AImpact Workshops',
+			href: `${base}/about#ai-education`,
 		},
 		{
-			title: 'Cloud-Native Evolution',
-			subtitle: 'State of the Art',
-			href: `${base}/about#cloud-native-evolution`,
+			title: 'Equity in Tech',
+			subtitle: 'NextSteps & Scholarships',
+			href: `${base}/about#equity-in-tech`,
 		},
 	];
 }
 
-/**
- * External engagement items
- */
 export const EXTERNAL_ENGAGEMENT: EngagementItem[] = [
 	{
-		title: 'AI with Friends',
-		role: 'Podcast Co-host',
-		desc: 'Weekly conversations on AI, engineering, and tech culture',
+		title: 'AImpact',
+		role: 'Head of AI & CEO',
+		desc: '80+ AI workshops to 10K+ professionals — 40% avg productivity lift',
 	},
 	{
-		title: '/dev/color',
-		role: 'Active Mentor',
-		desc: 'Supporting Black engineers navigating senior-level careers',
+		title: 'Microsoft Azure OpenAI Bootcamps',
+		role: 'Lead Architect',
+		desc: 'Contracted by Microsoft to lead Azure OpenAI bootcamps — 30% lift in cert pass-rates',
 	},
 	{
-		title: 'Speaking & Writing',
-		role: 'Thought Leadership',
-		desc: 'Conference talks and technical posts on cloud architecture',
+		title: 'Google + Dream Machine Innovation Labs',
+		role: 'Curriculum Author & Headliner',
+		desc: 'AI Library Project — five-city GenAI training tour for underserved communities',
+	},
+	{
+		title: 'NextSteps DevCon',
+		role: 'Founder',
+		desc: 'Engineering conference and Pledge to Equality scholarships (10K+ awards)',
 	},
 ];
 
-/**
- * Quick navigation links for homepage
- */
 export const QUICK_NAV_ITEMS: QuickNavItem[] = [
 	{
-		href: '#my-projects',
-		title: 'Featured Projects',
-		description: 'Open source tools and applications I build',
+		href: '#case-studies',
+		title: 'Featured Work',
+		description: 'AI products and ventures shipped to real customers',
 	},
 	{
 		href: '#insights',
-		title: 'Technical Insights',
-		description:
-			'Writing on systems design, infrastructure leadership, and AI workloads',
+		title: 'Writing & Insights',
+		description: 'Notes on Generative AI, voice, and the future of work',
 	},
 ];
 
-/**
- * Get quick navigation items with proper base path
- */
 export function getQuickNavItems(): QuickNavItem[] {
 	const base = getBasePath();
 	return [
 		{
-			href: '#my-projects',
-			title: 'Featured Projects',
-			description: 'Open source tools and applications I build',
+			href: '#case-studies',
+			title: 'Featured Work',
+			description: 'AI products and ventures shipped to real customers',
 		},
 		{
 			href: `${base}/experience`,
-			title: 'Career Timeline',
-			description: '20+ years building cloud infrastructure at scale',
+			title: 'Career & Ventures',
+			description: 'A decade building AI products, companies, and communities',
 		},
 		{
 			href: '#insights',
-			title: 'Technical Insights',
-			description:
-				'Writing on systems design, infrastructure leadership, and AI workloads',
+			title: 'Writing & Insights',
+			description: 'Notes on Generative AI, voice, and the future of work',
 		},
 	];
 }

@@ -10,7 +10,7 @@ const { PUBLIC_BASE_PATH, SITE } = loadEnv(process.env.NODE_ENV || 'development'
 
 // https://astro.build/config
 export default defineConfig({
-  site: SITE || 'https://sekoudoumbouya.com',
+  site: SITE || 'https://marlonavery.com',
   base: PUBLIC_BASE_PATH || '/',
   vite: {
     plugins: [tailwindcss()]
@@ -26,7 +26,7 @@ export default defineConfig({
         const path = url.replace(/\/$/, '');
 
         // Homepage - highest priority
-        if (path === 'https://sekoudoumbouya.com' || path.endsWith('/sekoudoumbouya')) {
+        if (path === 'https://marlonavery.com' || path.endsWith('/marlonavery')) {
           item.priority = 1.0;
           item.changefreq = 'weekly';
         }
@@ -65,8 +65,8 @@ export default defineConfig({
       },
       // Additional sitemap customization
       customPages: [
-        'https://sekoudoumbouya.com/llms.txt',
-        'https://sekoudoumbouya.com/llms-full.txt',
+        'https://marlonavery.com/llms.txt',
+        'https://marlonavery.com/llms-full.txt',
       ],
     })
   ]

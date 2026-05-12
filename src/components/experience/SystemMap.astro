@@ -28,51 +28,55 @@ interface Props {
 
 const { nodes, edges, activeDomain } = Astro.props;
 
-// Domain colors
 const domainColors: Record<string, { fill: string; stroke: string; text: string }> = {
-	'Network': { fill: '#dbeafe', stroke: '#3b82f6', text: '#1d4ed8' },
-	'Platform': { fill: '#fef3c7', stroke: '#f59e0b', text: '#b45309' },
-	'Cloud': { fill: '#d1fae5', stroke: '#10b981', text: '#047857' },
+	'Consumer': { fill: '#fef3c7', stroke: '#f59e0b', text: '#b45309' },
+	'Engineering': { fill: '#ede9fe', stroke: '#8b5cf6', text: '#6d28d9' },
+	'Education': { fill: '#dbeafe', stroke: '#3b82f6', text: '#1d4ed8' },
+	'AI': { fill: '#d1fae5', stroke: '#10b981', text: '#047857' },
 };
 
-// Career progression based on verified resume data:
-// Sage Software (2005-2008) → Jones New York (2008) → Continuum Health Alliance (2008-2011)
-// → Telvue Corporation (2012-2013) → LiveOps (2013-2014) → Groupon (2014-2016)
-// → Oracle (2016-2019) → Quip/Salesforce (2019-2021) → Pinterest (2021-present)
+// Career arc, accurate to 2025 resume:
+// Early Ventures (2015) → Treehouse (2017) → NewCraft / Udacity / NextSteps (2019)
+// → Lightship Capital (2020) → LiveRamp (2022) → AImpact (2023)
+// → JPMorgan Chase (2024) + VoicePath (2025)
 
 const careerNodes = [
-	{ id: 'sage', label: 'Sage', year: '2005', domain: 'Network', x: 60, y: 180, r: 20 },
-	{ id: 'jones', label: 'Jones NY', year: '2008', domain: 'Network', x: 130, y: 150, r: 18 },
-	{ id: 'continuum', label: 'Continuum', year: '2008', domain: 'Network', x: 200, y: 170, r: 22 },
-	{ id: 'telvue', label: 'Telvue', year: '2012', domain: 'Network', x: 280, y: 140, r: 22 },
-	{ id: 'liveops', label: 'LiveOps', year: '2013', domain: 'Platform', x: 360, y: 120, r: 24 },
-	{ id: 'groupon', label: 'Groupon', year: '2014', domain: 'Platform', x: 450, y: 140, r: 26 },
-	{ id: 'oracle', label: 'Oracle', year: '2016', domain: 'Cloud', x: 540, y: 110, r: 28 },
-	{ id: 'quip', label: 'Quip', year: '2019', domain: 'Cloud', x: 630, y: 130, r: 26 },
-	{ id: 'pinterest', label: 'Pinterest', year: '2021', domain: 'Cloud', x: 730, y: 100, r: 35 },
+	{ id: 'early-ventures', label: 'Ventures', year: '2015', domain: 'Consumer', x: 70, y: 215, r: 20 },
+	{ id: 'team-treehouse', label: 'Treehouse', year: '2017', domain: 'Education', x: 170, y: 125, r: 20 },
+	{ id: 'newcraft', label: 'NewCraft', year: '2019', domain: 'Engineering', x: 270, y: 170, r: 18 },
+	{ id: 'udacity', label: 'Udacity', year: '2019', domain: 'Education', x: 320, y: 90, r: 20 },
+	{ id: 'nextsteps-devcon', label: 'NextSteps', year: '2019', domain: 'Education', x: 360, y: 145, r: 22 },
+	{ id: 'lightship-capital', label: 'Lightship', year: '2020', domain: 'AI', x: 470, y: 80, r: 24 },
+	{ id: 'liveramp', label: 'LiveRamp', year: '2022', domain: 'Engineering', x: 590, y: 165, r: 22 },
+	{ id: 'aimpact', label: 'AImpact', year: '2023', domain: 'AI', x: 700, y: 90, r: 26 },
+	{ id: 'jpmorgan-chase', label: 'JPMorgan', year: '2024', domain: 'AI', x: 815, y: 80, r: 28 },
+	{ id: 'voicepath', label: 'VoicePath', year: '2025', domain: 'AI', x: 920, y: 100, r: 30 },
 ];
 
 const careerEdges = [
-	{ from: 'sage', to: 'jones' },
-	{ from: 'jones', to: 'continuum' },
-	{ from: 'continuum', to: 'telvue' },
-	{ from: 'telvue', to: 'liveops' },
-	{ from: 'liveops', to: 'groupon' },
-	{ from: 'groupon', to: 'oracle' },
-	{ from: 'oracle', to: 'quip' },
-	{ from: 'quip', to: 'pinterest' },
+	{ from: 'early-ventures', to: 'team-treehouse' },
+	{ from: 'team-treehouse', to: 'newcraft' },
+	{ from: 'team-treehouse', to: 'udacity' },
+	{ from: 'newcraft', to: 'nextsteps-devcon' },
+	{ from: 'udacity', to: 'lightship-capital' },
+	{ from: 'nextsteps-devcon', to: 'lightship-capital' },
+	{ from: 'lightship-capital', to: 'liveramp' },
+	{ from: 'liveramp', to: 'aimpact' },
+	{ from: 'aimpact', to: 'jpmorgan-chase' },
+	{ from: 'jpmorgan-chase', to: 'voicepath' },
 ];
 
 const roleDescriptions: Record<string, string> = {
-	sage: 'Field Engineer III (2005-2008)',
-	jones: 'Systems Engineer (2008)',
-	continuum: 'UNIX System & Network Admin (2008-2011)',
-	telvue: 'Director of Network Operations (2012-2013)',
-	liveops: 'Senior Systems Administrator (2013-2014)',
-	groupon: 'Senior Systems Engineer (2014-2016)',
-	oracle: 'Principal Systems Engineer (2016-2019)',
-	quip: 'SRE → Tech Lead (2019-2021)',
-	pinterest: 'Sr. Staff Cloud Systems Engineer (2021-Present)',
+	'early-ventures': 'Founder, early consumer products (Rekure, HaHa Davis App, Wallet Clicks)',
+	'team-treehouse': 'Engineering Manager, Programs (2017-2019)',
+	'newcraft': 'Software Engineer, NewCraft (2019)',
+	'udacity': 'Engineering Manager, Programs (2019-2020)',
+	'nextsteps-devcon': 'Founder, NextSteps DevCon & Pledge to Equality (2019-2023)',
+	'lightship-capital': 'Engineering Director / Interim CTO (2020-2022)',
+	'liveramp': 'Staff Technical Program Manager (2022-2023)',
+	'aimpact': 'Head of AI & CEO, AImpact (2023-Present)',
+	'jpmorgan-chase': 'VP, Applied AI Lead (2024-Present)',
+	'voicepath': 'Founder & CEO / Chief AI Officer, VoicePath (2025-Present)',
 };
 ---
 
@@ -114,10 +118,10 @@ const roleDescriptions: Record<string, string> = {
 	<!-- SVG Career Map -->
 	<div class="hidden md:block overflow-x-auto pb-4">
 		<svg
-			viewBox="0 0 820 260"
-			class="w-full min-w-[700px] h-auto"
+			viewBox="0 0 980 280"
+			class="w-full min-w-[760px] h-auto"
 			role="img"
-			aria-label="Career progression diagram showing roles from Sage Software (2005) through Pinterest (2021-present)"
+			aria-label="Career progression diagram from early consumer ventures (2015) through Founder & CEO of VoicePath (2025) and VP, Applied AI Lead at JPMorgan Chase (2024-present)"
 		>
 			<!-- Background with subtle grid -->
 			<defs>
@@ -125,23 +129,27 @@ const roleDescriptions: Record<string, string> = {
 					<path d="M 20 0 L 0 0 0 20" fill="none" stroke="var(--schematic-grid)" stroke-width="0.5"/>
 				</pattern>
 			</defs>
-			<rect width="820" height="260" fill="var(--surface-primary)" rx="8" />
-			<rect width="820" height="260" fill="url(#grid)" rx="8" opacity="0.5" />
+			<rect width="980" height="280" fill="var(--surface-primary)" rx="8" />
+			<rect width="980" height="280" fill="url(#grid)" rx="8" opacity="0.5" />
 
 			<!-- Timeline axis with dashed line -->
-			<line x1="40" y1="230" x2="780" y2="230" stroke="var(--schematic-line)" stroke-width="1" stroke-dasharray="4 2" />
+			<line x1="40" y1="248" x2="950" y2="248" stroke="var(--schematic-line)" stroke-width="1" stroke-dasharray="4 2" />
 
 			<!-- Year markers -->
-			<text x="60" y="248" class="system-map-year" text-anchor="middle">2005</text>
-			<text x="200" y="248" class="system-map-year" text-anchor="middle">2008</text>
-			<text x="360" y="248" class="system-map-year" text-anchor="middle">2013</text>
-			<text x="540" y="248" class="system-map-year" text-anchor="middle">2016</text>
-			<text x="730" y="248" class="system-map-year" text-anchor="middle">2021</text>
+			<text x="70" y="266" class="system-map-year" text-anchor="middle">2015</text>
+			<text x="170" y="266" class="system-map-year" text-anchor="middle">2017</text>
+			<text x="320" y="266" class="system-map-year" text-anchor="middle">2019</text>
+			<text x="470" y="266" class="system-map-year" text-anchor="middle">2020</text>
+			<text x="590" y="266" class="system-map-year" text-anchor="middle">2022</text>
+			<text x="700" y="266" class="system-map-year" text-anchor="middle">2023</text>
+			<text x="815" y="266" class="system-map-year" text-anchor="middle">2024</text>
+			<text x="920" y="266" class="system-map-year" text-anchor="middle">2025</text>
 
 			<!-- Domain swim lanes (subtle) -->
-			<text x="15" y="185" class="system-map-domain-label" transform="rotate(-90, 15, 185)">Network</text>
-			<text x="15" y="130" class="system-map-domain-label" transform="rotate(-90, 15, 130)">Platform</text>
-			<text x="15" y="85" class="system-map-domain-label" transform="rotate(-90, 15, 85)">Cloud</text>
+			<text x="15" y="215" class="system-map-domain-label" transform="rotate(-90, 15, 215)">Consumer</text>
+			<text x="15" y="170" class="system-map-domain-label" transform="rotate(-90, 15, 170)">Engineering</text>
+			<text x="15" y="125" class="system-map-domain-label" transform="rotate(-90, 15, 125)">Education</text>
+			<text x="15" y="85" class="system-map-domain-label" transform="rotate(-90, 15, 85)">AI</text>
 
 			<!-- Edges (connection lines) - dashed schematic style -->
 			<g class="system-map-edges">
@@ -165,7 +173,7 @@ const roleDescriptions: Record<string, string> = {
 			<g class="system-map-nodes">
 				{careerNodes.map(node => {
 					const colors = domainColors[node.domain];
-					const isCurrent = node.id === 'pinterest';
+					const isCurrent = node.id === 'jpmorgan-chase' || node.id === 'voicepath' || node.id === 'aimpact';
 					return (
 						<g
 							class:list={['system-map-node', { current: isCurrent }]}
@@ -210,22 +218,26 @@ const roleDescriptions: Record<string, string> = {
 			<!-- Legend with schematic styling -->
 			<g transform="translate(40, 18)">
 				<text x="0" y="0" class="system-map-legend-title">Career Domains:</text>
-				<g transform="translate(100, -8)">
-					<circle cx="10" cy="0" r="6" fill={domainColors.Network.fill} stroke={domainColors.Network.stroke} stroke-width="1" />
-					<text x="22" y="4" class="system-map-legend-text">Network</text>
+				<g transform="translate(110, -8)">
+					<circle cx="10" cy="0" r="6" fill={domainColors.Consumer.fill} stroke={domainColors.Consumer.stroke} stroke-width="1" />
+					<text x="22" y="4" class="system-map-legend-text">Consumer</text>
 				</g>
-				<g transform="translate(185, -8)">
-					<circle cx="10" cy="0" r="6" fill={domainColors.Platform.fill} stroke={domainColors.Platform.stroke} stroke-width="1" />
-					<text x="22" y="4" class="system-map-legend-text">Platform</text>
+				<g transform="translate(205, -8)">
+					<circle cx="10" cy="0" r="6" fill={domainColors.Engineering.fill} stroke={domainColors.Engineering.stroke} stroke-width="1" />
+					<text x="22" y="4" class="system-map-legend-text">Engineering</text>
 				</g>
-				<g transform="translate(270, -8)">
-					<circle cx="10" cy="0" r="6" fill={domainColors.Cloud.fill} stroke={domainColors.Cloud.stroke} stroke-width="1" />
-					<text x="22" y="4" class="system-map-legend-text">Cloud</text>
+				<g transform="translate(315, -8)">
+					<circle cx="10" cy="0" r="6" fill={domainColors.Education.fill} stroke={domainColors.Education.stroke} stroke-width="1" />
+					<text x="22" y="4" class="system-map-legend-text">Education</text>
+				</g>
+				<g transform="translate(415, -8)">
+					<circle cx="10" cy="0" r="6" fill={domainColors.AI.fill} stroke={domainColors.AI.stroke} stroke-width="1" />
+					<text x="22" y="4" class="system-map-legend-text">AI</text>
 				</g>
 			</g>
 
 			<!-- Reference annotation -->
-			<g transform="translate(600, 18)">
+			<g transform="translate(800, 18)">
 				<text class="system-map-legend-text" fill="var(--color-muted)">
 					<tspan>Click nodes for details</tspan>
 				</text>
@@ -383,15 +395,16 @@ const roleDescriptions: Record<string, string> = {
 	// Node click for details (scroll to experience section)
 	// Map node labels to experience entry IDs (based on actual JSON file names)
 	const labelToExpMap: Record<string, string> = {
-		'sage': 'exp-sage-software',
-		'jones ny': 'exp-nine-west-group',
-		'continuum': 'exp-continuum-health-alliance',
-		'telvue': 'exp-telvue',
-		'liveops': 'exp-liveops',
-		'groupon': 'exp-groupon',
-		'oracle': 'exp-oracle',
-		'quip': 'exp-quip',
-		'pinterest': 'exp-pinterest',
+		'ventures': 'exp-early-ventures',
+		'treehouse': 'exp-team-treehouse',
+		'newcraft': 'exp-newcraft',
+		'udacity': 'exp-udacity',
+		'nextsteps': 'exp-nextsteps-devcon',
+		'lightship': 'exp-lightship-capital',
+		'liveramp': 'exp-liveramp',
+		'aimpact': 'exp-aimpact',
+		'jpmorgan': 'exp-jpmorgan-chase',
+		'voicepath': 'exp-voicepath',
 	};
 
 	nodes.forEach(node => {

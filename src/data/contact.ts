@@ -15,126 +15,114 @@ export interface FAQItem {
 	answer: string;
 }
 
-/**
- * Base engagement types - always visible regardless of availability status
- * These represent genuine community connection, not paid work
- */
 export const ENGAGEMENT_TYPES: EngagementType[] = [
 	{
 		id: 'speaking',
-		title: 'Speaking & Events',
+		title: 'Speaking & Workshops',
 		icon: '🎤',
-		description: 'I enjoy sharing lessons from the trenches at conferences, meetups, and company tech talks.',
+		description:
+			'Keynotes, workshops, and corporate training on Generative AI, voice agents, and the practical realities of shipping AI into production.',
 		examples: [
 			'Conference keynotes and breakout sessions',
-			'Internal engineering all-hands',
+			'AImpact-style hands-on workshops',
+			'Executive briefings on AI strategy',
 			'Podcast and panel appearances',
-			'Workshop facilitation',
 		],
 	},
 	{
 		id: 'conversations',
-		title: 'Technical Conversations',
+		title: 'AI Conversations',
 		icon: '💬',
-		description: 'Happy to chat with founders and engineers navigating infrastructure challenges, from traditional cloud to AI workloads. No sales pitch, just sharing what I\'ve learned.',
+		description:
+			'Happy to compare notes with founders, operators, and engineers shipping Generative AI products. No sales pitch, just trading what we have learned.',
 		examples: [
-			'AI infrastructure and LLM serving architecture',
-			'Cloud-to-AI platform migration patterns',
-			'Scaling challenges and cost optimization',
-			'Platform team strategy discussions',
+			'Voice AI architecture and conversation design',
+			'Agent and RAG product patterns',
+			'Applied LLM workflows for real businesses',
+			'AI strategy in regulated industries',
 		],
 	},
 	{
-		id: 'networking',
-		title: 'Community & Connection',
+		id: 'community',
+		title: 'Community & Mentorship',
 		icon: '🤝',
-		description: 'The best part of this industry is the people. Always open to meeting fellow practitioners.',
+		description:
+			'Open to connecting with emerging technologists — especially those entering AI from underrepresented backgrounds. NextSteps DevCon and AImpact channels are also open.',
 		examples: [
-			'Virtual coffee chats',
-			'Open source collaboration',
-			'Engineering leadership exchange',
-			'Industry peer connections',
+			'Mentorship for AI builders and founders',
+			'NextSteps DevCon and scholarship inquiries',
+			'Inclusive AI community connections',
+			'Cross-org learning exchanges',
 		],
 	},
 ];
 
-/**
- * Consulting engagement types - only shown when availableForHire is true
- * These imply paid/contractual work arrangements
- */
 export const CONSULTING_ENGAGEMENTS: EngagementType[] = [
 	{
-		id: 'opportunities',
-		title: 'Open to Opportunities',
-		icon: '💼',
-		description: 'Exploring principal-level infrastructure and platform engineering roles.',
+		id: 'voicepath',
+		title: 'VoicePath Engagements',
+		icon: '🎙️',
+		description:
+			'Custom voice agents built and deployed for healthcare, finance, insurance, legal, and SMB operations.',
 		examples: [
-			'Principal / Staff+ IC positions',
-			'Platform engineering leadership',
-			'Infrastructure architecture roles',
-			'Founding engineer opportunities',
+			'AI Receptionists and Call Centers',
+			'Voice-first customer journeys',
+			'Conversation design and grounding',
+			'Production deployment and monitoring',
 		],
 	},
 	{
 		id: 'advisory',
-		title: 'Advisory & Consulting',
+		title: 'AI Advisory',
 		icon: '🧭',
-		description: 'Strategic guidance on infrastructure, platform, and engineering organization challenges.',
+		description:
+			'Strategic guidance for executives and founders on Generative AI roadmap, build-vs-buy, and responsible deployment.',
 		examples: [
-			'Architecture reviews and roadmap planning',
-			'Cloud cost optimization strategies',
-			'Platform team formation and scaling',
-			'Technical due diligence',
+			'AI roadmap and prioritization',
+			'Build-vs-buy and vendor evaluation',
+			'Responsible AI and governance',
+			'AI literacy across leadership teams',
 		],
 	},
 ];
 
-// Legacy export for backwards compatibility
 export const HIRING_ENGAGEMENT: EngagementType = CONSULTING_ENGAGEMENTS[0];
 
-/**
- * FAQ items - base questions always shown
- */
 export const CONTACT_FAQ_BASE: FAQItem[] = [
 	{
-		question: 'What topics do you speak about?',
-		answer: 'My talks draw from real production experience: multi-region architecture, platform engineering and developer experience, AI/ML infrastructure at scale, and lessons in technical leadership. I prefer sharing concrete patterns over abstract theory.',
+		question: 'What topics do you speak on?',
+		answer:
+			'Voice AI in production, applied LLMs and agents, AI for business operations, AI education and workforce enablement, and equity in the AI era. I tailor each talk to the audience — operators, engineers, executives, or community.',
 	},
 	{
-		question: 'What\'s the best way to reach you?',
-		answer: 'Email works best for introductions and detailed questions. LinkedIn is great for quick notes or if we\'ve met before. I read everything, though responses may take a few days depending on my schedule.',
+		question: 'What is the best way to reach you?',
+		answer:
+			'Email works best for new inquiries. LinkedIn is great for quick introductions or if we have met before. I read everything; responses can take a few days depending on travel and workshop load.',
 	},
 	{
 		question: 'Are you open to coffee chats or informal conversations?',
-		answer: 'Absolutely. I genuinely enjoy meeting people working on interesting problems. If you\'re a founder, engineer, or just curious about infrastructure at scale, feel free to reach out. No agenda needed.',
+		answer:
+			'Yes. I genuinely enjoy meeting builders, founders, and educators working on Generative AI. If you are shipping something interesting, reach out — no agenda required.',
 	},
 ];
 
-/**
- * FAQ items - only shown when availableForHire is true
- */
 export const CONTACT_FAQ_CONSULTING: FAQItem[] = [
 	{
-		question: 'What does advisory work look like?',
-		answer: 'Typically 2-4 hours per month of strategic consultation. This can include architecture reviews, roadmap feedback, team structure advice, or being a sounding board for technical decisions. I work with startups and established companies alike.',
+		question: 'What does a VoicePath engagement look like?',
+		answer:
+			'Discovery, prototype, deploy. We scope your highest-friction voice surface, ship a working agent quickly, and harden it for production. Engagements range from focused 4-week pilots to longer multi-vertical builds.',
 	},
 	{
-		question: 'Do you take on fractional or interim roles?',
-		answer: 'Occasionally, depending on the scope and my current commitments. These are best discussed directly to understand the time commitment and alignment.',
+		question: 'Do you take on advisory roles?',
+		answer:
+			'Yes — typically 2–4 hours per month for executives and founders navigating AI strategy, voice product decisions, or responsible deployment. Best discussed live to make sure scope and time commitment align.',
 	},
 ];
 
-/**
- * Combined FAQ export - for backwards compatibility
- * Pages should use CONTACT_FAQ_BASE and CONTACT_FAQ_CONSULTING directly for conditional rendering
- */
 export const CONTACT_FAQ: FAQItem[] = CONTACT_FAQ_BASE;
 
-/**
- * Contact info with timezone
- */
 export const CONTACT_INFO = {
-	timezone: 'Pacific Time (PT)',
+	timezone: 'Eastern Time (ET)',
 	responseTime: 'Usually within 2-3 business days',
 	preferredContact: 'Email for new inquiries, LinkedIn for quick questions',
 };
