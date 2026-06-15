@@ -29,9 +29,24 @@ pnpm-debug.log*
 .claude/*
 !.claude/rules/
 
+# Content Brain: version the Strategist agent + brain-review skill only
+# (other local .claude/ agents and skills stay ignored).
+!.claude/agents/
+.claude/agents/*
+!.claude/agents/content-strategist.md
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/brain-review/
+
 # CLAUDE.md files in subdirectories (keep only root CLAUDE.md)
 */CLAUDE.md
 **/*/CLAUDE.md
 
 # custom prompts (user-specific)
 scripts/prompts-custom/
+
+# Content Brain — private knowledge store (raw scraped pages, transcripts, notes,
+# and Strategist proposals). Never commit: may contain unapproved or confidential
+# source material. See docs/content-brain.md.
+# Leading slash anchors to repo root so it does NOT match scripts/brain/ (the code).
+/brain/
