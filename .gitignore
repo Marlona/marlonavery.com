@@ -29,6 +29,15 @@ pnpm-debug.log*
 .claude/*
 !.claude/rules/
 
+# Content Brain: version the Strategist agent + brain-review skill only
+# (other local .claude/ agents and skills stay ignored).
+!.claude/agents/
+.claude/agents/*
+!.claude/agents/content-strategist.md
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/brain-review/
+
 # CLAUDE.md files in subdirectories (keep only root CLAUDE.md)
 */CLAUDE.md
 **/*/CLAUDE.md

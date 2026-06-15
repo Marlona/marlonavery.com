@@ -110,3 +110,41 @@ export function appendToIndex(record: IndexRecord): void {
   records.push(record);
   writeIndex(records);
 }
+
+/**
+ * Return the index records that have not yet been reviewed by the Strategist.
+ */
+export function unprocessedRecords(): IndexRecord[] {
+  return readIndex().filter((r) => !r.processed);
+}
+
+/**
+ * Mark a set of entries as processed in BOTH the index manifest and each entry's
+ * frontmatter. Used by the /brain-review loop after proposals are written.
+ * Returns the ids that were updated.
+ */
+export function markProcessed(ids: string[]): string[] {
+  const idSet = new Set(ids);
+  const updated: string[] = [];
+
+  // Update the manifest.
+  const records = readIndex();
+  for (const record of records) {
+    if (idSet.has(record.id) && !record.processed) {
+      record.processed = true;
+      updated.push(record.id);
+    }
+  }
+  writeIndex(records);
+
+  // Update each entry file's frontmatter.
+  for (const id of updated) {
+    const path = join(ENTRIES_DIR, `${id}.md`);
+    if (!existsSync(path)) continue;
+    const parsed = matter(readFileSync(path, 'utf-8'));
+    parsed.data.processed = true;
+    writeFileSync(path, matter.stringify(parsed.content, parsed.data), 'utf-8');
+  }
+
+  return updated;
+}
