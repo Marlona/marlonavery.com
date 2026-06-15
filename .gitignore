@@ -35,3 +35,9 @@ pnpm-debug.log*
 
 # custom prompts (user-specific)
 scripts/prompts-custom/
+
+# Content Brain — private knowledge store (raw scraped pages, transcripts, notes,
+# and Strategist proposals). Never commit: may contain unapproved or confidential
+# source material. See docs/content-brain.md.
+# Leading slash anchors to repo root so it does NOT match scripts/brain/ (the code).
+/brain/
