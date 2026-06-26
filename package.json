@@ -20,21 +20,34 @@
     "generate:clean": "CLEAN_GENERATED=true tsx scripts/generate-case-studies.ts",
     "generate:clean:dry": "CLEAN_GENERATED=true DRY_RUN=true tsx scripts/generate-case-studies.ts",
     "generate:copy-prompts": "cp -r scripts/prompts scripts/prompts-custom && echo 'Prompts copied to scripts/prompts-custom/. Set PROMPT_TEMPLATE and SYSTEM_PROMPT env vars to use them.'",
-    "generate:resume": "node scripts/generate-resume-pdf.js"
+    "generate:resume": "node scripts/generate-resume-pdf.js",
+    "brain:add": "tsx scripts/brain/add.ts",
+    "brain:add:dry": "DRY_RUN=true tsx scripts/brain/add.ts",
+    "brain:list": "tsx scripts/brain/add.ts --list"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/mdx": "^4.3.12",
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.6.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.16.0",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.52.0",
+    "@mozilla/readability": "^0.5.0",
+    "@types/jsdom": "^21.1.7",
+    "@types/turndown": "^5.0.5",
     "gray-matter": "^4.0.3",
+    "jsdom": "^25.0.1",
+    "mammoth": "^1.8.0",
+    "pdf-parse": "^1.1.1",
     "pdfkit": "^0.17.2",
-    "tsx": "^4.7.0"
+    "tsx": "^4.7.0",
+    "turndown": "^7.2.0",
+    "youtube-transcript": "^1.2.1"
   }
 }

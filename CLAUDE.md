@@ -31,6 +31,28 @@ npm run generate:resume  # Generate PDF resume from scripts/generate-resume-pdf.
 
 Outputs to `public/Marlon_Avery_Resume.pdf`. Uses PDFKit for optimized, clean PDF output.
 
+### Content Brain
+
+```bash
+npm run brain:add -- <url|path>   # Ingest a source into the Brain
+npm run brain:add:dry -- <url|path>  # Preview ingestion without writing
+npm run brain:list                # List all Brain entries
+```
+
+In Claude Code:
+
+```
+/brain-review   # Run the Strategist — reads unprocessed entries, writes proposals
+```
+
+The Brain is a private, local knowledge store (`brain/` — fully gitignored). It ingests web pages, YouTube videos, podcast transcripts, resumes, and local documents, normalizes each via Claude, and tracks them in `brain/index.json`.
+
+**Propose-only rule**: The Strategist (`/brain-review`) writes ONLY to `brain/proposals/`. It never edits `src/` or any tracked file. Every site change from a proposal must go through `/speckit-specify` → plan → implement → verify.
+
+`docKind` detection for local docs (auto from filename, or `--kind` flag): `podcast-transcript`, `resume`, `general`.
+
+See `docs/content-brain.md` for the full workflow and directory layout.
+
 ## Architecture Overview
 
 This is an Astro 5.0 static portfolio site with Tailwind CSS 4, MDX content, and GitHub Pages deployment.
@@ -179,3 +201,8 @@ The site serves an LLM-readable profile at `/llms.txt` via `src/pages/llms.txt.t
 - `src/content/projects/`:Major new projects or achievements
 
 The llms.txt file dynamically reads from `SITE_CONFIG` for basic info, but narrative sections (achievements, expertise) are hardcoded and need manual updates when significant changes occur.
+
+<!-- SPECKIT START -->
+For additional context about technologies to be used, project structure,
+shell commands, and other important information, read the current plan
+<!-- SPECKIT END -->
