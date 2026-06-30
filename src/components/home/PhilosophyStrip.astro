@@ -1,0 +1,24 @@
+---
+import type { PhilosophyStep } from '../../data/types';
+
+interface Props {
+	steps: PhilosophyStep[];
+}
+
+const { steps } = Astro.props;
+---
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 stagger-reveal">
+	{steps.map((step) => (
+		<div class="card p-5 text-center">
+			<div class="text-2xl mb-3">{step.icon}</div>
+			<h3
+				class="heading-sm mb-2"
+				style="font-family: var(--font-display); color: var(--accent);"
+			>
+				{step.step}
+			</h3>
+			<p class="body-xs text-secondary leading-relaxed">{step.description}</p>
+		</div>
+	))}
+</div>

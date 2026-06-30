@@ -18,11 +18,11 @@ const resumeHref = withBasePath(RESUME_PATH);
 ---
 
 <div class="flex items-center gap-4">
-	<div class="hidden md:flex items-center gap-6">
+	<div class="hidden md:flex items-center gap-4">
 		{NAV_LINKS.map((link) => (
 			<a
 				href={withBasePath(link.href)}
-				class={`text-sm font-medium transition-colors ${
+				class={`text-xs font-medium transition-colors ${
 					isActivePath(currentPath, withBasePath(link.href))
 						? 'text-foreground'
 						: 'text-muted hover:text-foreground'
@@ -34,14 +34,6 @@ const resumeHref = withBasePath(RESUME_PATH);
 				)}
 			</a>
 		))}
-		<a
-			href={resumeHref}
-			target="_blank"
-			rel="noopener noreferrer"
-			class="btn btn-secondary text-sm"
-		>
-			Resume
-		</a>
 	</div>
 
 	<div class="hidden md:flex items-center gap-3 pl-4 border-l border-[var(--border-default)]">

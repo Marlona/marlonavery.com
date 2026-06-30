@@ -1,0 +1,170 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_CONFIG } from '../../config';
+import { getCollection } from 'astro:content';
+import LabEntry from '../../components/ailab/LabEntry.astro';
+import { LAB_MISSION, LAB_DISTRIBUTION_CHANNELS, LAB_FILTERS } from '../../data/ailab';
+
+// Only feature entries that are active (not in-progress)
+const allEntries = await getCollection('ailab');
+const published = allEntries
+	.filter(e => e.data.status === 'active')
+	.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+
+const allTags = [...new Set(published.flatMap(e => e.data.tags))].sort();
+
+const platformLinks: Record<string, string> = {
+	linkedin: `https://linkedin.com/in/${SITE_CONFIG.linkedInUsername}`,
+	youtube: 'https://youtube.com/@IamMarlonAvery',
+	instagram: 'https://instagram.com/IamMarlonAvery',
+	tiktok: 'https://tiktok.com/@IamMarlonAvery',
+};
+
+const platformIcons: Record<string, string> = {
+	linkedin: '💼',
+	youtube: '▶️',
+	instagram: '📸',
+	tiktok: '🎵',
+};
+---
+
+<PageLayout
+	title={`AI Lab | ${SITE_CONFIG.name}`}
+	description="Public innovation journal — real experiments, tools, prompts, and lessons from building with AI. The Build → Learn → Teach flywheel in action."
+>
+	<!-- HERO -->
+	<section class="py-20 px-4">
+		<div class="max-w-4xl mx-auto">
+			<p class="kicker mb-4">AI Lab</p>
+			<h1 class="display text-foreground mb-6">
+				Public Innovation Journal
+			</h1>
+			<p class="body-lg text-secondary max-w-2xl leading-relaxed">
+				{LAB_MISSION}
+			</p>
+		</div>
+	</section>
+
+	<!-- DISTRIBUTION CHANNELS -->
+	<section class="py-12 px-4 bg-[var(--color-surface)] border-y border-[var(--border)]">
+		<div class="max-w-4xl mx-auto">
+			<p class="kicker mb-6">Follow the Lab</p>
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+				{LAB_DISTRIBUTION_CHANNELS.map(channel => (
+					<a
+						href={platformLinks[channel.platform] ?? '#'}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="card p-4 block group hover:border-[var(--accent)] transition-colors"
+					>
+						<div class="text-2xl mb-2">{platformIcons[channel.platform]}</div>
+						<p class="font-medium text-foreground body-sm mb-1 capitalize group-hover:text-[var(--accent)] transition-colors">
+							{channel.platform}
+						</p>
+						<p class="body-xs text-secondary">{channel.description}</p>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- FILTER BAR -->
+	<section class="sticky top-0 z-20 py-4 px-4 border-b border-[var(--border)] bg-[var(--color-bg)]">
+		<div class="max-w-5xl mx-auto flex flex-wrap gap-3 items-center">
+			<span class="font-mono text-xs text-secondary hidden sm:inline">Filter:</span>
+			{LAB_FILTERS.map(f => (
+				<button
+					class="lab-filter font-mono text-xs px-3 py-1.5 rounded border transition-colors"
+					data-kind={f.id}
+					data-active={f.id === 'all' ? 'true' : 'false'}
+					style={f.id === 'all' ? 'border-color: var(--accent); color: var(--accent);' : 'border-color: var(--border); color: var(--text-secondary);'}
+				>
+					{f.label}
+				</button>
+			))}
+		</div>
+	</section>
+
+	<!-- ENTRIES GRID -->
+	<section class="py-16 px-4">
+		<div class="max-w-5xl mx-auto">
+			{published.length > 0 ? (
+				<div id="lab-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+					{published.map(entry => (
+						<div class="lab-grid-item" data-kind={entry.data.kind}>
+							<LabEntry id={entry.id} entry={entry.data} />
+						</div>
+					))}
+				</div>
+			) : (
+				<div class="text-center py-20">
+					<p class="body-lg text-secondary mb-4">Lab entries coming soon.</p>
+					<p class="body-md text-secondary">
+						Follow on{' '}
+						<a href={platformLinks.linkedin} class="link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+						{' '}for updates.
+					</p>
+				</div>
+			)}
+
+			<div id="lab-no-results" class="text-center py-20 hidden">
+				<p class="body-lg text-secondary">No entries match that filter.</p>
+			</div>
+		</div>
+	</section>
+
+	{allTags.length > 0 && (
+		<section class="py-12 px-4 border-t border-[var(--border)]">
+			<div class="max-w-5xl mx-auto">
+				<p class="font-mono text-xs text-secondary mb-4">Browse by tag</p>
+				<div class="flex flex-wrap gap-2">
+					{allTags.map(tag => (
+						<button class="tag lab-tag-filter" data-tag={tag}>{tag}</button>
+					))}
+				</div>
+			</div>
+		</section>
+	)}
+</PageLayout>
+
+<script>
+	let activeKind = 'all';
+	let activeTag: string | null = null;
+
+	function applyFilters() {
+		const items = document.querySelectorAll<HTMLElement>('.lab-grid-item');
+		let visible = 0;
+		items.forEach(item => {
+			const kind = item.dataset.kind ?? '';
+			const card = item.querySelector('[data-kind]');
+			const tags = Array.from(item.querySelectorAll('.tag')).map(el => el.textContent?.trim() ?? '');
+
+			const kindMatch = activeKind === 'all' || kind === activeKind;
+			const tagMatch = !activeTag || tags.includes(activeTag);
+			const show = kindMatch && tagMatch;
+			item.style.display = show ? '' : 'none';
+			if (show) visible++;
+		});
+		const noResults = document.getElementById('lab-no-results');
+		if (noResults) noResults.classList.toggle('hidden', visible > 0);
+	}
+
+	document.querySelectorAll<HTMLButtonElement>('.lab-filter').forEach(btn => {
+		btn.addEventListener('click', () => {
+			activeKind = btn.dataset.kind ?? 'all';
+			document.querySelectorAll('.lab-filter').forEach(b => b.setAttribute('style', 'border-color: var(--border); color: var(--text-secondary);'));
+			btn.setAttribute('style', 'border-color: var(--accent); color: var(--accent);');
+			applyFilters();
+		});
+	});
+
+	document.querySelectorAll<HTMLButtonElement>('.lab-tag-filter').forEach(btn => {
+		btn.addEventListener('click', () => {
+			const tag = btn.dataset.tag ?? null;
+			activeTag = activeTag === tag ? null : tag;
+			document.querySelectorAll('.lab-tag-filter').forEach(b => b.classList.remove('active'));
+			if (activeTag) btn.classList.add('active');
+			applyFilters();
+		});
+	});
+</script>

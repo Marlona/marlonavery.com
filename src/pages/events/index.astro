@@ -1,0 +1,130 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_CONFIG } from '../../config';
+import { getCollection } from 'astro:content';
+import EventCard from '../../components/events/EventCard.astro';
+import { EVENTS_HERO } from '../../data/events';
+
+const allEvents = await getCollection('events');
+const upcoming = allEvents
+	.filter(e => e.data.status === 'upcoming')
+	.sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+const past = allEvents
+	.filter(e => e.data.status === 'past')
+	.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Group past events by year
+const pastByYear = past.reduce<Record<number, typeof past>>((acc, e) => {
+	const year = e.data.date.getFullYear();
+	if (!acc[year]) acc[year] = [];
+	acc[year].push(e);
+	return acc;
+}, {});
+const years = Object.keys(pastByYear).map(Number).sort((a, b) => b - a);
+---
+
+<PageLayout
+	title={`Events | ${SITE_CONFIG.name}`}
+	description={`Catch ${SITE_CONFIG.name} live — keynotes, workshops, panels, and AI education sessions. Upcoming events and past archive.`}
+>
+	<!-- HERO -->
+	<section class="py-20 px-4">
+		<div class="max-w-4xl mx-auto">
+			<p class="kicker mb-4">On Stage</p>
+			<h1 class="display text-foreground mb-6">{EVENTS_HERO.headline}</h1>
+			<p class="body-lg text-secondary max-w-2xl">{EVENTS_HERO.subhead}</p>
+		</div>
+	</section>
+
+	<!-- TABS -->
+	<section class="px-4">
+		<div class="max-w-4xl mx-auto">
+			<div class="flex gap-6 border-b border-[var(--border)] mb-10" role="tablist">
+				<button
+					id="tab-upcoming"
+					role="tab"
+					aria-selected="true"
+					aria-controls="panel-upcoming"
+					class="pb-3 font-mono text-sm font-medium border-b-2 transition-colors"
+					style="border-color: var(--accent); color: var(--accent);"
+				>
+					Upcoming {upcoming.length > 0 ? `(${upcoming.length})` : ''}
+				</button>
+				<button
+					id="tab-past"
+					role="tab"
+					aria-selected="false"
+					aria-controls="panel-past"
+					class="pb-3 font-mono text-sm font-medium border-b-2 transition-colors"
+					style="border-color: transparent; color: var(--text-secondary);"
+				>
+					Archive {past.length > 0 ? `(${past.length})` : ''}
+				</button>
+			</div>
+
+			<!-- Upcoming panel -->
+			<div id="panel-upcoming" role="tabpanel" aria-labelledby="tab-upcoming">
+				{upcoming.length > 0 ? (
+					<div class="space-y-4 stagger-reveal">
+						{upcoming.map(e => (
+							<EventCard id={e.id} event={e.data} variant="upcoming" />
+						))}
+					</div>
+				) : (
+					<div class="py-16 text-center">
+						<p class="body-lg text-secondary mb-4">No upcoming events scheduled.</p>
+						<p class="body-md text-secondary">
+							Follow on{' '}
+							<a href={`https://linkedin.com/in/${SITE_CONFIG.linkedInUsername}`} class="link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+							{' '}for announcements.
+						</p>
+					</div>
+				)}
+			</div>
+
+			<!-- Past panel (hidden initially) -->
+			<div id="panel-past" role="tabpanel" aria-labelledby="tab-past" class="hidden">
+				{years.length > 0 ? (
+					<div class="space-y-12">
+						{years.map(year => (
+							<div>
+								<h2 class="heading-md text-foreground mb-6 font-mono">{year}</h2>
+								<div class="space-y-4">
+									{pastByYear[year].map(e => (
+										<EventCard id={e.id} event={e.data} variant="past" />
+									))}
+								</div>
+							</div>
+						))}
+					</div>
+				) : (
+					<div class="py-16 text-center">
+						<p class="body-lg text-secondary">No past events yet.</p>
+					</div>
+				)}
+			</div>
+		</div>
+	</section>
+
+	<div class="py-16"></div>
+</PageLayout>
+
+<script>
+	const tabs = document.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+	const panels = document.querySelectorAll<HTMLElement>('[role="tabpanel"]');
+
+	tabs.forEach(tab => {
+		tab.addEventListener('click', () => {
+			tabs.forEach(t => {
+				t.setAttribute('aria-selected', 'false');
+				t.setAttribute('style', 'border-color: transparent; color: var(--text-secondary);');
+			});
+			panels.forEach(p => p.classList.add('hidden'));
+
+			tab.setAttribute('aria-selected', 'true');
+			tab.setAttribute('style', 'border-color: var(--accent); color: var(--accent);');
+			const target = tab.getAttribute('aria-controls');
+			if (target) document.getElementById(target)?.classList.remove('hidden');
+		});
+	});
+</script>

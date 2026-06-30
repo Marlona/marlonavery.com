@@ -13,7 +13,7 @@ import GitHubIcon from '../icons/GitHubIcon.astro';
 		<!-- Positioning Statement -->
 		<div class="mb-8 pb-8 border-b border-[var(--border-subtle)]">
 			<p class="heading-sm text-foreground mb-2">{SITE_CONFIG.name}</p>
-			<p class="body-sm text-muted max-w-md">Generative AI builder shipping voice and agentic systems that move real businesses. Educator, founder, and speaker.</p>
+			<p class="body-sm text-muted max-w-md">Applied AI executive, engineer, educator, and speaker. Building AI systems. Teaching others. Inspiring what's next.</p>
 		</div>
 
 		<!-- Main Footer Content -->
@@ -81,6 +81,39 @@ import GitHubIcon from '../icons/GitHubIcon.astro';
 				<ul class="space-y-2">
 					<li>
 						<a
+							href={withBasePath('/experience')}
+							class="inline-flex items-center gap-2 body-sm text-secondary hover:text-foreground transition-colors"
+						>
+							<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+							</svg>
+							Experience
+						</a>
+					</li>
+					<li>
+						<a
+							href={withBasePath('/ai-lab')}
+							class="inline-flex items-center gap-2 body-sm text-secondary hover:text-foreground transition-colors"
+						>
+							<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+							</svg>
+							AI Lab
+						</a>
+					</li>
+					<li>
+						<a
+							href={withBasePath('/playbook')}
+							class="inline-flex items-center gap-2 body-sm text-secondary hover:text-foreground transition-colors"
+						>
+							<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+							</svg>
+							Playbook
+						</a>
+					</li>
+					<li>
+						<a
 							href={withBasePath(RESUME_PATH)}
 							target="_blank"
 							rel="noopener noreferrer"
@@ -90,28 +123,6 @@ import GitHubIcon from '../icons/GitHubIcon.astro';
 								<path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
 							</svg>
 							Resume
-						</a>
-					</li>
-					<li>
-						<a
-							href={withBasePath('/writing')}
-							class="inline-flex items-center gap-2 body-sm text-secondary hover:text-foreground transition-colors"
-						>
-							<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-							</svg>
-							Writing
-						</a>
-					</li>
-					<li>
-						<a
-							href={withBasePath('/rss.xml')}
-							class="inline-flex items-center gap-2 body-sm text-secondary hover:text-foreground transition-colors"
-						>
-							<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-								<path d="M6.18 15.64a2.18 2.18 0 1 1 0 4.36 2.18 2.18 0 0 1 0-4.36m12.18 4.36a14.36 14.36 0 0 0-14.36-14.36V9a11 11 0 0 1 11 11h3.36m-6.72 0a7.64 7.64 0 0 0-7.64-7.64v3.36a4.28 4.28 0 0 1 4.28 4.28h3.36z"/>
-							</svg>
-							RSS Feed
 						</a>
 					</li>
 					<li>
@@ -127,15 +138,13 @@ import GitHubIcon from '../icons/GitHubIcon.astro';
 					</li>
 					<li>
 						<a
-							href={SOCIAL_LINKS.twitter}
-							target="_blank"
-							rel="noopener noreferrer"
+							href={withBasePath('/rss.xml')}
 							class="inline-flex items-center gap-2 body-sm text-secondary hover:text-foreground transition-colors"
 						>
 							<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-								<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+								<path d="M6.18 15.64a2.18 2.18 0 1 1 0 4.36 2.18 2.18 0 0 1 0-4.36m12.18 4.36a14.36 14.36 0 0 0-14.36-14.36V9a11 11 0 0 1 11 11h3.36m-6.72 0a7.64 7.64 0 0 0-7.64-7.64v3.36a4.28 4.28 0 0 1 4.28 4.28h3.36z"/>
 							</svg>
-							Twitter / X
+							RSS Feed
 						</a>
 					</li>
 				</ul>

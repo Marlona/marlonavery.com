@@ -1,0 +1,307 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_CONFIG } from '../../config';
+import { ENROLLMENT_STEPS, RECOMMENDATION_MAP } from '../../data/workshops';
+
+const formSubmitEndpoint = `https://formsubmit.co/ajax/${encodeURIComponent(SITE_CONFIG.email)}`;
+---
+
+<PageLayout
+	title={`Enroll | Workshops | ${SITE_CONFIG.name}`}
+	description="Find the right AI workshop for you — take the 5-step quiz and get a personalized recommendation."
+>
+	<section class="py-16 px-4">
+		<div class="max-w-2xl mx-auto">
+			<p class="kicker mb-3">Find Your Workshop</p>
+			<h1 class="heading-xl text-foreground mb-2">Let's personalize this</h1>
+			<p class="body-lg text-secondary mb-10">
+				Answer a few questions and we'll recommend the right starting point for you.
+			</p>
+
+			<!-- Progress bar -->
+			<div class="wizard-progress-bar mb-10">
+				<div id="wizard-progress" class="wizard-progress-fill" style="width: 20%;"></div>
+			</div>
+
+			<!-- Steps container -->
+			<div id="wizard-steps">
+
+				<!-- STEP 1: Who are you? -->
+				<div class="wizard-step active" data-step="0">
+					<p class="font-mono text-xs text-secondary mb-1">Step 1 of {ENROLLMENT_STEPS.length}</p>
+					<h2 class="heading-lg text-foreground mb-6">{ENROLLMENT_STEPS[0].question}</h2>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+						{ENROLLMENT_STEPS[0].options.map(opt => (
+							<label class="wizard-option-card card p-5 cursor-pointer has-[:checked]:border-[var(--accent)] block">
+								<input type="radio" name="step0" value={opt.id} class="sr-only" />
+								<div class="text-2xl mb-2">{opt.icon}</div>
+								<div class="font-medium text-foreground body-sm mb-1">{opt.label}</div>
+								{opt.description && <div class="body-xs text-secondary">{opt.description}</div>}
+							</label>
+						))}
+					</div>
+				</div>
+
+				<!-- STEP 2: What brings you? -->
+				<div class="wizard-step" data-step="1">
+					<p class="font-mono text-xs text-secondary mb-1">Step 2 of {ENROLLMENT_STEPS.length}</p>
+					<h2 class="heading-lg text-foreground mb-6">{ENROLLMENT_STEPS[1].question}</h2>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+						{ENROLLMENT_STEPS[1].options.map(opt => (
+							<label class="wizard-option-card card p-5 cursor-pointer has-[:checked]:border-[var(--accent)] block">
+								<input type="radio" name="step1" value={opt.id} class="sr-only" />
+								<div class="text-2xl mb-2">{opt.icon}</div>
+								<div class="font-medium text-foreground body-sm mb-1">{opt.label}</div>
+								{opt.description && <div class="body-xs text-secondary">{opt.description}</div>}
+							</label>
+						))}
+					</div>
+				</div>
+
+				<!-- STEP 3: Comfort level -->
+				<div class="wizard-step" data-step="2">
+					<p class="font-mono text-xs text-secondary mb-1">Step 3 of {ENROLLMENT_STEPS.length}</p>
+					<h2 class="heading-lg text-foreground mb-6">{ENROLLMENT_STEPS[2].question}</h2>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+						{ENROLLMENT_STEPS[2].options.map(opt => (
+							<label class="wizard-option-card card p-5 cursor-pointer has-[:checked]:border-[var(--accent)] block">
+								<input type="radio" name="step2" value={opt.id} class="sr-only" />
+								<div class="text-2xl mb-2">{opt.icon}</div>
+								<div class="font-medium text-foreground body-sm mb-1">{opt.label}</div>
+								{opt.description && <div class="body-xs text-secondary">{opt.description}</div>}
+							</label>
+						))}
+					</div>
+				</div>
+
+				<!-- STEP 4: What excites you (multi-select) -->
+				<div class="wizard-step" data-step="3">
+					<p class="font-mono text-xs text-secondary mb-1">Step 4 of {ENROLLMENT_STEPS.length}</p>
+					<h2 class="heading-lg text-foreground mb-2">{ENROLLMENT_STEPS[3].question}</h2>
+					<p class="body-sm text-secondary mb-6">Select all that apply.</p>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+						{ENROLLMENT_STEPS[3].options.map(opt => (
+							<label class="wizard-option-card card p-5 cursor-pointer has-[:checked]:border-[var(--accent)] block">
+								<input type="checkbox" name="step3" value={opt.id} class="sr-only" />
+								<div class="text-2xl mb-2">{opt.icon}</div>
+								<div class="font-medium text-foreground body-sm mb-1">{opt.label}</div>
+								{opt.description && <div class="body-xs text-secondary">{opt.description}</div>}
+							</label>
+						))}
+					</div>
+				</div>
+
+				<!-- STEP 5: Details form -->
+				<div class="wizard-step" data-step="4">
+					<p class="font-mono text-xs text-secondary mb-1">Step 5 of {ENROLLMENT_STEPS.length}</p>
+					<h2 class="heading-lg text-foreground mb-6">A few more details</h2>
+					<div class="card p-6 space-y-5">
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+							<div>
+								<label for="enroll-name" class="block body-sm text-foreground mb-1">Name <span class="text-[var(--accent)]">*</span></label>
+								<input id="enroll-name" name="name" type="text" required
+									class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground" />
+							</div>
+							<div>
+								<label for="enroll-email" class="block body-sm text-foreground mb-1">Email <span class="text-[var(--accent)]">*</span></label>
+								<input id="enroll-email" name="email" type="email" required
+									class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground" />
+							</div>
+						</div>
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+							<div>
+								<label for="enroll-org" class="block body-sm text-foreground mb-1">Organization</label>
+								<input id="enroll-org" name="organization" type="text"
+									class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground" />
+							</div>
+							<div>
+								<label for="enroll-industry" class="block body-sm text-foreground mb-1">Industry</label>
+								<select id="enroll-industry" name="industry"
+									class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground">
+									<option value="">Select industry</option>
+									<option>Healthcare</option>
+									<option>Financial Services</option>
+									<option>Technology</option>
+									<option>Education</option>
+									<option>Legal</option>
+									<option>Real Estate</option>
+									<option>Retail</option>
+									<option>Government</option>
+									<option>Non-Profit</option>
+									<option>Media & Entertainment</option>
+									<option>Manufacturing</option>
+									<option>Insurance</option>
+									<option>Other</option>
+								</select>
+							</div>
+						</div>
+						<div>
+							<label class="block body-sm text-foreground mb-2">Preferred format</label>
+							<div class="flex gap-4">
+								{['Virtual', 'In-Person', 'Hybrid'].map(fmt => (
+									<label class="flex items-center gap-2 body-sm text-foreground cursor-pointer">
+										<input type="radio" name="format_preference" value={fmt.toLowerCase()} />
+										{fmt}
+									</label>
+								))}
+							</div>
+						</div>
+						<div>
+							<label for="enroll-goal" class="block body-sm text-foreground mb-1">Primary goal</label>
+							<textarea id="enroll-goal" name="primary_goal" rows="3"
+								placeholder="What outcome matters most to you from this workshop?"
+								class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground"></textarea>
+						</div>
+					</div>
+				</div>
+
+				<!-- RESULT SCREEN -->
+				<div class="wizard-step" data-step="result" id="wizard-result">
+					<div class="text-center py-8">
+						<div class="text-4xl mb-4">✓</div>
+						<h2 class="heading-lg text-foreground mb-2">Your recommendation</h2>
+						<p class="body-md text-secondary mb-8">Based on your answers, here's where to start:</p>
+						<div id="recommendation-card" class="card-premium p-6 text-left mb-8">
+							<h3 id="rec-title" class="heading-md text-foreground mb-2"></h3>
+							<p id="rec-description" class="body-md text-secondary mb-4"></p>
+							<div class="flex flex-wrap gap-3">
+								<a id="rec-enroll-link" href="/workshops" class="btn btn-primary">Enroll Now</a>
+								<a href="/workshops" class="btn btn-secondary">Browse All Workshops</a>
+							</div>
+						</div>
+						<p class="body-sm text-secondary">
+							Your details have been sent. Marlon will follow up within 2–3 business days.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Navigation buttons -->
+			<div id="wizard-nav" class="flex justify-between mt-8">
+				<button id="wizard-back" class="btn btn-secondary" style="display:none;">← Back</button>
+				<button id="wizard-next" class="btn btn-primary ml-auto">Next →</button>
+			</div>
+		</div>
+	</section>
+</PageLayout>
+
+<style>
+	.wizard-option-card {
+		border: 1px solid var(--border);
+		transition: border-color 0.15s ease;
+	}
+	.wizard-option-card:has(input:checked) {
+		border-color: var(--accent);
+		background: var(--color-accent-bg, rgba(198, 93, 58, 0.05));
+	}
+</style>
+
+<script define:vars={{ RECOMMENDATION_MAP, formSubmitEndpoint }}>
+	const totalSteps = 5; // steps 0-4 + result
+	let currentStep = 0;
+	const answers = {};
+
+	const steps = Array.from(document.querySelectorAll('.wizard-step:not([data-step="result"])'));
+	const resultStep = document.getElementById('wizard-result');
+	const nextBtn = document.getElementById('wizard-next');
+	const backBtn = document.getElementById('wizard-back');
+	const progressBar = document.getElementById('wizard-progress');
+
+	function showStep(idx) {
+		steps.forEach((s, i) => s.classList.toggle('active', i === idx));
+		if (resultStep) resultStep.classList.remove('active');
+		nextBtn.style.display = '';
+		backBtn.style.display = idx > 0 ? '' : 'none';
+		nextBtn.textContent = idx === totalSteps - 1 ? 'See My Recommendation →' : 'Next →';
+		if (progressBar) progressBar.style.width = `${((idx + 1) / (totalSteps + 1)) * 100}%`;
+	}
+
+	function showResult() {
+		steps.forEach(s => s.classList.remove('active'));
+		if (resultStep) resultStep.classList.add('active');
+		nextBtn.style.display = 'none';
+		backBtn.style.display = 'none';
+		if (progressBar) progressBar.style.width = '100%';
+
+		// Build recommendation key
+		const who = answers.step0 ?? '';
+		const goal = answers.step1 ?? '';
+		const level = answers.step2 ?? '';
+		const key = `${who}-${goal}-${level}`;
+		const workshopSlug = RECOMMENDATION_MAP[key] ?? RECOMMENDATION_MAP['default'] ?? 'ai-fundamentals-for-professionals';
+
+		const titleEl = document.getElementById('rec-title');
+		const descEl = document.getElementById('rec-description');
+		const linkEl = document.getElementById('rec-enroll-link');
+		if (titleEl) titleEl.textContent = workshopSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+		if (descEl) descEl.textContent = 'Based on your profile, this workshop is the right starting point. Click below to enroll or explore all available programs.';
+		if (linkEl) linkEl.href = `/workshops?highlight=${workshopSlug}`;
+
+		// Background form submission
+		const formData = new FormData();
+		formData.append('_subject', 'Workshop Enrollment — marlonavery.com');
+		formData.append('who', answers.step0 ?? '');
+		formData.append('goal', answers.step1 ?? '');
+		formData.append('comfort_level', answers.step2 ?? '');
+		formData.append('interests', (answers.step3 ?? []).join(', '));
+		formData.append('recommended_workshop', workshopSlug);
+
+		const name = document.getElementById('enroll-name')?.value;
+		const email = document.getElementById('enroll-email')?.value;
+		const org = document.getElementById('enroll-org')?.value;
+		const industry = document.getElementById('enroll-industry')?.value;
+		const goal_text = document.getElementById('enroll-goal')?.value;
+
+		if (name) formData.append('name', name);
+		if (email) formData.append('email', email);
+		if (org) formData.append('organization', org);
+		if (industry) formData.append('industry', industry);
+		if (goal_text) formData.append('primary_goal', goal_text);
+
+		fetch(formSubmitEndpoint, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } }).catch(() => {});
+	}
+
+	function collectAnswers(stepIdx) {
+		const step = steps[stepIdx];
+		if (!step) return true;
+		const stepData = stepIdx;
+
+		const radios = step.querySelectorAll(`input[name="step${stepIdx}"]:checked`);
+		const checkboxes = step.querySelectorAll(`input[name="step${stepIdx}"]:checked`);
+
+		if (stepIdx === 3) {
+			answers[`step${stepIdx}`] = Array.from(checkboxes).map(el => el.value);
+		} else {
+			const checked = step.querySelector(`input[name="step${stepIdx}"]:checked`);
+			if (!checked && stepIdx < 3) return false; // require selection
+			answers[`step${stepIdx}`] = checked?.value ?? '';
+		}
+		return true;
+	}
+
+	nextBtn?.addEventListener('click', () => {
+		if (currentStep < totalSteps) {
+			const valid = collectAnswers(currentStep);
+			if (!valid) {
+				nextBtn.classList.add('opacity-50');
+				setTimeout(() => nextBtn.classList.remove('opacity-50'), 600);
+				return;
+			}
+		}
+		if (currentStep === totalSteps - 1) {
+			showResult();
+		} else {
+			currentStep++;
+			showStep(currentStep);
+		}
+	});
+
+	backBtn?.addEventListener('click', () => {
+		if (currentStep > 0) {
+			currentStep--;
+			showStep(currentStep);
+		}
+	});
+
+	showStep(0);
+</script>

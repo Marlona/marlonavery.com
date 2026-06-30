@@ -1,0 +1,29 @@
+{
+  "title": "The Aha! Learning Model",
+  "slug": "aha-learning-model",
+  "tagline": "How to create moments that change how people think",
+  "summary": "After 80+ workshops, I've noticed that learning doesn't happen gradually — it happens in moments. An Aha! moment is when someone's mental model shifts, and suddenly something that was confusing becomes obvious. This model is my framework for designing those moments intentionally.",
+  "pillars": [
+    {
+      "name": "Awareness",
+      "description": "Meet people where they are, not where you wish they were. Start by understanding what they currently believe and where that belief breaks down. The gap between what they expect and what actually happens is where Aha! moments live."
+    },
+    {
+      "name": "Hands-On",
+      "description": "People don't learn by watching — they learn by doing. Design learning experiences where participants are building, experimenting, and making mistakes in the first 20 minutes. Failure in a safe context is the fastest path to understanding."
+    },
+    {
+      "name": "Application",
+      "description": "The Aha! moment only sticks if people immediately apply it to their own context. Every lesson ends with: 'How would you use this next week in your actual work?' Generic learning dies in the classroom. Personal application makes it real."
+    }
+  ],
+  "keyQuestions": [
+    "What does my audience currently believe that I need to gently disrupt?",
+    "What's the fastest way to get people doing something instead of watching?",
+    "What's the one thing I want them to walk away with — and how do I make it theirs?",
+    "What does an Aha! moment look like in this specific context?"
+  ],
+  "exampleInPractice": "In my AI fundamentals workshops, the Aha! moment almost always happens in the same place: when participants build their first working AI assistant and it responds in a way they didn't expect. That moment of surprise — 'wait, I built that?' — is the emotional anchor the rest of the learning hangs on. [NEEDS REVIEW BY MARLON]",
+  "status": "published",
+  "order": 6
+}

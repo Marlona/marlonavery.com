@@ -30,8 +30,12 @@ export const SOCIAL_LINKS = {
 
 export const NAV_LINKS = [
 	{ href: '/about', label: 'About' },
-	{ href: '/experience', label: 'Experience' },
+	{ href: '/speaking', label: 'Speaking' },
+	{ href: '/workshops', label: 'Workshops' },
 	{ href: '/projects', label: 'Projects' },
+	{ href: '/events', label: 'Events' },
+	{ href: '/ai-lab', label: 'AI Lab' },
+	{ href: '/playbook', label: 'Playbook' },
 	{ href: '/writing', label: 'Writing' },
 	{ href: '/contact', label: 'Contact' },
 ] as const;

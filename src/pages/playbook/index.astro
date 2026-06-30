@@ -1,0 +1,50 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_CONFIG } from '../../config';
+import { getCollection } from 'astro:content';
+import FrameworkCard from '../../components/playbook/FrameworkCard.astro';
+import { PLAYBOOK_INTRO, PLAYBOOK_FRAMEWORK_ORDER } from '../../data/playbook';
+
+const allFrameworks = await getCollection('playbook');
+const published = allFrameworks
+	.filter(f => f.data.status === 'published')
+	.sort((a, b) => {
+		const aIdx = PLAYBOOK_FRAMEWORK_ORDER.indexOf(a.data.slug ?? a.id);
+		const bIdx = PLAYBOOK_FRAMEWORK_ORDER.indexOf(b.data.slug ?? b.id);
+		if (aIdx === -1 && bIdx === -1) return a.data.order - b.data.order;
+		if (aIdx === -1) return 1;
+		if (bIdx === -1) return -1;
+		return aIdx - bIdx;
+	});
+---
+
+<PageLayout
+	title={`Playbook | ${SITE_CONFIG.name}`}
+	description="The frameworks Marlon Avery lives by — mental models for AI strategy, education, leadership, and responsible adoption built from building real systems."
+>
+	<!-- HERO -->
+	<section class="py-20 px-4">
+		<div class="max-w-4xl mx-auto">
+			<p class="kicker mb-4">Frameworks & Mental Models</p>
+			<h1 class="display text-foreground mb-6">{PLAYBOOK_INTRO.headline}</h1>
+			<p class="body-lg text-secondary max-w-2xl leading-relaxed">{PLAYBOOK_INTRO.description}</p>
+		</div>
+	</section>
+
+	<!-- FRAMEWORKS GRID -->
+	<section class="py-8 pb-24 px-4">
+		<div class="max-w-5xl mx-auto">
+			{published.length > 0 ? (
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-reveal">
+					{published.map(f => (
+						<FrameworkCard id={f.id} framework={f.data} />
+					))}
+				</div>
+			) : (
+				<div class="text-center py-20">
+					<p class="body-lg text-secondary">Frameworks coming soon.</p>
+				</div>
+			)}
+		</div>
+	</section>
+</PageLayout>

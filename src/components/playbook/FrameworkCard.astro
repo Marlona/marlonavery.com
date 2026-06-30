@@ -1,0 +1,58 @@
+---
+interface Pillar {
+	name: string;
+	description: string;
+}
+
+interface FrameworkData {
+	title: string;
+	slug: string;
+	tagline: string;
+	summary: string;
+	pillars: Pillar[];
+	keyQuestions: string[];
+	status: 'published' | 'draft';
+	order: number;
+}
+
+interface Props {
+	id: string;
+	framework: FrameworkData;
+	expanded?: boolean;
+}
+
+const { id, framework, expanded = false } = Astro.props;
+const slug = framework.slug ?? id;
+---
+
+<div class="framework-card card p-6" data-framework={slug}>
+	<div class="mb-4">
+		<h3 class="heading-sm text-foreground mb-1">{framework.title}</h3>
+		<p class="kicker mb-3" style="color: var(--accent);">{framework.tagline}</p>
+		<p class="body-sm text-secondary leading-relaxed">{framework.summary}</p>
+	</div>
+
+	<details open={expanded}>
+		<summary class="font-mono text-xs text-secondary cursor-pointer hover:text-[var(--accent)] transition-colors mb-4 select-none">
+			{framework.pillars.length} pillars — expand ↓
+		</summary>
+
+		<ul class="framework-pillar-list mb-4">
+			{framework.pillars.map((pillar, i) => (
+				<li class="flex gap-3">
+					<span class="font-mono text-xs shrink-0 mt-0.5" style="color: var(--accent); opacity: 0.7;">
+						{String(i + 1).padStart(2, '0')}
+					</span>
+					<div>
+						<span class="body-sm font-medium text-foreground">{pillar.name}</span>
+						<span class="body-xs text-secondary ml-2">{pillar.description}</span>
+					</div>
+				</li>
+			))}
+		</ul>
+
+		<a href={`/playbook/${slug}`} class="font-mono text-xs text-[var(--accent)] hover:underline">
+			Read the full framework →
+		</a>
+	</details>
+</div>

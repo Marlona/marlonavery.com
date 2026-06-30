@@ -3,6 +3,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 import { SITE_CONFIG } from '../config';
 import PhilosophyCard from '../components/PhilosophyCard.astro';
 import FocusAreaCard from '../components/FocusAreaCard.astro';
+import PhilosophyStrip from '../components/home/PhilosophyStrip.astro';
 
 // Data imports
 import {
@@ -14,6 +15,7 @@ import {
 	EDUCATION,
 	COMMUNITY,
 } from '../data/about';
+import { PHILOSOPHY_STEPS } from '../data/homepage';
 ---
 
 <PageLayout title={`About | ${SITE_CONFIG.name}`} description={`About ${SITE_CONFIG.name} — ${SITE_CONFIG.title}. A decade building Generative AI products, voice systems, and developer communities.`}>
@@ -53,6 +55,15 @@ import {
 				<div class="text-2xl font-bold text-accent font-mono">5+</div>
 				<div class="body-sm text-muted mt-1">Ventures Founded</div>
 			</div>
+		</div>
+
+		<!-- Philosophy Strip -->
+		<div id="philosophy" class="mb-16 scroll-mt-8">
+			<h2 class="heading-lg text-foreground mb-6">The Philosophy I Live By</h2>
+			<p class="body-md text-secondary mb-8 max-w-3xl">
+				Every keynote, workshop, and AI system I build comes back to this flywheel: build real things, extract the lessons, teach them widely, and inspire others to keep going.
+			</p>
+			<PhilosophyStrip steps={PHILOSOPHY_STEPS} />
 		</div>
 
 		<!-- How I Lead (Expanded) -->
@@ -121,6 +132,10 @@ import {
 						</ul>
 					</div>
 				))}
+			</div>
+			<div class="mt-8 flex flex-wrap gap-4">
+				<a href="/workshops" class="btn btn-secondary">Browse AImpact Workshops →</a>
+				<a href="/speaking" class="btn btn-secondary">Speaking Topics →</a>
 			</div>
 		</div>
 

@@ -1,0 +1,23 @@
+---
+interface Props {
+	industries: string[];
+}
+
+const { industries } = Astro.props;
+---
+
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 stagger-reveal">
+	{industries.map(industry => (
+		<a
+			href={`/speaking?industry=${encodeURIComponent(industry)}`}
+			class="industry-tile card p-4 text-center block"
+		>
+			<span class="body-sm font-medium text-foreground">{industry}</span>
+		</a>
+	))}
+</div>
+
+<p class="text-center mt-6 body-sm text-secondary">
+	Don't see your industry?{' '}
+	<a href="/contact" class="text-[var(--accent)] hover:underline">Let's talk.</a>
+</p>

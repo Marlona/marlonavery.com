@@ -1,0 +1,33 @@
+{
+  "title": "AI Readiness Framework",
+  "slug": "ai-readiness",
+  "tagline": "Know where you are before you decide where to go",
+  "summary": "Most organizations rush to implement AI before they're ready, and wonder why it doesn't stick. This framework helps leaders assess readiness across four dimensions — not to find reasons to delay, but to identify the highest-leverage changes that unlock adoption.",
+  "pillars": [
+    {
+      "name": "Infrastructure",
+      "description": "Do you have the data, compute, and security foundations to run AI systems responsibly? This isn't about having everything perfect — it's about knowing what you have and what the gaps are."
+    },
+    {
+      "name": "People",
+      "description": "Do your teams have the AI literacy to use tools effectively and the psychological safety to experiment? The biggest barrier to AI adoption is usually human, not technical."
+    },
+    {
+      "name": "Process",
+      "description": "Do your workflows create natural integration points for AI, or do they require people to break their habits to use it? AI that fights your process dies in a drawer."
+    },
+    {
+      "name": "Culture",
+      "description": "Is leadership modeling curiosity about AI, or sending signals that errors are failures? Cultures that treat AI experiments as learning opportunities adopt faster than those that demand certainty."
+    }
+  ],
+  "keyQuestions": [
+    "Where in your workflow does AI create the most immediate leverage?",
+    "What's the biggest fear your team has about AI — and is it grounded in reality?",
+    "What would need to be true for your team to use AI on Monday morning?",
+    "Who are your early adopters, and how can they help the rest of the team?"
+  ],
+  "exampleInPractice": "In enterprise workshops, I use a quick 20-question readiness survey across these four pillars. Teams score themselves and immediately see patterns — most organizations are strong in infrastructure but weak in culture, or vice versa. That gap becomes the roadmap. [NEEDS REVIEW BY MARLON]",
+  "status": "published",
+  "order": 2
+}

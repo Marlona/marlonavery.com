@@ -1,0 +1,15 @@
+{
+  "title": "AI Fundamentals for Professionals",
+  "tagline": "Go from curious to capable in one day",
+  "level": "beginner",
+  "format": "virtual",
+  "duration": "4 hours",
+  "audience": ["Business professionals", "Team leads", "Executives", "Educators"],
+  "outcomes": [
+    "Understand how large language models work without needing a technical background",
+    "Build and use your first AI assistant using real tools",
+    "Leave with a personal AI workflow you can use on Monday"
+  ],
+  "industries": ["Healthcare", "Financial Services", "Education", "Retail", "Government"],
+  "featured": true
+}

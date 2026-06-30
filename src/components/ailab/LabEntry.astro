@@ -1,0 +1,71 @@
+---
+import { LAB_KIND_LABELS } from '../../data/ailab';
+
+interface LabEntryData {
+	title: string;
+	publishDate: Date;
+	kind: 'experiment' | 'tool' | 'prompt' | 'lesson';
+	status: 'active' | 'archived' | 'in-progress';
+	description: string;
+	embed?: string;
+	tags: string[];
+	distributedTo: string[];
+	featured: boolean;
+}
+
+interface Props {
+	id: string;
+	entry: LabEntryData;
+}
+
+const { id, entry } = Astro.props;
+
+const kindClass: Record<string, string> = {
+	experiment: 'badge-experiment',
+	tool: 'badge-tool',
+	prompt: 'badge-prompt',
+	lesson: 'badge-lesson',
+};
+
+const platformIcons: Record<string, string> = {
+	tiktok: '🎵',
+	instagram: '📸',
+	linkedin: '💼',
+	youtube: '▶️',
+};
+
+const dateStr = entry.publishDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+---
+
+<div class="lab-card card p-5 flex flex-col h-full" data-kind={entry.kind}>
+	<div class="flex items-start justify-between gap-3 mb-3">
+		<span class={kindClass[entry.kind]}>
+			{LAB_KIND_LABELS[entry.kind]}
+		</span>
+		<span class="font-mono text-xs text-secondary">{dateStr}</span>
+	</div>
+
+	<h3 class="heading-sm text-foreground mb-2">{entry.title}</h3>
+	<p class="body-sm text-secondary leading-relaxed mb-4">{entry.description}</p>
+
+	{entry.tags.length > 0 && (
+		<div class="flex flex-wrap gap-1 mb-4">
+			{entry.tags.map(tag => (
+				<span class="tag">{tag}</span>
+			))}
+		</div>
+	)}
+
+	<div class="mt-auto pt-3 border-t border-[var(--border)] flex items-center justify-between">
+		{entry.distributedTo.length > 0 && (
+			<div class="flex gap-1">
+				{entry.distributedTo.map(p => (
+					<span title={p} class="text-sm">{platformIcons[p] ?? p}</span>
+				))}
+			</div>
+		)}
+		{entry.status === 'archived' && (
+			<span class="font-mono text-xs text-secondary">Archived</span>
+		)}
+	</div>
+</div>

@@ -1,0 +1,10 @@
+{
+  "title": "VoicePath AI: Voice Agent Architecture Starter",
+  "publishDate": "2025-02-01",
+  "kind": "tool",
+  "status": "active",
+  "description": "A reference architecture and starter codebase for building production-ready voice AI agents. Covers telephony integration (Twilio), speech-to-text (Whisper), LLM reasoning (GPT-4o / Claude), and text-to-speech. Designed for healthcare and customer service use cases.",
+  "tags": ["voice-ai", "architecture", "twilio", "openai", "production"],
+  "distributedTo": ["linkedin"],
+  "featured": false
+}

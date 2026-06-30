@@ -1,0 +1,10 @@
+{
+  "title": "The Killer Customer Support Prompt Template",
+  "publishDate": "2025-08-15",
+  "kind": "prompt",
+  "status": "active",
+  "description": "A reusable prompt template for building customer support assistants that stay on-brand, avoid hallucinations, and escalate correctly. Used in AImpact workshops across multiple industries. Includes four versions: retail, healthcare, financial services, and general enterprise.",
+  "tags": ["prompt-engineering", "customer-support", "templates", "enterprise"],
+  "distributedTo": ["linkedin", "instagram"],
+  "featured": true
+}

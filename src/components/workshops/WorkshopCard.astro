@@ -1,0 +1,78 @@
+---
+interface WorkshopData {
+	title: string;
+	tagline: string;
+	level: 'beginner' | 'intermediate' | 'advanced' | 'executive';
+	format: 'virtual' | 'in-person' | 'hybrid';
+	duration: string;
+	audience: string[];
+	outcomes: string[];
+	featured: boolean;
+	enrollUrl?: string;
+	capacity?: string;
+}
+
+interface Props {
+	id: string;
+	workshop: WorkshopData;
+	showEnrollCTA?: boolean;
+}
+
+const { id, workshop, showEnrollCTA = true } = Astro.props;
+
+const levelColors: Record<string, string> = {
+	beginner: '#5a8f4e',
+	intermediate: '#c65d3a',
+	advanced: '#2d3748',
+	executive: '#4a5568',
+};
+
+const formatIcon: Record<string, string> = {
+	virtual: '🖥',
+	'in-person': '📍',
+	hybrid: '↔️',
+};
+---
+
+<div
+	class="workshop-card card p-6 flex flex-col h-full"
+	data-level={workshop.level}
+	data-format={workshop.format}
+	data-workshop-id={id}
+>
+	<div class="flex items-start justify-between gap-3 mb-3">
+		<span
+			class="font-mono text-xs font-medium uppercase tracking-wider px-2 py-1 rounded"
+			style={`background: ${levelColors[workshop.level]}22; color: ${levelColors[workshop.level]};`}
+		>
+			{workshop.level}
+		</span>
+		<span class="text-xs text-secondary">{formatIcon[workshop.format]} {workshop.format}</span>
+	</div>
+
+	<h3 class="heading-sm text-foreground mb-1">{workshop.title}</h3>
+	<p class="body-sm text-secondary mb-4 leading-relaxed">{workshop.tagline}</p>
+
+	{workshop.outcomes.length > 0 && (
+		<ul class="mb-4 space-y-1">
+			{workshop.outcomes.slice(0, 3).map(o => (
+				<li class="body-xs text-secondary flex items-start gap-2">
+					<span style="color: var(--accent); flex-shrink: 0;">→</span>
+					<span>{o}</span>
+				</li>
+			))}
+		</ul>
+	)}
+
+	<div class="mt-auto pt-4 border-t border-[var(--border)] flex items-center justify-between gap-3">
+		<span class="font-mono text-xs text-secondary">{workshop.duration}</span>
+		{showEnrollCTA && (
+			<a
+				href={workshop.enrollUrl ?? `/workshops/enroll?workshop=${id}`}
+				class="btn-secondary text-sm py-1.5 px-4"
+			>
+				Enroll →
+			</a>
+		)}
+	</div>
+</div>

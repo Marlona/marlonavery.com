@@ -165,4 +165,81 @@ const press = defineCollection({
     }),
 });
 
-export const collections = { blog, projects, experience, narratives, artifacts, press };
+// 7. WORKSHOPS COLLECTION
+const workshops = defineCollection({
+    loader: glob({ pattern: '**/*.{json,md,mdx}', base: './src/content/workshops' }),
+    schema: z.object({
+        title: z.string(),
+        tagline: z.string(),
+        level: z.enum(['beginner', 'intermediate', 'advanced', 'executive']),
+        format: z.enum(['virtual', 'in-person', 'hybrid']),
+        duration: z.string(),
+        audience: z.array(z.string()),
+        outcomes: z.array(z.string()).default([]),
+        industries: z.array(z.string()).default([]),
+        featured: z.boolean().default(false),
+        enrollUrl: z.string().optional(),
+        capacity: z.string().optional(),
+    }),
+});
+
+// 8. EVENTS COLLECTION
+const events = defineCollection({
+    loader: glob({ pattern: '**/*.{json,md,mdx}', base: './src/content/events' }),
+    schema: z.object({
+        title: z.string(),
+        slug: z.string().optional(),
+        date: z.coerce.date(),
+        endDate: z.coerce.date().optional(),
+        type: z.enum(['keynote', 'workshop', 'panel', 'conference', 'podcast', 'live']),
+        status: z.enum(['upcoming', 'past']),
+        venue: z.string().optional(),
+        city: z.string().optional(),
+        description: z.string(),
+        recap: z.string().optional(),
+        photos: z.array(z.string()).default([]),
+        videoUrl: z.string().url().optional(),
+        resources: z.array(z.object({
+            label: z.string(),
+            url: z.string().url(),
+        })).default([]),
+        featured: z.boolean().default(false),
+    }),
+});
+
+// 9. AILAB COLLECTION
+const ailab = defineCollection({
+    loader: glob({ pattern: '**/*.{json,md,mdx}', base: './src/content/ailab' }),
+    schema: z.object({
+        title: z.string(),
+        publishDate: z.coerce.date(),
+        kind: z.enum(['experiment', 'tool', 'prompt', 'lesson']),
+        status: z.enum(['active', 'archived', 'in-progress']).default('active'),
+        description: z.string(),
+        embed: z.string().url().optional(),
+        tags: z.array(z.string()).default([]),
+        distributedTo: z.array(z.enum(['tiktok', 'instagram', 'linkedin', 'youtube'])).default([]),
+        featured: z.boolean().default(false),
+    }),
+});
+
+// 10. PLAYBOOK COLLECTION
+const playbook = defineCollection({
+    loader: glob({ pattern: '**/*.json', base: './src/content/playbook' }),
+    schema: z.object({
+        title: z.string(),
+        slug: z.string(),
+        tagline: z.string(),
+        summary: z.string(),
+        pillars: z.array(z.object({
+            name: z.string(),
+            description: z.string(),
+        })),
+        keyQuestions: z.array(z.string()).default([]),
+        exampleInPractice: z.string().optional(),
+        status: z.enum(['published', 'draft']).default('published'),
+        order: z.number().default(0),
+    }),
+});
+
+export const collections = { blog, projects, experience, narratives, artifacts, press, workshops, events, ailab, playbook };

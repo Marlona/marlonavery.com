@@ -1,0 +1,150 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_CONFIG } from '../../config';
+import { getCollection } from 'astro:content';
+import WorkshopCard from '../../components/workshops/WorkshopCard.astro';
+import { AIMPACT_OVERVIEW, WORKSHOP_LEVELS, WORKSHOP_FORMATS } from '../../data/workshops';
+
+const workshops = await getCollection('workshops');
+const featured = workshops.filter(w => w.data.featured);
+const allWorkshops = workshops;
+---
+
+<PageLayout
+	title={`Workshops | ${SITE_CONFIG.name}`}
+	description="AI workshops that create real capability — not just awareness. Browse AImpact workshop programs for professionals, executives, and teams."
+>
+	<!-- HERO -->
+	<section class="py-20 px-4">
+		<div class="max-w-4xl mx-auto">
+			<p class="kicker mb-4">AImpact Workshops</p>
+			<h1 class="display text-foreground mb-6">
+				{AIMPACT_OVERVIEW.tagline}
+			</h1>
+			<p class="body-lg text-secondary max-w-2xl mb-10">
+				{AIMPACT_OVERVIEW.description}
+			</p>
+
+			<!-- Stats -->
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+				{AIMPACT_OVERVIEW.stats.map(stat => (
+					<div class="text-center p-4 border border-[var(--border-subtle)] rounded-lg">
+						<div class="text-2xl font-bold font-mono mb-1" style="color: var(--accent);">{stat.value}</div>
+						<div class="body-xs text-secondary">{stat.label}</div>
+					</div>
+				))}
+			</div>
+
+			<a href="/workshops/enroll" class="btn btn-primary">
+				Find Your Workshop →
+			</a>
+		</div>
+	</section>
+
+	<!-- FILTER BAR -->
+	<section class="sticky top-0 z-20 py-4 px-4 border-y border-[var(--border)] bg-[var(--color-bg)]">
+		<div class="max-w-5xl mx-auto flex flex-wrap gap-3 items-center">
+			<span class="font-mono text-xs text-secondary hidden sm:inline">Level:</span>
+			{WORKSHOP_LEVELS.map(level => (
+				<button
+					class="filter-btn font-mono text-xs px-3 py-1.5 rounded border transition-colors"
+					data-filter-level={level.id}
+					data-active={level.id === 'all' ? 'true' : 'false'}
+					style={level.id === 'all' ? 'border-color: var(--accent); color: var(--accent);' : 'border-color: var(--border); color: var(--text-secondary);'}
+				>
+					{level.label}
+				</button>
+			))}
+			<span class="font-mono text-xs text-secondary ml-4 hidden sm:inline">Format:</span>
+			{WORKSHOP_FORMATS.map(fmt => (
+				<button
+					class="filter-btn font-mono text-xs px-3 py-1.5 rounded border transition-colors"
+					data-filter-format={fmt.id}
+					data-active={fmt.id === 'all' ? 'true' : 'false'}
+					style={fmt.id === 'all' ? 'border-color: var(--accent); color: var(--accent);' : 'border-color: var(--border); color: var(--text-secondary);'}
+				>
+					{fmt.label}
+				</button>
+			))}
+		</div>
+	</section>
+
+	<!-- WORKSHOP GRID -->
+	<section class="py-16 px-4">
+		<div class="max-w-5xl mx-auto">
+			<div id="workshop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+				{allWorkshops.map(w => (
+					<div
+						data-level={w.data.level}
+						data-format={w.data.format}
+						class="workshop-grid-item"
+					>
+						<WorkshopCard id={w.id} workshop={w.data} showEnrollCTA={true} />
+					</div>
+				))}
+			</div>
+
+			{allWorkshops.length === 0 && (
+				<div class="text-center py-20">
+					<p class="body-lg text-secondary mb-4">No workshops yet.</p>
+					<a href="/contact" class="link">Get notified when new programs launch →</a>
+				</div>
+			)}
+
+			<div id="no-results" class="text-center py-20 hidden">
+				<p class="body-lg text-secondary">No workshops match that filter.</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA BAND -->
+	<section class="py-16 px-4 bg-[var(--color-surface)] border-t border-[var(--border)]">
+		<div class="max-w-3xl mx-auto text-center">
+			<h2 class="heading-xl text-foreground mb-4">Not sure which one fits?</h2>
+			<p class="body-lg text-secondary mb-8">
+				Take the 5-step enrollment quiz. Answer a few questions and get a personalized recommendation.
+			</p>
+			<a href="/workshops/enroll" class="btn btn-primary">Find My Workshop →</a>
+		</div>
+	</section>
+</PageLayout>
+
+<script>
+	// Client-side filter logic
+	let activeLevel = 'all';
+	let activeFormat = 'all';
+
+	function applyFilters() {
+		const items = document.querySelectorAll<HTMLElement>('.workshop-grid-item');
+		let visibleCount = 0;
+		items.forEach(item => {
+			const level = item.dataset.level ?? '';
+			const format = item.dataset.format ?? '';
+			const levelMatch = activeLevel === 'all' || level === activeLevel;
+			const formatMatch = activeFormat === 'all' || format === activeFormat;
+			const show = levelMatch && formatMatch;
+			item.style.display = show ? '' : 'none';
+			if (show) visibleCount++;
+		});
+		const noResults = document.getElementById('no-results');
+		if (noResults) noResults.classList.toggle('hidden', visibleCount > 0);
+	}
+
+	document.querySelectorAll<HTMLButtonElement>('[data-filter-level]').forEach(btn => {
+		btn.addEventListener('click', () => {
+			activeLevel = btn.dataset.filterLevel ?? 'all';
+			document.querySelectorAll('[data-filter-level]').forEach(b => b.setAttribute('style', 'border-color: var(--border); color: var(--text-secondary);'));
+			btn.setAttribute('style', 'border-color: var(--accent); color: var(--accent);');
+			applyFilters();
+		});
+	});
+
+	document.querySelectorAll<HTMLButtonElement>('[data-filter-format]').forEach(btn => {
+		btn.addEventListener('click', () => {
+			activeFormat = btn.dataset.filterFormat ?? 'all';
+			document.querySelectorAll('[data-filter-format]').forEach(b => b.setAttribute('style', 'border-color: var(--border); color: var(--text-secondary);'));
+			btn.setAttribute('style', 'border-color: var(--accent); color: var(--accent);');
+			applyFilters();
+		});
+	});
+</script>

@@ -1,0 +1,15 @@
+{
+  "title": "Prompt Engineering Masterclass",
+  "tagline": "Write prompts that actually work",
+  "level": "intermediate",
+  "format": "hybrid",
+  "duration": "6 hours",
+  "audience": ["Analysts", "Managers", "Product teams", "Content creators"],
+  "outcomes": [
+    "Master the Context → Constraint → Format → Example prompt framework",
+    "Build reusable prompt templates for your team",
+    "Reduce AI hallucinations by 80% with structured prompting techniques"
+  ],
+  "industries": ["Technology", "Financial Services", "Healthcare", "Legal", "Education"],
+  "featured": true
+}

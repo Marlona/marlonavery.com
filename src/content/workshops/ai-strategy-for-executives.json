@@ -1,0 +1,15 @@
+{
+  "title": "AI Strategy for Executives",
+  "tagline": "Lead the AI transformation — don't just survive it",
+  "level": "executive",
+  "format": "in-person",
+  "duration": "Half-day (3 hours)",
+  "audience": ["C-suite leaders", "VPs and Directors", "Board members", "Senior decision-makers"],
+  "outcomes": [
+    "Assess your organization's AI readiness across people, process, and infrastructure",
+    "Build a 90-day AI adoption roadmap your team can execute",
+    "Navigate responsible AI adoption with a practical ethics framework"
+  ],
+  "industries": ["Financial Services", "Healthcare", "Technology", "Retail", "Manufacturing"],
+  "featured": true
+}

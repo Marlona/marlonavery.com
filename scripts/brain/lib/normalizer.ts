@@ -79,7 +79,7 @@ export async function normalize(
 
   const message = await client.messages.create({
     model: config.model || DEFAULT_MODEL,
-    max_tokens: 2048,
+    max_tokens: 4096,
     messages: [{ role: 'user', content: prompt }],
   });
 

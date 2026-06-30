@@ -1,0 +1,83 @@
+---
+interface EventData {
+	title: string;
+	date: Date;
+	endDate?: Date;
+	type: string;
+	status: 'upcoming' | 'past';
+	venue?: string;
+	city?: string;
+	description: string;
+	recap?: string;
+	videoUrl?: string;
+	featured: boolean;
+}
+
+interface Props {
+	id: string;
+	event: EventData;
+	variant?: 'upcoming' | 'past';
+}
+
+const { id, event, variant = event.status } = Astro.props;
+
+const monthShort = event.date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+const day = event.date.toLocaleDateString('en-US', { day: '2-digit' });
+const year = event.date.getFullYear();
+
+const typeLabels: Record<string, string> = {
+	keynote: 'Keynote',
+	workshop: 'Workshop',
+	panel: 'Panel',
+	conference: 'Conference',
+	podcast: 'Podcast',
+	live: 'Live Session',
+};
+---
+
+<div class={`event-card card p-5 flex gap-4 ${variant === 'upcoming' ? 'border-l-2' : ''}`}
+	style={variant === 'upcoming' ? 'border-left-color: var(--accent);' : ''}>
+
+	<div class="event-card-date shrink-0 text-center w-12">
+		<div>{monthShort}</div>
+		<div class="text-xl font-bold">{day}</div>
+		<div class="opacity-60">{year}</div>
+	</div>
+
+	<div class="flex-1 min-w-0">
+		<div class="flex items-center gap-2 mb-1 flex-wrap">
+			<span class="badge-tag font-mono text-xs uppercase tracking-wider" style="color: var(--accent);">
+				{typeLabels[event.type] ?? event.type}
+			</span>
+			{event.featured && (
+				<span class="font-mono text-xs text-secondary">Featured</span>
+			)}
+		</div>
+
+		<h3 class="heading-sm text-foreground mb-1">
+			{variant === 'past'
+				? <a href={`/events/${id}`} class="hover:text-[var(--accent)] transition-colors">{event.title}</a>
+				: event.title
+			}
+		</h3>
+
+		{(event.venue || event.city) && (
+			<p class="body-xs text-secondary mb-2">
+				{[event.venue, event.city].filter(Boolean).join(' · ')}
+			</p>
+		)}
+
+		<p class="body-sm text-secondary line-clamp-2">{event.description}</p>
+
+		{variant === 'past' && event.recap && (
+			<a href={`/events/${id}`} class="inline-block mt-2 font-mono text-xs text-[var(--accent)] hover:underline">
+				Read recap →
+			</a>
+		)}
+		{variant === 'upcoming' && (
+			<a href="/contact" class="inline-block mt-2 font-mono text-xs text-[var(--accent)] hover:underline">
+				Request info →
+			</a>
+		)}
+	</div>
+</div>

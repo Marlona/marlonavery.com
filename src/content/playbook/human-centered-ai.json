@@ -1,0 +1,33 @@
+{
+  "title": "Human-Centered AI",
+  "slug": "human-centered-ai",
+  "tagline": "AI that makes people better, not obsolete",
+  "summary": "The question isn't 'what can AI replace?' It's 'what can AI unlock in people who were previously limited?' Human-centered AI design starts with a deep understanding of human needs, not with technology capabilities. The best AI systems are the ones people barely notice because they work so naturally.",
+  "pillars": [
+    {
+      "name": "Augment, Don't Replace",
+      "description": "Design AI systems that make your people more capable, not fewer. The goal is to remove the tedious and expand the creative — to let humans do more of what only humans can do."
+    },
+    {
+      "name": "Trust Through Transparency",
+      "description": "People adopt AI faster when they understand it. Design systems that explain themselves, surface their confidence levels, and make it easy to verify outputs. Opaque AI creates resistance."
+    },
+    {
+      "name": "Feedback Loops",
+      "description": "Build in mechanisms for people to correct, improve, and guide the AI. The best AI systems get better over time because they incorporate human judgment, not despite it."
+    },
+    {
+      "name": "Inclusive Design",
+      "description": "Design for the full range of users — different technical comfort levels, languages, abilities, and contexts. AI that only works for power users has a short lifetime."
+    }
+  ],
+  "keyQuestions": [
+    "What does this person actually need to accomplish — and does the AI help them get there faster?",
+    "Where does this AI take control away from the user, and is that the right trade-off?",
+    "How does someone correct the AI when it's wrong?",
+    "Who isn't represented in our design assumptions, and how does that create risk?"
+  ],
+  "exampleInPractice": "When designing the VoicePath patient intake agent, we ran sessions with actual healthcare admin staff — not executives. Their feedback reshaped the entire interaction model. The version they helped design had 50% faster adoption than the first prototype. [NEEDS REVIEW BY MARLON]",
+  "status": "published",
+  "order": 5
+}

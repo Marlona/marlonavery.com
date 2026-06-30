@@ -1,0 +1,112 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_CONFIG } from '../../config';
+import { getCollection } from 'astro:content';
+import { PLAYBOOK_FRAMEWORK_ORDER } from '../../data/playbook';
+
+export async function getStaticPaths() {
+	const frameworks = await getCollection('playbook');
+	return frameworks.map(f => ({
+		params: { slug: f.data.slug ?? f.id },
+		props: { framework: f },
+	}));
+}
+
+const { framework } = Astro.props;
+const { data } = framework;
+
+// Find related frameworks (adjacent in order)
+const allFrameworks = await getCollection('playbook');
+const published = allFrameworks.filter(f => f.data.status === 'published');
+const currentSlug = data.slug ?? framework.id;
+const currentIdx = PLAYBOOK_FRAMEWORK_ORDER.indexOf(currentSlug);
+const related = published
+	.filter(f => (f.data.slug ?? f.id) !== currentSlug)
+	.slice(0, 2);
+---
+
+<PageLayout
+	title={`${data.title} | Playbook | ${SITE_CONFIG.name}`}
+	description={data.summary}
+>
+	<section class="max-w-3xl mx-auto px-4 py-16">
+		<!-- Breadcrumb -->
+		<nav class="font-mono text-xs text-secondary mb-10">
+			<a href="/playbook" class="hover:text-[var(--accent)] transition-colors">← Playbook</a>
+		</nav>
+
+		<!-- Header -->
+		<div class="mb-10">
+			<p class="kicker mb-3" style="color: var(--accent);">{data.tagline}</p>
+			<h1 class="heading-xl text-foreground mb-6">{data.title}</h1>
+			<p class="body-lg text-secondary leading-relaxed">{data.summary}</p>
+		</div>
+
+		<!-- Pillars -->
+		<div class="mb-12">
+			<h2 class="heading-md text-foreground mb-6">The Pillars</h2>
+			<ol class="space-y-6">
+				{data.pillars.map((pillar, i) => (
+					<li class="flex gap-4">
+						<span
+							class="font-mono text-sm shrink-0 w-7 h-7 flex items-center justify-center rounded border mt-0.5"
+							style="border-color: var(--accent); color: var(--accent);"
+						>
+							{i + 1}
+						</span>
+						<div>
+							<h3 class="heading-sm text-foreground mb-1">{pillar.name}</h3>
+							<p class="body-md text-secondary">{pillar.description}</p>
+						</div>
+					</li>
+				))}
+			</ol>
+		</div>
+
+		<!-- Key Questions -->
+		{data.keyQuestions && data.keyQuestions.length > 0 && (
+			<div class="mb-12">
+				<h2 class="heading-md text-foreground mb-6">Key Questions</h2>
+				<ul class="space-y-3">
+					{data.keyQuestions.map(q => (
+						<li class="flex items-start gap-3 body-md text-secondary">
+							<span style="color: var(--accent); flex-shrink: 0; font-weight: 600;">?</span>
+							<span>{q}</span>
+						</li>
+					))}
+				</ul>
+			</div>
+		)}
+
+		<!-- In Practice -->
+		{data.exampleInPractice && (
+			<div class="mb-12">
+				<h2 class="heading-md text-foreground mb-4">In Practice</h2>
+				<div class="schematic-callout">
+					<p class="body-md text-foreground leading-relaxed">{data.exampleInPractice}</p>
+				</div>
+			</div>
+		)}
+
+		<!-- Related -->
+		{related.length > 0 && (
+			<div class="pt-10 border-t border-[var(--border)]">
+				<h2 class="heading-sm text-foreground mb-4">Related Frameworks</h2>
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					{related.map(f => (
+						<a href={`/playbook/${f.data.slug ?? f.id}`} class="card-premium p-4 block group">
+							<p class="body-xs text-secondary mb-1" style="color: var(--accent);">{f.data.tagline}</p>
+							<h3 class="heading-sm text-foreground group-hover:text-[var(--accent)] transition-colors">
+								{f.data.title} →
+							</h3>
+						</a>
+					))}
+				</div>
+			</div>
+		)}
+
+		<div class="mt-10">
+			<a href="/playbook" class="btn btn-secondary">← Back to Playbook</a>
+		</div>
+	</section>
+</PageLayout>

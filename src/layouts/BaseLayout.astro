@@ -4,6 +4,7 @@ import '../styles/global.css';
 import { ViewTransitions } from 'astro:transitions';
 import SEOHead from '../components/common/SEOHead.astro';
 import JSONLD from '../components/common/JSONLD.astro';
+import { SITE_CONFIG } from '../config';
 
 interface BreadcrumbItem {
 	name: string;
@@ -19,7 +20,7 @@ interface Props {
 	breadcrumbs?: BreadcrumbItem[];
 }
 
-const { title, description = "Infrastructure Architect | Cloud, AI/ML, Platform Engineering", image, type, publishDate, breadcrumbs = [] } = Astro.props;
+const { title, description = SITE_CONFIG.description, image, type, publishDate, breadcrumbs = [] } = Astro.props;
 ---
 
 <!doctype html>

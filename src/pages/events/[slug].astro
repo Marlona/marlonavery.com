@@ -1,0 +1,102 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_CONFIG } from '../../config';
+import { getCollection } from 'astro:content';
+import { EVENT_TYPE_LABELS } from '../../data/events';
+
+export async function getStaticPaths() {
+	const events = await getCollection('events');
+	return events.map(event => ({
+		params: { slug: event.id },
+		props: { event },
+	}));
+}
+
+const { event } = Astro.props;
+const { data } = event;
+
+const dateStr = data.date.toLocaleDateString('en-US', {
+	weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+});
+---
+
+<PageLayout
+	title={`${data.title} | Events | ${SITE_CONFIG.name}`}
+	description={data.recap ?? data.description}
+>
+	<section class="max-w-3xl mx-auto px-4 py-16">
+		<!-- Breadcrumb -->
+		<nav class="font-mono text-xs text-secondary mb-8">
+			<a href="/events" class="hover:text-[var(--accent)] transition-colors">← Events</a>
+		</nav>
+
+		<!-- Header -->
+		<div class="mb-10">
+			<div class="flex items-center gap-3 mb-4 flex-wrap">
+				<span class="badge-tag font-mono text-xs uppercase tracking-wider" style="color: var(--accent);">
+					{EVENT_TYPE_LABELS[data.type] ?? data.type}
+				</span>
+				<span class="font-mono text-xs text-secondary">{data.status === 'upcoming' ? 'Upcoming' : 'Past Event'}</span>
+			</div>
+			<h1 class="heading-xl text-foreground mb-4">{data.title}</h1>
+			<div class="flex flex-wrap gap-4 body-sm text-secondary">
+				<span>{dateStr}</span>
+				{(data.venue || data.city) && (
+					<span>{[data.venue, data.city].filter(Boolean).join(', ')}</span>
+				)}
+			</div>
+		</div>
+
+		<!-- Description -->
+		<div class="mb-10">
+			<p class="body-lg text-secondary leading-relaxed">{data.description}</p>
+		</div>
+
+		{/* Recap */}
+		{data.recap && (
+			<div class="mb-10">
+				<h2 class="heading-md text-foreground mb-4">Recap</h2>
+				<div class="pull-quote mb-6">{data.recap}</div>
+			</div>
+		)}
+
+		{/* Video */}
+		{data.videoUrl && (
+			<div class="mb-10">
+				<h2 class="heading-md text-foreground mb-4">Video</h2>
+				<div class="aspect-video rounded-lg overflow-hidden">
+					<iframe
+						src={data.videoUrl}
+						title={data.title}
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+						class="w-full h-full"
+					></iframe>
+				</div>
+			</div>
+		)}
+
+		{/* Resources */}
+		{data.resources && data.resources.length > 0 && (
+			<div class="mb-10">
+				<h2 class="heading-md text-foreground mb-4">Resources</h2>
+				<ul class="space-y-2">
+					{data.resources.map(r => (
+						<li>
+							<a href={r.url} class="link body-sm" target="_blank" rel="noopener noreferrer">
+								{r.label} ↗
+							</a>
+						</li>
+					))}
+				</ul>
+			</div>
+		)}
+
+		<!-- Back CTA -->
+		<div class="pt-8 border-t border-[var(--border)] flex flex-wrap gap-4">
+			<a href="/events" class="btn btn-secondary">← All Events</a>
+			<a href="/speaking" class="btn btn-primary">Book for Your Event →</a>
+		</div>
+	</section>
+</PageLayout>

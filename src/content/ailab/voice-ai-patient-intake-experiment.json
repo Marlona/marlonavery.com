@@ -1,0 +1,10 @@
+{
+  "title": "Voice AI Patient Intake Agent",
+  "publishDate": "2025-06-01",
+  "kind": "experiment",
+  "status": "active",
+  "description": "Built a HIPAA-compliant voice agent to handle patient intake calls — scheduling, symptom collection, and appointment confirmation. Tested across simulated healthcare scenarios with a focus on reducing wait times and administrative load. [NEEDS REVIEW BY MARLON]",
+  "tags": ["voice-ai", "healthcare", "agents", "hipaa"],
+  "distributedTo": ["linkedin"],
+  "featured": true
+}

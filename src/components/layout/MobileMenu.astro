@@ -30,7 +30,7 @@ const resumeHref = withBasePath(RESUME_PATH);
 </button>
 
 <nav id="mobile-menu" class="hidden md:hidden border-t border-[var(--border-default)] bg-[var(--color-surface)] absolute left-0 right-0 top-full" aria-label="Mobile navigation" aria-hidden="true">
-	<div class="container mx-auto px-4 py-4 space-y-1">
+	<div class="container mx-auto px-4 py-4 space-y-1 max-h-[80vh] overflow-y-auto">
 		{NAV_LINKS.map((link) => (
 			<a
 				href={withBasePath(link.href)}

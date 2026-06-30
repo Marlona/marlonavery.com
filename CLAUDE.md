@@ -59,12 +59,16 @@ This is an Astro 5.0 static portfolio site with Tailwind CSS 4, MDX content, and
 
 ### Content Collections (src/content/)
 
-Four type-safe content collections defined in `src/content/config.ts`:
+Eight type-safe content collections defined in `src/content/config.ts`:
 
 - **projects/** - MDX files for case studies. Schema includes `category` ('strategic' | 'open-source'), `primaryTech`, `outcomes`, `contributions`, and `impactSummary`
 - **blog/** - MDX blog posts with `draft` support (drafts excluded in production)
 - **experience/** - JSON files for work history (structured data for timeline rendering)
 - **narratives/** - MDX files for rich experience narratives linked to experience entries via `experienceSlug`. Three pillars: Communication, Behavior, Impact with quantified metrics.
+- **workshops/** - JSON/MDX files for AImpact workshop programs. Schema: `title`, `tagline`, `level` (beginner/intermediate/advanced/executive), `format`, `duration`, `audience[]`, `outcomes[]`, `featured`
+- **events/** - JSON/MDX files for speaking events. Schema: `title`, `date`, `type`, `status` (upcoming/past), `venue`, `city`, `description`, `recap`, `videoUrl`, `featured`
+- **ailab/** - JSON/MDX files for the public AI innovation journal. Schema: `title`, `publishDate`, `kind` (experiment/tool/prompt/lesson), `status`, `description`, `tags[]`, `distributedTo[]`
+- **playbook/** - JSON files for the 6 AI frameworks library. Schema: `title`, `slug`, `tagline`, `summary`, `pillars[]`, `keyQuestions[]`, `exampleInPractice`, `order`
 
 ### Dynamic GitHub Data
 
@@ -82,8 +86,25 @@ The homepage fetches live repository data via `src/utils/github.ts`:
 
 - **common/** - Shared components (SEOHead, JSONLD, etc.)
 - **experience/** - Experience page components (ExperienceCard, NarrativeAccordion)
+- **home/** - Homepage-specific components (PhilosophyStrip, WhatBringsYouHere, IndustrySelectorGrid)
+- **speaking/** - Speaking page components (KeynoteTopic)
+- **workshops/** - Workshop components (WorkshopCard)
+- **events/** - Events components (EventCard)
+- **ailab/** - AI Lab components (LabEntry)
+- **playbook/** - Playbook components (FrameworkCard)
 - **icons/** - SVG icon components
 - **layout/** - Layout partials (Header, Footer, etc.)
+
+### Agent Definition Files (.claude/agents/)
+
+Seven specialized agent MD files for ongoing site maintenance:
+- **design-system-agent.md** — CSS/token expert; knows all design system rules and component classes
+- **homepage-agent.md** — Owns 9 homepage sections; never fabricates metrics
+- **speaking-agent.md** — Speaking page; enforces `[PLACEHOLDER]` for unconfirmed testimonials
+- **workshops-agent.md** — Workshops + enrollment wizard; verifies wizard flow before changes
+- **events-agent.md** — Events page + archive; marks past events with status+recap
+- **ai-lab-agent.md** — AI Lab journal; never features `in-progress` entries
+- **playbook-agent.md** — Playbook frameworks; enforces `exampleInPractice` before publishing
 
 ### Environment Configuration
 

@@ -2,9 +2,9 @@
 @plugin "@tailwindcss/typography";
 
 /*
- * Design System: Warm editorial — Sekou Doumbouya Design System v2
+ * Design System: Warm editorial — Marlon Avery Design System v1
  * Warm cream canvas, burnt-sienna accent, ink-on-paper rhythm.
- * Typography-led, low ornamentation, built for long reads.
+ * Typography-led, low ornamentation, premium but approachable.
  * Fonts: Fraunces (display), Instrument Sans (body), JetBrains Mono (proof)
  */
 
@@ -1753,4 +1753,220 @@
 	font-size: 12px;
 	color: var(--color-muted);
 	margin-top: var(--space-1);
+}
+
+/* ==========================================
+ * New page components — Applied AI Leader redesign
+ * ========================================== */
+
+/* Premium card — elevated lift, accent border on hover */
+.card-premium {
+	position: relative;
+	background: var(--bg-card);
+	border: 1px solid var(--border);
+	border-radius: var(--r-lg);
+	transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
+}
+
+.card-premium:hover {
+	transform: translateY(-5px);
+	box-shadow: var(--shadow-lg);
+	border-color: var(--coral-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.card-premium:hover { transform: none; }
+}
+
+/* Workshop card — left border coded by level */
+.workshop-card {
+	position: relative;
+	background: var(--bg-card);
+	border: 1px solid var(--border);
+	border-radius: var(--r-lg);
+	transition: transform var(--t-base), box-shadow var(--t-base);
+}
+
+.workshop-card:hover {
+	transform: translateY(-3px);
+	box-shadow: var(--shadow-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.workshop-card:hover { transform: none; }
+}
+
+.workshop-card[data-level="beginner"] { border-left: 3px solid var(--coral-soft); }
+.workshop-card[data-level="intermediate"] { border-left: 3px solid var(--coral); }
+.workshop-card[data-level="advanced"] { border-left: 3px solid var(--coral-deep); }
+.workshop-card[data-level="executive"] { border-left: 3px solid var(--slate); }
+
+/* Event card */
+.event-card {
+	background: var(--bg-card);
+	border: 1px solid var(--border);
+	border-radius: var(--r-lg);
+	transition: transform var(--t-base), box-shadow var(--t-base);
+}
+
+.event-card:hover {
+	transform: translateY(-3px);
+	box-shadow: var(--shadow-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.event-card:hover { transform: none; }
+}
+
+.event-card-date {
+	font-family: var(--font-mono);
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--accent);
+}
+
+/* AI Lab card */
+.lab-card {
+	background: var(--bg-card);
+	border: 1px solid var(--border);
+	border-radius: var(--r-lg);
+	transition: transform var(--t-base), box-shadow var(--t-base);
+}
+
+.lab-card:hover {
+	transform: translateY(-3px);
+	box-shadow: var(--shadow-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.lab-card:hover { transform: none; }
+}
+
+/* Lab kind badges */
+.badge-experiment { background: #ede9fe; color: #6d28d9; }
+.badge-tool { background: #d1fae5; color: #047857; }
+.badge-prompt { background: #fef3c7; color: #b45309; }
+.badge-lesson { background: #dbeafe; color: #1d4ed8; }
+
+[data-theme="dark"] .badge-experiment { background: #4c1d95; color: #c4b5fd; }
+[data-theme="dark"] .badge-tool { background: #064e3b; color: #6ee7b7; }
+[data-theme="dark"] .badge-prompt { background: #78350f; color: #fbbf24; }
+[data-theme="dark"] .badge-lesson { background: #1e3a8a; color: #93c5fd; }
+
+/* Playbook / Framework card */
+.framework-card {
+	background: var(--bg-card);
+	border: 1px solid var(--border);
+	border-radius: var(--r-lg);
+	transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-fast);
+}
+
+.framework-card:hover {
+	transform: translateY(-3px);
+	box-shadow: var(--shadow-md);
+	border-color: var(--border-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.framework-card:hover { transform: none; }
+}
+
+.framework-pillar-list {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--s-2);
+}
+
+.framework-pillar-list li::before {
+	content: '→';
+	color: var(--accent);
+	margin-right: var(--s-2);
+	font-family: var(--font-mono);
+}
+
+/* Enrollment wizard */
+.wizard-step { display: none; }
+.wizard-step.active { display: block; animation: fadeIn 200ms ease; }
+
+.wizard-progress-bar {
+	height: 3px;
+	background: var(--border);
+	border-radius: var(--r-pill);
+	overflow: hidden;
+}
+
+.wizard-progress-fill {
+	height: 100%;
+	background: var(--accent);
+	border-radius: var(--r-pill);
+	transition: width 0.4s var(--ease);
+}
+
+/* Industry selector tile */
+.industry-tile {
+	padding: var(--s-4) var(--s-5);
+	background: var(--bg-card);
+	border: 1px solid var(--border);
+	border-radius: var(--r-md);
+	cursor: pointer;
+	transition: border-color var(--t-fast), background var(--t-fast), transform var(--t-fast);
+	text-align: center;
+}
+
+.industry-tile:hover {
+	border-color: var(--accent);
+	background: var(--accent-wash);
+	transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.industry-tile:hover { transform: none; }
+}
+
+/* Stagger-reveal — parent-controlled entrance */
+.stagger-reveal > * {
+	opacity: 0;
+	transform: translateY(12px);
+	transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+}
+
+.stagger-reveal.revealed > * {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.stagger-reveal.revealed > *:nth-child(1) { transition-delay: 0ms; }
+.stagger-reveal.revealed > *:nth-child(2) { transition-delay: 80ms; }
+.stagger-reveal.revealed > *:nth-child(3) { transition-delay: 160ms; }
+.stagger-reveal.revealed > *:nth-child(4) { transition-delay: 240ms; }
+.stagger-reveal.revealed > *:nth-child(5) { transition-delay: 320ms; }
+
+@media (prefers-reduced-motion: reduce) {
+	.stagger-reveal > * {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
+
+/* Parallax hero — CSS scroll-driven (progressive enhancement) */
+@supports (animation-timeline: scroll()) {
+	.parallax-hero {
+		animation: parallax-drift linear both;
+		animation-timeline: scroll();
+		animation-range: 0% 40%;
+	}
+
+	@keyframes parallax-drift {
+		from { transform: translateY(0); }
+		to { transform: translateY(60px); }
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.parallax-hero { animation: none !important; }
 }

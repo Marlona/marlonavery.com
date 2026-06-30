@@ -1,0 +1,33 @@
+{
+  "title": "Build → Learn → Teach",
+  "slug": "build-learn-teach",
+  "tagline": "The flywheel that multiplies your impact",
+  "summary": "Most people learn by reading. I learn by building — and then I teach what I built. This flywheel means every project compounds: you don't just ship something, you extract the lessons and then multiply your impact by sharing them with others.",
+  "pillars": [
+    {
+      "name": "Build",
+      "description": "Ship real things. Build AI systems that work in production, not just demos. The constraint of real stakes forces clarity. [NEEDS REVIEW BY MARLON]"
+    },
+    {
+      "name": "Learn",
+      "description": "Extract the lessons. What broke? What surprised you? What would you tell someone starting this journey today? The debrief is where the real knowledge lives."
+    },
+    {
+      "name": "Teach",
+      "description": "Multiply impact. Share what you built and learned in a way that creates Aha! moments for others. When you teach, you also deepen your own understanding."
+    },
+    {
+      "name": "Inspire",
+      "description": "Make the world bigger for the people you teach. The goal isn't just to transfer knowledge — it's to show people what's possible so they go build their own thing."
+    }
+  ],
+  "keyQuestions": [
+    "What would I have wanted to know when I started this?",
+    "What surprised me most about this build?",
+    "Who needs to know this, and what's the simplest way to explain it?",
+    "How does this connect to something my audience already understands?"
+  ],
+  "exampleInPractice": "When I built VoicePath AI, I documented every architecture decision, every integration challenge, and every lesson learned. That documentation became the curriculum for a series of workshops that helped hundreds of professionals understand voice AI — and several of them went on to build their own voice agents. The build multiplied. [NEEDS REVIEW BY MARLON]",
+  "status": "published",
+  "order": 1
+}

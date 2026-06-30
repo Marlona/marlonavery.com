@@ -1,0 +1,316 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { SITE_CONFIG } from '../config';
+import KeynoteTopic from '../components/speaking/KeynoteTopic.astro';
+import {
+	SPEAKING_HERO,
+	KEYNOTE_TOPICS,
+	AUDIENCE_OUTCOMES,
+	INDUSTRIES_SERVED,
+	TESTIMONIALS_PLACEHOLDER,
+	EVENT_PLANNER_RESOURCES,
+} from '../data/speaking';
+
+const formSubmitEndpoint = `https://formsubmit.co/${encodeURIComponent(SITE_CONFIG.email)}`;
+const featuredTopics = KEYNOTE_TOPICS.slice(0, 4);
+
+// Read query param for industry pre-filter (used by homepage industry tiles)
+const industry = Astro.url.searchParams.get('industry');
+---
+
+<PageLayout
+	title={`Speaking | ${SITE_CONFIG.name}`}
+	description={`Book ${SITE_CONFIG.name} for keynotes and workshops on Applied AI, voice technology, and AI education. Available for conferences, leadership retreats, and corporate events.`}
+>
+	<!-- 1. HERO -->
+	<section class="parallax-hero relative overflow-hidden py-24 px-4">
+		<div class="max-w-4xl mx-auto relative z-10">
+			<p class="kicker mb-4">Keynotes & Workshops</p>
+			<h1 class="display text-foreground mb-6 max-w-3xl">
+				{SPEAKING_HERO.headline}
+			</h1>
+			<p class="body-lg text-secondary max-w-2xl mb-10">
+				{SPEAKING_HERO.subhead}
+			</p>
+			<div class="flex flex-wrap gap-4">
+				<a href="#booking-form" class="btn btn-primary">
+					{SPEAKING_HERO.ctaBook}
+				</a>
+				<a href="/press" class="btn btn-secondary">
+					{SPEAKING_HERO.ctaPressKit}
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- 2. PULL QUOTE -->
+	<section class="py-12 px-4 border-y border-[var(--border)]">
+		<div class="max-w-3xl mx-auto text-center">
+			<blockquote class="pull-quote">
+				"{SPEAKING_HERO.positioningQuote}"
+			</blockquote>
+			<cite class="body-sm text-secondary mt-4 block not-italic">— {SITE_CONFIG.name}</cite>
+		</div>
+	</section>
+
+	<!-- 3. KEYNOTE TOPICS -->
+	<section class="py-20 px-4">
+		<div class="max-w-5xl mx-auto">
+			<p class="kicker mb-3">Topics</p>
+			<h2 class="heading-xl text-foreground mb-4">What I Talk About</h2>
+			<p class="body-lg text-secondary mb-12 max-w-2xl">
+				Every talk is crafted for the specific audience and occasion. Below are signature and standard topics — all available as keynotes, breakout sessions, or workshop formats.
+			</p>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-4 stagger-reveal">
+				{featuredTopics.map((topic, i) => (
+					<KeynoteTopic topic={topic} index={i} />
+				))}
+			</div>
+			{KEYNOTE_TOPICS.length > 4 && (
+				<div class="mt-8 text-center">
+					<details class="inline-block text-left">
+						<summary class="btn btn-secondary cursor-pointer">
+							Show {KEYNOTE_TOPICS.length - 4} more topics
+						</summary>
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+							{KEYNOTE_TOPICS.slice(4).map((topic, i) => (
+								<KeynoteTopic topic={topic} index={i + 4} />
+							))}
+						</div>
+					</details>
+				</div>
+			)}
+		</div>
+	</section>
+
+	<!-- 4. VIDEO HIGHLIGHTS -->
+	<section class="py-20 px-4 bg-[var(--color-surface)]">
+		<div class="max-w-4xl mx-auto">
+			<p class="kicker mb-3">On Stage</p>
+			<h2 class="heading-xl text-foreground mb-10">See It in Action</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<!-- Replace src when video URLs available -->
+				{[1, 2].map(_ => (
+					<div class="aspect-video rounded-lg bg-[var(--color-bg)] border border-[var(--border)] flex items-center justify-center">
+						<div class="text-center">
+							<div class="w-14 h-14 rounded-full border-2 border-[var(--border-strong)] flex items-center justify-center mx-auto mb-3" style="border-color: var(--accent);">
+								<span class="text-xl" style="color: var(--accent);">▶</span>
+							</div>
+							<p class="font-mono text-xs text-secondary">Video coming soon</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- 5. AUDIENCE OUTCOMES -->
+	<section class="py-20 px-4">
+		<div class="max-w-5xl mx-auto">
+			<p class="kicker mb-3">What Audiences Leave With</p>
+			<h2 class="heading-xl text-foreground mb-12">More Than Inspiration</h2>
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-reveal">
+				{AUDIENCE_OUTCOMES.map(outcome => (
+					<div class="card p-6">
+						<div class="text-2xl mb-4">{outcome.icon}</div>
+						<h3 class="heading-sm text-foreground mb-4">{outcome.title}</h3>
+						<ul class="space-y-3">
+							{outcome.outcomes.map(o => (
+								<li class="body-sm text-secondary flex items-start gap-2">
+									<span class="shrink-0 mt-1" style="color: var(--accent);">→</span>
+									<span>{o}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- 6. INDUSTRIES SERVED (marquee) -->
+	<section class="py-16 px-4 bg-[var(--color-surface)] overflow-hidden">
+		<div class="max-w-5xl mx-auto mb-8">
+			<p class="kicker mb-2 text-center">Industries</p>
+			<h2 class="heading-xl text-foreground text-center mb-2">
+				{industry ? `Speaking in ${industry}` : 'Across Every Sector'}
+			</h2>
+		</div>
+		<div class="tech-marquee" aria-label="Industries served">
+			<div class="flex gap-6 whitespace-nowrap">
+				{[...INDUSTRIES_SERVED, ...INDUSTRIES_SERVED].map((ind, i) => (
+					<a
+						href={`/speaking?industry=${encodeURIComponent(ind)}`}
+						class={`inline-flex items-center px-4 py-2 rounded border font-mono text-sm transition-colors ${
+							ind === industry
+								? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--color-accent-bg)]'
+								: 'border-[var(--border)] text-secondary hover:border-[var(--accent)] hover:text-[var(--accent)]'
+						}`}
+					>
+						{ind}
+					</a>
+				))}
+			</div>
+		</div>
+		<div class="max-w-5xl mx-auto mt-8 text-center">
+			<a href="/contact" class="body-sm text-secondary hover:text-[var(--accent)] transition-colors">
+				Don't see your industry? <span class="underline">Let's talk.</span>
+			</a>
+		</div>
+	</section>
+
+	<!-- 7. TESTIMONIALS -->
+	<section class="py-20 px-4">
+		<div class="max-w-5xl mx-auto">
+			<p class="kicker mb-3">What People Say</p>
+			<h2 class="heading-xl text-foreground mb-12">From the Room</h2>
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-reveal">
+				{TESTIMONIALS_PLACEHOLDER.map(t => (
+					<div class="card-premium p-6 flex flex-col">
+						<blockquote class="body-md text-secondary leading-relaxed mb-6 flex-1 italic">
+							"{t.quote}"
+						</blockquote>
+						<div class="pt-4 border-t border-[var(--border)]">
+							<p class="font-medium text-foreground body-sm">{t.name}</p>
+							<p class="body-xs text-secondary">{t.title}, {t.org}</p>
+						</div>
+					</div>
+				))}
+			</div>
+			<!-- Temporary note: remove before launch -->
+			<p class="text-center mt-6 font-mono text-xs text-secondary opacity-50">
+				[Testimonials pending — add real quotes to src/data/speaking.ts before launch]
+			</p>
+		</div>
+	</section>
+
+	<!-- 8. EVENT PLANNER RESOURCES -->
+	<section class="py-20 px-4 bg-[var(--color-surface)]">
+		<div class="max-w-4xl mx-auto">
+			<p class="kicker mb-3">For Event Planners</p>
+			<h2 class="heading-xl text-foreground mb-10">Everything You Need</h2>
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				{EVENT_PLANNER_RESOURCES.map(resource => (
+					<a
+						href={resource.href}
+						target={resource.external ? '_blank' : undefined}
+						rel={resource.external ? 'noopener noreferrer' : undefined}
+						class="card-premium p-5 block group"
+					>
+						<h3 class="heading-sm text-foreground mb-1 group-hover:text-[var(--accent)] transition-colors">
+							{resource.label} {resource.external ? '↗' : '→'}
+						</h3>
+						<p class="body-sm text-secondary">{resource.description}</p>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- 9. BOOKING FORM -->
+	<section id="booking-form" class="py-24 px-4 scroll-mt-8">
+		<div class="max-w-3xl mx-auto">
+			<p class="kicker mb-3">Booking</p>
+			<h2 class="heading-xl text-foreground mb-4">Let's Make It Happen</h2>
+			<p class="body-lg text-secondary mb-10">
+				Share your event details below. I'll review and respond within 2–3 business days with availability and next steps.
+			</p>
+
+			<div class="card p-8">
+				<form
+					action={formSubmitEndpoint}
+					method="POST"
+					class="space-y-5"
+				>
+					<input type="hidden" name="_subject" value="Speaking Inquiry — marlonavery.com" />
+					<input type="hidden" name="_template" value="table" />
+					<input type="hidden" name="_next" value="/thank-you" />
+					<input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+						<div>
+							<label for="book-name" class="block body-sm text-foreground mb-1">Your Name <span class="text-[var(--accent)]">*</span></label>
+							<input id="book-name" name="name" type="text" required
+								class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground" />
+						</div>
+						<div>
+							<label for="book-org" class="block body-sm text-foreground mb-1">Organization <span class="text-[var(--accent)]">*</span></label>
+							<input id="book-org" name="organization" type="text" required
+								class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground" />
+						</div>
+					</div>
+
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+						<div>
+							<label for="book-email" class="block body-sm text-foreground mb-1">Email <span class="text-[var(--accent)]">*</span></label>
+							<input id="book-email" name="email" type="email" required
+								class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground" />
+						</div>
+						<div>
+							<label for="book-date" class="block body-sm text-foreground mb-1">Event Date</label>
+							<input id="book-date" name="event_date" type="date"
+								class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground" />
+						</div>
+					</div>
+
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+						<div>
+							<label for="book-event" class="block body-sm text-foreground mb-1">Event Name</label>
+							<input id="book-event" name="event_name" type="text"
+								class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground" />
+						</div>
+						<div>
+							<label for="book-audience-size" class="block body-sm text-foreground mb-1">Audience Size</label>
+							<select id="book-audience-size" name="audience_size"
+								class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground">
+								<option value="">Select range</option>
+								<option value="under-50">Under 50</option>
+								<option value="50-200">50–200</option>
+								<option value="200-500">200–500</option>
+								<option value="500-1000">500–1,000</option>
+								<option value="1000+">1,000+</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+						<div>
+							<label for="book-topic" class="block body-sm text-foreground mb-1">Preferred Topic</label>
+							<select id="book-topic" name="preferred_topic"
+								class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground">
+								<option value="">Select or describe below</option>
+								{KEYNOTE_TOPICS.map(t => (
+									<option value={t.title}>{t.title}</option>
+								))}
+								<option value="custom">Custom / Open to discussion</option>
+							</select>
+						</div>
+						<div>
+							<label for="book-budget" class="block body-sm text-foreground mb-1">Budget Range</label>
+							<select id="book-budget" name="budget_range"
+								class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground">
+								<option value="">Prefer not to say</option>
+								<option value="under-5k">Under $5,000</option>
+								<option value="5k-15k">$5,000–$15,000</option>
+								<option value="15k-30k">$15,000–$30,000</option>
+								<option value="30k-50k">$30,000–$50,000</option>
+								<option value="50k+">$50,000+</option>
+							</select>
+						</div>
+					</div>
+
+					<div>
+						<label for="book-message" class="block body-sm text-foreground mb-1">Additional Details</label>
+						<textarea id="book-message" name="message" rows="4"
+							placeholder="Tell me about your event, audience, and what you're hoping the audience takes away."
+							class="w-full rounded-md border border-[var(--border-default)] bg-[var(--color-surface)] px-3 py-2 body-sm text-foreground"></textarea>
+					</div>
+
+					<button type="submit" class="btn btn-primary w-full sm:w-auto">
+						Submit Booking Inquiry
+					</button>
+				</form>
+			</div>
+		</div>
+	</section>
+</PageLayout>

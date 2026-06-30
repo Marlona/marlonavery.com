@@ -1,0 +1,33 @@
+{
+  "title": "Prompt Thinking",
+  "slug": "prompt-thinking",
+  "tagline": "Talking to AI is a skill — here's how to get good at it",
+  "summary": "Most people get bad results from AI because they treat it like a search engine: one-word queries with no context. Prompt Thinking is a framework for communicating with AI the same way you'd brief a brilliant colleague — with context, constraints, format guidance, and examples.",
+  "pillars": [
+    {
+      "name": "Context",
+      "description": "Tell the AI who it's talking to, what situation you're in, and why this matters. The more relevant context you provide, the more relevant the response will be."
+    },
+    {
+      "name": "Constraint",
+      "description": "Tell the AI what NOT to do, what format you don't want, what audience to avoid. Constraints eliminate the most common failure modes."
+    },
+    {
+      "name": "Format",
+      "description": "Tell the AI exactly how you want the output structured — bullet points, a table, a numbered list, a 3-paragraph essay. Don't make it guess."
+    },
+    {
+      "name": "Example",
+      "description": "Show the AI one or two examples of what a good response looks like. This is the single most powerful technique in prompt engineering and is consistently underused."
+    }
+  ],
+  "keyQuestions": [
+    "What does this AI need to know about my situation to give a great answer?",
+    "What are the ways this response could go wrong, and how do I guard against them?",
+    "What format would actually be useful for me — not just impressive?",
+    "Can I show the AI an example of what I actually want?"
+  ],
+  "exampleInPractice": "In workshops, I run a live exercise: everyone writes their current AI prompt, then we apply the Context → Constraint → Format → Example framework together. The quality improvement is immediate and visible. Participants who came in skeptical usually have their Aha! moment here. [NEEDS REVIEW BY MARLON]",
+  "status": "published",
+  "order": 3
+}

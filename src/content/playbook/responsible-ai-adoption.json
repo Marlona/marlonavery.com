@@ -1,0 +1,33 @@
+{
+  "title": "Responsible AI Adoption",
+  "slug": "responsible-ai-adoption",
+  "tagline": "Build AI that you and your customers can trust",
+  "summary": "Responsible AI isn't a constraint on innovation — it's the foundation that makes innovation sustainable. Organizations that skip this foundation build fast and break trust. The ones that get it right build slower initially but scale with confidence.",
+  "pillars": [
+    {
+      "name": "Transparency",
+      "description": "Be honest with your users about when they're interacting with AI. Disclose limitations. Make it easy to understand why the AI made a decision. Hidden AI creates distrust."
+    },
+    {
+      "name": "Equity",
+      "description": "Audit your AI systems for bias in both training data and outcomes. Who benefits from this system, and who might it disadvantage? Build in diverse perspectives at the design stage, not the audit stage."
+    },
+    {
+      "name": "Oversight",
+      "description": "Keep humans in the loop for high-stakes decisions. Know when to escalate from AI to human. Build feedback mechanisms so errors get caught and corrected, not hidden."
+    },
+    {
+      "name": "Sustainability",
+      "description": "Build AI that serves people over the long term, not just the next demo. Consider the environmental cost, the data privacy implications, and whether the incentive structures are aligned with human benefit."
+    }
+  ],
+  "keyQuestions": [
+    "Would you be comfortable if your customers knew exactly how this AI system works?",
+    "Who is most vulnerable to harm if this system makes an error?",
+    "What happens when the AI is wrong — and how quickly will you find out?",
+    "Who doesn't have access to the benefits this system creates, and does that matter?"
+  ],
+  "exampleInPractice": "I use this framework in executive workshops by running a 'responsible AI audit' of a real AI product the company is considering or has already deployed. The goal isn't to find reasons to stop — it's to find the gaps before they become public failures. [NEEDS REVIEW BY MARLON]",
+  "status": "published",
+  "order": 4
+}
